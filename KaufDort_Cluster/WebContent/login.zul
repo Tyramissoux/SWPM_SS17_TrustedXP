@@ -1,0 +1,74 @@
+<?page id="loginZul" title="LOGIN" ?>
+<?link rel="shortcut icon" type="image/x-icon" href="/img/eiF.ico"?>
+<?link rel="icon" type="image/x-icon" href="/img/ani.gif"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+ <style>
+    div.z-grid, tr.z-row td.z-row-inner {background: white; border:0;  zoom: 1; }
+    </style>
+    <window id="loginwin" border="none" height="100%" width="100%" apply="frontend.LoginController">
+
+        <h:br></h:br>
+        <h:br></h:br>
+        <h:br></h:br>
+        <h:table align="center">
+            <h:tr>
+                <h:td>&#160; </h:td>
+                <h:td>&#160; </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>&#160; </h:td>
+                <h:td>
+                    <h:h1>  <label style="position:relative; top:-30px;padding-left: 50px; font-size:30px;color:#008BB6;font-weight:bold;"
+					value="Login fuer Clustering"/>
+                    </h:h1>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>&#160;</h:td>
+                <h:td>
+                    <image id="eios1" src="img/home-in2.gif" width="323"  height="242"/>
+                </h:td>
+                <h:td>
+
+                    <panel closable="false"  width="320px">
+                        <panelchildren>
+                            <groupbox>
+                                <caption label="Login" />
+                                <div>
+                                    <grid fixedLayout="true" sclass="GridLayoutNoBorder" style="border:0px">
+                                        <columns>
+                                            <column width="40%" />
+                                            <column width="60%" />
+                                        </columns>
+                                        <rows>
+                                            <row>
+                                                <label id="usernameLbl" value="User" />
+                                                <textbox id="usernameTxtbox" width="98%" />
+                                            </row>
+                                            <row>
+                                                <label id="pwdLbl" value="Password" />
+                                                <textbox id="passwordTxtbox" type="password" width="98%" />
+                                            </row>
+                                        </rows>
+                                    </grid>
+                                    <separator bar="false" />
+                                    <separator bar="true" />
+                                    <hbox>
+                                        <button id="loginButton" type="submit" height="22px" label="Login" />
+                                        <button id="resetButton" type="reset" height="22px" label="Reset" />
+                                    </hbox>
+                                        <label id="mesgLbl" />
+                                </div>
+                            </groupbox>
+                        </panelchildren>
+                    </panel>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>
+

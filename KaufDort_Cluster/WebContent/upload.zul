@@ -1,0 +1,42 @@
+<zk xmlns:n="native" xmlns:c="client">
+	<?page title="RemoveKlausNote" ?>
+	<window id="RemoveKlausNote" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('frontend.FileUploadVM')"
+		title="KaufDort Cluster - CSV Upload "
+		border="normal" width="1000px" position="center,top"
+		mode="embedded">
+
+		<separator></separator>
+
+		<label sclass="bold" value="UPLOAD:" />
+		<space width="5" />
+		
+		<separator />
+
+		<hbox>
+			<timer id="timer" delay="50" repeats="true"
+				onTimer="@command('refreshTextbox')" />
+			<label value="Console log: " />
+			
+
+			<button label="Upload" upload="true"
+				onUpload="@command('onUploadPDF', upEvent=event)">
+			</button>
+
+
+			<button label="Show PDF" visible="@load(vm.fileuploaded)"
+				onClick="@command('showPDF')">
+			</button>
+		</hbox>
+
+		
+
+
+
+
+	</window>
+
+
+
+
+</zk>

@@ -1,0 +1,38 @@
+<!--
+
+bar.zul
+
+{{IS_NOTE
+	Purpose:
+		The toolbar floating on the right
+	Description:
+		
+	History:
+		Tue Sep  2 11:50:23     2008, Created by tomyeh
+}}IS_NOTE
+
+Copyright (C) 2008 Potix Corporation. All Rights Reserved.
+
+{{IS_RIGHT
+}}IS_RIGHT
+-->
+<zk>
+<style>
+.right {
+<!-- position:absolute; -->
+top:20px; right:0px;
+<!-- width:400px; -->
+}
+</style>
+<div class="right" apply="com.ei.einavigation.themes.ThemeSelectionCtrl">
+<!--
+        <toolbarbutton id="signOut1" label="Sign Out" >
+            <attribute name="onClick">
+               Executions.sendRedirect("login.zul");
+            </attribute>
+        </toolbarbutton>
+        <html>&#160;&#160;&#160;&#160;</html>
+-->
+<listbox id="themeSelectListbox" mold="select"/>
+</div>
+</zk>
