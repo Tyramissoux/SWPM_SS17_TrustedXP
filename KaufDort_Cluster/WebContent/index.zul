@@ -5,7 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul
                         http://www.zkoss.org/2005/zul/zul.xsd" >
-
+<rows><row></row></rows>
 	<?forward uri="/login.zul" ?>
 	<!--<?forward uri="/login.zul" if="${!foo:isLogin()}"?> Schnittstelle für loggedIn Check-->
 </zk>
