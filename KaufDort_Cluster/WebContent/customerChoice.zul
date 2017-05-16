@@ -1,0 +1,22 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Clusteranzahl und Featurewahl" border="normal"
+		apply="frontend.SelectorVM">
+		<vbox>
+			<label value="Gewünschte Clusteranzahl:" />
+			<intbox value="5" id="intBoxCluster"  vflex="0.2"
+				constraint="no empty : Feld darf nicht leer sein, no negative: Keine negativen Zahlen, no zero : Bitte einen anderen Wert als 0 waehlen, "/>
+		<button id="btnGO" label="Start" type="button" />
+		</vbox>
+		<vbox>
+			<listbox id="listbox" vflex="0.8" >
+				<listhead sizable="true" >
+					<listheader label="Feature" sort="false" />
+				</listhead>
+
+			</listbox>
+			
+		</vbox>
+		
+	</window>
+</zk>

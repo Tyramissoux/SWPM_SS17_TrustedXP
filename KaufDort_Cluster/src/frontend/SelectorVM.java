@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -20,7 +21,7 @@ import backend.BackEndController;
 public class SelectorVM extends GenericForwardComposer {
 
 	@Wire
-	Textbox txtboxCluster;
+	Intbox intBoxCluster;
 	
 	protected Listbox listbox; // autowired
 	private ListModelList list; // the model of the listbox
@@ -49,7 +50,7 @@ public class SelectorVM extends GenericForwardComposer {
 			for(Listitem li: set){
 				list.add(li.getIndex());
 			}
-			int cluster = convertValue(txtboxCluster.getValue().trim());
+			int cluster = intBoxCluster.getValue();
 			
 			new BackEndController(list, (String)Sessions.getCurrent()
 					.getAttribute("uploadedFilePath"),cluster);

@@ -37,12 +37,13 @@ public class FileUploadVM {
 		int year = now.get(Calendar.YEAR);
 		int month = now.get(Calendar.MONTH);
 		int day = now.get(Calendar.DAY_OF_MONTH);
+		int hour = now.get(Calendar.HOUR);
 		int min = now.get(Calendar.MINUTE);
 		int sec = now.get(Calendar.SECOND);
 		String tmpPath = getTemp();
 		if (!tmpPath.endsWith(File.separatorChar + ""))
 			tmpPath = tmpPath + File.separatorChar;
-		String filePath = tmpPath + year + "_" + month + "_" + day + "_" + min
+		String filePath = tmpPath + year + "_" + month + "_" + day + "_" + hour+ "_"+ min
 				+ "_" + sec+File.separatorChar;
 		File f = new File(filePath);
 		return f;
@@ -85,7 +86,7 @@ public class FileUploadVM {
 
 			try {
 				Files.copy(new File(filePath), media.getStreamData());
-				String[] header = new CsvHeaderReader(filePath)
+				String[] header = new CSVReader(filePath)
 						.getHeaderElements();
 				Sessions.getCurrent().setAttribute("headerValues", header);
 				Sessions.getCurrent().setAttribute("uploadedFilePath",filePath);

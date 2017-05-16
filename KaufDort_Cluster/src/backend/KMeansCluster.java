@@ -1,21 +1,26 @@
 package backend;
 
 import java.util.ArrayList;
-
 import weka.core.Instance;
+import weka.core.Instances;
 
 public class KMeansCluster {
 	
-	ArrayList<Instance> instances;
+	ArrayList<Instance> assignedInstances;
 	private int clusterNum;
+	private int attributesNum;
+	Instance centroid;
 	
-	public KMeansCluster(int clusterNum){
-		this.clusterNum = clusterNum;
-		instances = new ArrayList<Instance>();
+	
+	public KMeansCluster(int numOfClusters, int numOfAttributes){
+		this.clusterNum = numOfClusters;
+		this.attributesNum = numOfAttributes;
+		this.assignedInstances = new ArrayList<Instance>();
+		
 	}
 
 	protected void addInstance(Instance in){
-		instances.add(in);
+		assignedInstances.add(in);
 	}
 	
 	protected int getClusterNumber(){
@@ -23,10 +28,41 @@ public class KMeansCluster {
 	}
 	
 	protected ArrayList<Instance> getAllInstances(){
-		return instances;
+		return assignedInstances;
 	}
 	
 	protected int instancesAssignedToCluster(){
-		return instances.size();
+		return assignedInstances.size();
 	}
+	
+	protected void addCenteroid(Instance instance){
+		centroid = instance;
+	}
+	
+	protected Instance getCenteroid(){
+		return centroid;
+	}
+	
+	protected String getCentroidValues(){
+		return centroid.toString();
+	}
+	
+	protected int getNumberOfInstancesAssgned(){
+		return assignedInstances.size();
+	}
+	
+	protected void test(){
+		System.out.println("Cluster "+clusterNum+":");
+	for(int i = 0; i < assignedInstances.size(); i++){
+		Instance inst = assignedInstances.get(i);
+		System.out.print("Instance "+i+":\t");
+		for (int j = 0; j < attributesNum; j++) {
+			System.out.print(inst.toString(j)+"\t");
+		}
+		System.out.println();
+		
+	}
+	}
+	
+	
 }
