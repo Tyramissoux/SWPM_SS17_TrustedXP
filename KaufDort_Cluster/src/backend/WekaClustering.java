@@ -10,14 +10,23 @@ import java.util.Map.Entry;
 import weka.clusterers.SimpleKMeans;
 import weka.core.Instances;
 
+/**
+ * Erzeugt aus einem gegebenen Pfad zu einer Arff-Datei ein KMeans Clustering
+ * und leitet die geclusterten Instanzen (Datenzeilen aus der CSV) in ihre
+ * zugehörigen KMeansCluster um
+ * 
+ * @author wooooot
+ * 
+ */
 public class WekaClustering {
 
-	ArrayList<KMeansCluster> list;
-	int seed = 10;
-	HashMap<Integer, KMeansCluster> clusterMap;
+	private ArrayList<KMeansCluster> list;
+	private int seed;
+	private HashMap<Integer, KMeansCluster> clusterMap;
 
 	public WekaClustering(String pathToArffFile, int chosenNumOfClusters) {
 		clusterMap = new HashMap<Integer, KMeansCluster>();
+		seed = 10;
 		try {
 			clusterArffData(pathToArffFile, chosenNumOfClusters);
 		} catch (Exception e) {
@@ -26,16 +35,33 @@ public class WekaClustering {
 		}
 	}
 
+	/**
+	 * Öffnet eine Datei mit einem FileReader und returniert das BufferedReader
+	 * Objekt
+	 * 
+	 * @param filename
+	 *            arff-Datei, die gelesen werden soll
+	 * @return BufferedReader
+	 */
 	private BufferedReader readDataFile(String filename) {
 		BufferedReader inputReader = null;
 		try {
 			inputReader = new BufferedReader(new FileReader(filename));
 		} catch (FileNotFoundException ex) {
+			// sollte theoretisch nicht zu diesem Fehler kommen können
 			System.err.println("File not found: " + filename);
 		}
 		return inputReader;
 	}
 
+	/**
+	 * Methode führt das eigentliche Clustering durch und leitet die Daten um in
+	 * entsprechende Objekte
+	 * 
+	 * @param pathToArffFile
+	 * @param numOfClusters
+	 * @throws Exception
+	 */
 	private void clusterArffData(String pathToArffFile, int numOfClusters)
 			throws Exception {
 		BufferedReader datafile = readDataFile(pathToArffFile);
@@ -50,10 +76,9 @@ public class WekaClustering {
 		Instances data = new Instances(datafile);
 
 		kmeans.buildClusterer(data);
-		
+
 		Instances centers = kmeans.getClusterCentroids();
 		int attributes = centers.numAttributes();
-
 
 		// This array returns the cluster number (starting with 0) for each
 		// instance
@@ -65,26 +90,24 @@ public class WekaClustering {
 			if (clusterMap.containsKey(assignment)) {
 				clusterMap.get(assignment).addInstance(data.instance(i));
 			} else {
-				clusterMap.put(assignment, new KMeansCluster(assignment,attributes));
+				clusterMap.put(assignment, new KMeansCluster(assignment,
+						attributes));
 
 			}
 		}
-
-		
 
 		Instances centroids = kmeans.getClusterCentroids();
 		for (int i = 0; i < centroids.numInstances(); i++) {
 			if (clusterMap.containsKey(i)) {
 				clusterMap.get(i).addCenteroid(centroids.instance(i));
 			}
-			
-		}
-		
-		/*
-		for (int i = 0; i < centroids.numInstances(); i++) {
-			System.out.println("Centroid " + i + ": " + centroids.instance(i));
+
 		}
 
+		/*
+		 * for (int i = 0; i < centroids.numInstances(); i++) {
+		 * System.out.println("Centroid " + i + ": " + centroids.instance(i)); }
+		 * 
 		 * for ( int j = 0; j < centers.numInstances(); j++ ) { // for each
 		 * cluster center Instance inst = centers.instance( j ); // as you
 		 * mentioned, you only had 1 attribute // but you can iterate through
@@ -94,13 +117,18 @@ public class WekaClustering {
 		 * }
 		 */
 
-		for(Entry<Integer, KMeansCluster> en : clusterMap.entrySet()){
+		for (Entry<Integer, KMeansCluster> en : clusterMap.entrySet()) {
 			en.getValue().test();
 		}
-		
+
 		list = new ArrayList<KMeansCluster>();
 	}
 
+	/**
+	 * Gibt die KMeansClusterList zurück
+	 * 
+	 * @return ArrayList<KMeansCluster>
+	 */
 	protected ArrayList<KMeansCluster> getKMeansClusterList() {
 		return list;
 	}

@@ -9,3 +9,4 @@
 	<?forward uri="/login.zul" ?>
 	<!--<?forward uri="/login.zul" if="${!foo:isLogin()}"?> Schnittstelle für loggedIn Check-->
 </zk>
+<!-- https://www.zkoss.org/wiki/ZK_Installation_Guide/Quick_Start/Create_and_Run_Your_First_ZK_Application_with_Eclipse_and_Maven -->

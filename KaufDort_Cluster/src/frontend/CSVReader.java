@@ -19,6 +19,9 @@ public class CSVReader {
 		return featureExamples;
 	}
 
+	
+	//TO DO: Malware check
+	@SuppressWarnings("resource")
 	private void readHeader(String in) {
 		try {
 			BufferedReader read = new BufferedReader(new FileReader(in));

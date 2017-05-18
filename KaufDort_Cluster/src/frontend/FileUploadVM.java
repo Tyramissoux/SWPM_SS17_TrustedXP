@@ -2,7 +2,9 @@ package frontend;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import org.zkoss.bind.BindContext;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
@@ -17,12 +19,43 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 
 public class FileUploadVM {
+
+	// INFO: es handelt sich hier um MVVM
 
 	private String filePath;
 	private AMedia fileContent;
 	private File saveFolder;
+	private List<OldUploadItem> items;
+	private Listitem _selected;
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<OldUploadItem> getItems() {
+		if (items == null) {
+			items = new ArrayList();
+			items.add(new OldUploadItem("Item 1", 1, 1));
+			items.add(new OldUploadItem("Item 2", 2, 2));
+			items.add(new OldUploadItem("Item 3", 3, 3));
+		}
+		return items;
+	}
+
+	public void setSelected(Listitem selected) {
+		_selected = selected;
+	}
+
+	public Listitem getSelected() {
+		return _selected;
+	}
+
+	@Command
+	@NotifyChange("items")
+	public void addItem() {
+		items.get(1).setQuantity(items.get(1).getQuantity() + 1);
+	}
 
 	public File getSaveFolder() {
 		return saveFolder;
@@ -32,6 +65,13 @@ public class FileUploadVM {
 		return filePath;
 	}
 
+	/**
+	 * Erzeugt einen neues Dateiordnerobjekt mit einem auf der aktuellen Zeit
+	 * basierenden Pfad - Schema: Jahr_Monat_Tag_Stunde_Minute_Sekunde Grund:
+	 * Uploadkonflikte von vorneherein meiden
+	 * 
+	 * @return File
+	 */
 	private File createFolder() {
 		Calendar now = Calendar.getInstance();
 		int year = now.get(Calendar.YEAR);
@@ -43,8 +83,10 @@ public class FileUploadVM {
 		String tmpPath = getTemp();
 		if (!tmpPath.endsWith(File.separatorChar + ""))
 			tmpPath = tmpPath + File.separatorChar;
-		String filePath = tmpPath + year + "_" + month + "_" + day + "_" + hour+ "_"+ min
-				+ "_" + sec+File.separatorChar;
+
+		String filePath = tmpPath + year + "_" + month + "_" + day + "_" + hour
+				+ "_" + min + "_" + sec + File.separatorChar;
+
 		File f = new File(filePath);
 		return f;
 	}
@@ -57,6 +99,11 @@ public class FileUploadVM {
 		this.fileContent = fileContent;
 	}
 
+	/**
+	 * Mit Hilfe dieser Methode können auch große Dateien hochgeladen werden
+	 * 
+	 * @param view
+	 */
 	@AfterCompose
 	public void initSetup(@ContextParam(ContextType.VIEW) Component view) {
 		Selectors.wireComponents(view, this, false);
@@ -75,31 +122,39 @@ public class FileUploadVM {
 		if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
 			upEvent = (UploadEvent) objUploadEvent;
 		}
-		if (upEvent != null) {
-			Media media = upEvent.getMedia();
-
-			// String webAppPath =
-			// Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
-
-			saveFolder = createFolder();
-			filePath = saveFolder.getAbsolutePath()+File.separatorChar + media.getName();
-
-			try {
-				Files.copy(new File(filePath), media.getStreamData());
-				String[] header = new CSVReader(filePath)
-						.getHeaderElements();
-				Sessions.getCurrent().setAttribute("headerValues", header);
-				Sessions.getCurrent().setAttribute("uploadedFilePath",filePath);
-				if (header.length != 0)
-					Executions.sendRedirect("customerChoice.zul");
-				else
-					System.out
-							.println("ERROR FileUpload - reading Header failed");
-			} catch (Exception e) {
-
-			}
-
+		if (upEvent == null) {
+			Messagebox.show("Hochladen fehlgeschlagen", "Warning",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+			return;
 		}
+
+		Media media = upEvent.getMedia();
+
+		if (!media.getName().endsWith(".csv")) {
+			Messagebox.show("Ausgewählte Datei ist keine CSV", "Warning",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+			return;
+		}
+
+		saveFolder = createFolder();
+		filePath = saveFolder.getAbsolutePath() + File.separatorChar
+				+ media.getName();
+
+		try {
+			Files.copy(new File(filePath), media.getStreamData());
+			String[] header = new CSVReader(filePath).getHeaderElements();
+			Sessions.getCurrent().setAttribute("headerValues", header);
+			Sessions.getCurrent().setAttribute("uploadedFilePath", filePath);
+			if (header.length != 0)
+				Executions.sendRedirect("customerChoice.zul");
+			else
+				Messagebox.show("Hochgeladene Datei war nicht korrekt formatiert", "Warning",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+
 	}
 
 	public static String getTemp() {

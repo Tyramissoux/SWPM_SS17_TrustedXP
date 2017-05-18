@@ -1,18 +1,45 @@
 <zk xmlns:n="native" xmlns:c="client">
 	<window id="Upload" apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('frontend.FileUploadVM')"
-		title="KaufDort Cluster - CSV Upload "
-		border="normal" width="1000px" position="center,top"
-		mode="embedded">
+		title="KaufDort Cluster - CSV Upload " border="normal" width="1000px"
+		position="center,top" mode="embedded">
 
-		<separator></separator>
 
 		<label sclass="bold" value="UPLOAD:" />
 		<space width="5" />
-		
-		<separator />
+		<hbox>
+			<box orient="horizontal">
+				<button id="btnUpload" label="Upload"
+					upload="true,multiple=false,accept=.csv"
+					onUpload="@command('fileUpload')" />
+			</box>
+			<!-- SCHNTTSTELLE um die Box unsichtbar zu machen, falls keine Verarbeitungen stattgefunden haben
+			<box orient="horizontal" visible="true">
+				Vergangene Uploads:
+				<listbox model="@load(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="300px" checkmark="true">
+				<listhead>
+					<listheader label="Datum"  align="center"  sort="true"/>
+					<listheader label="Datei" align="center" sort="true" />
+					<listheader label="Clusteranzahl" align="center" sort="true" />
+				</listhead>
+				<template name="model" var="item">
+					<listitem >
+						<listcell>
+							<textbox value="@bind(item.name)" />
+						</listcell>
+						<listcell>
+							<intbox value="@bind(item.price)" />
+						</listcell>
+						<listcell>
+							<intbox value="@bind(item.quantity)" />
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+			</box>
+		</hbox>
 
-			<button id="btnUpload" label="Upload" upload="true" onUpload="@command('fileUpload')" />
+
 	</window>
 
 </zk>

@@ -51,6 +51,7 @@ public class KMeansCluster {
 		return assignedInstances.size();
 	}
 	
+	// hrrrrm
 	protected void test(){
 		System.out.println("Cluster "+clusterNum+":");
 	for(int i = 0; i < assignedInstances.size(); i++){
