@@ -142,10 +142,10 @@ public class FileUploadVM {
 
 		try {
 			Files.copy(new File(filePath), media.getStreamData());
-			String[] header = new CSVReader(filePath).getHeaderElements();
+			ArrayList<FeatureItem> header = new CSVReader(filePath).getFeatureExampleList();
 			Sessions.getCurrent().setAttribute("headerValues", header);
 			Sessions.getCurrent().setAttribute("uploadedFilePath", filePath);
-			if (header.length != 0)
+			if (header.size() != 0)
 				Executions.sendRedirect("customerChoice.zul");
 			else
 				Messagebox.show("Hochgeladene Datei war nicht korrekt formatiert", "Warning",

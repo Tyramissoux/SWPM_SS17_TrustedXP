@@ -13,29 +13,31 @@
 					upload="true,multiple=false,accept=.csv"
 					onUpload="@command('fileUpload')" />
 			</box>
-			<!-- SCHNTTSTELLE um die Box unsichtbar zu machen, falls keine Verarbeitungen stattgefunden haben
+
 			<box orient="horizontal" visible="true">
-				Vergangene Uploads:
-				<listbox model="@load(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="300px" checkmark="true">
-				<listhead>
-					<listheader label="Datum"  align="center"  sort="true"/>
-					<listheader label="Datei" align="center" sort="true" />
-					<listheader label="Clusteranzahl" align="center" sort="true" />
-				</listhead>
-				<template name="model" var="item">
-					<listitem >
-						<listcell>
-							<textbox value="@bind(item.name)" />
-						</listcell>
-						<listcell>
-							<intbox value="@bind(item.price)" />
-						</listcell>
-						<listcell>
-							<intbox value="@bind(item.quantity)" />
-						</listcell>
-					</listitem>
-				</template>
-			</listbox>
+				<label value="Vergangene Uploads:" />
+				<listbox model="@load(vm.items)"
+					selectedItem="@bind(vm.selected)" hflex="true" height="300px"
+					checkmark="true">
+					<listhead>
+						<listheader label="Datum" align="center"
+							sort="true" />
+						<listheader label="Datei" align="center"
+							sort="true" />
+						<listheader label="Clusteranzahl" align="center"
+							sort="true" />
+					</listhead>
+					<template name="model" var="item">
+						<listitem value="@bind(item)">
+							<listcell label="@bind(item.name)"
+								style="text-align: left" />
+							<listcell label="@bind(item.price)"
+								style="text-align: left" />
+							<listcell label="@bind(item.quantity)"
+								style="text-align: left" />
+						</listitem>
+					</template>
+				</listbox>
 			</box>
 		</hbox>
 

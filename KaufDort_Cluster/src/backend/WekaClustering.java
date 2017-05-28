@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
+import java.util.Enumeration;
 import weka.clusterers.SimpleKMeans;
+import weka.core.Attribute;
+import weka.core.Instance;
 import weka.core.Instances;
 
 /**
@@ -20,15 +20,18 @@ import weka.core.Instances;
  */
 public class WekaClustering {
 
-	private ArrayList<KMeansCluster> list;
+	private ArrayList<KMeansCluster> kMeansClusterList;
 	private int seed;
-	private HashMap<Integer, KMeansCluster> clusterMap;
+	private ArrayList<Feature> features;
 
 	public WekaClustering(String pathToArffFile, int chosenNumOfClusters) {
-		clusterMap = new HashMap<Integer, KMeansCluster>();
+		this.features = new ArrayList<Feature>();
+		this.kMeansClusterList = new ArrayList<KMeansCluster>();
+
 		seed = 10;
 		try {
 			clusterArffData(pathToArffFile, chosenNumOfClusters);
+			System.out.println("YES");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +59,8 @@ public class WekaClustering {
 
 	/**
 	 * Methode führt das eigentliche Clustering durch und leitet die Daten um in
-	 * entsprechende Objekte
+	 * entsprechende Objekte - wichtigste Methode in der Klasse, da sie alle
+	 * Datenströme koordiniert
 	 * 
 	 * @param pathToArffFile
 	 * @param numOfClusters
@@ -64,73 +68,106 @@ public class WekaClustering {
 	 */
 	private void clusterArffData(String pathToArffFile, int numOfClusters)
 			throws Exception {
+		// no touchy!! alles wichtige weka-bezogene Sachen
 		BufferedReader datafile = readDataFile(pathToArffFile);
 		SimpleKMeans kmeans = new SimpleKMeans();
-
 		kmeans.setSeed(seed);
 
 		// important parameter to set: preserver order, number of cluster.
 		kmeans.setPreserveInstancesOrder(true);
 		kmeans.setNumClusters(numOfClusters);
-
 		Instances data = new Instances(datafile);
-
 		kmeans.buildClusterer(data);
 
-		Instances centers = kmeans.getClusterCentroids();
-		int attributes = centers.numAttributes();
-
-		// This array returns the cluster number (starting with 0) for each
-		// instance
-		// The array has as many elements as the number of instances
-		int[] assignments = kmeans.getAssignments();
-
-		for (int i = 0; i < assignments.length; i++) {
-			int assignment = assignments[i];
-			if (clusterMap.containsKey(assignment)) {
-				clusterMap.get(assignment).addInstance(data.instance(i));
-			} else {
-				clusterMap.put(assignment, new KMeansCluster(assignment,
-						attributes));
-
-			}
-		}
-
-		Instances centroids = kmeans.getClusterCentroids();
-		for (int i = 0; i < centroids.numInstances(); i++) {
-			if (clusterMap.containsKey(i)) {
-				clusterMap.get(i).addCenteroid(centroids.instance(i));
-			}
-
-		}
+		// eigene Kreationen
+		createBasicFeatureList(numOfClusters, data);
+		fillKMeansClusterList(numOfClusters);
+		assignInstancesToKMeansCluster(data, features.size(),
+				kmeans.getAssignments());
+		addCentroids(kmeans);
 
 		/*
-		 * for (int i = 0; i < centroids.numInstances(); i++) {
-		 * System.out.println("Centroid " + i + ": " + centroids.instance(i)); }
-		 * 
-		 * for ( int j = 0; j < centers.numInstances(); j++ ) { // for each
-		 * cluster center Instance inst = centers.instance( j ); // as you
-		 * mentioned, you only had 1 attribute // but you can iterate through
-		 * the different attributes double value = inst.value( 0 );
-		 * System.out.println(inst.attributeSparse(0)); System.out.println(
-		 * "Value for centroid " + j + ": " + value +" weight: "+inst.weight());
-		 * }
+		 * FOR TESTING: HashMap<String,Integer> map =
+		 * features.get(1).getElementValuesForCluster(4); for(Entry<String,
+		 * Integer> e : map.entrySet()){
+		 * System.out.println(e.getKey()+" "+e.getValue()); }
 		 */
 
-		for (Entry<Integer, KMeansCluster> en : clusterMap.entrySet()) {
-			en.getValue().test();
-		}
-
-		list = new ArrayList<KMeansCluster>();
 	}
 
 	/**
-	 * Gibt die KMeansClusterList zurück
+	 * 
+	 * @param numOfClusters
+	 */
+	private void fillKMeansClusterList(int numOfClusters) {
+		for (int i = 0; i < numOfClusters; i++) {
+			kMeansClusterList.add(new KMeansCluster(numOfClusters, features
+					.size()));
+		}
+	}
+
+	/**
+	 * 
+	 * @param numOfClusters
+	 * @param data
+	 */
+	private void createBasicFeatureList(int numOfClusters, Instances data) {
+		@SuppressWarnings("unchecked")
+		Enumeration<Attribute> enu = data.enumerateAttributes();
+		while (enu.hasMoreElements()) {
+			Attribute a = enu.nextElement();
+			features.add(new Feature(a.name(), a.type(), numOfClusters));
+			a = null;
+		}
+		enu = null;
+	}
+
+	/**
+	 * 
+	 * @param data
+	 * @param numOfFeatures
+	 * @param assignments
+	 */
+	private void assignInstancesToKMeansCluster(Instances data,
+			int numOfFeatures, int[] assignments) {
+		for (int i = 0; i < assignments.length; i++) {
+			int assignment = assignments[i];
+			Instance inst = data.instance(i);
+
+			kMeansClusterList.get(assignment).addInstance(inst);
+			kMeansClusterList.get(assignment).addOriginalInstanceNum(i);
+			for (int j = 0; j < numOfFeatures; j++) {
+				features.get(j).addFeatureElementForCluster(assignment,
+						inst.toString(j));
+			}
+			inst = null;
+		}
+	}
+
+	/**
+	 * Fuegt die Centroide den KMeans Clustern in der kMeansClusterList hinzu
+	 * 
+	 * @param kmeans
+	 */
+	private void addCentroids(SimpleKMeans kmeans) {
+		Instances centroids = kmeans.getClusterCentroids();
+		for (int i = 0; i < centroids.numInstances(); i++) {
+			kMeansClusterList.get(i).addCenteroid(centroids.instance(i));
+		}
+	}
+
+	/**
+	 * Gibt die KMeansClusterList zurück, die alle KMeansCluster Objekte
+	 * enthaelt
 	 * 
 	 * @return ArrayList<KMeansCluster>
 	 */
 	protected ArrayList<KMeansCluster> getKMeansClusterList() {
-		return list;
+		return kMeansClusterList;
+	}
+	
+	protected ArrayList<Feature> getFeatureList(){
+		return features;
 	}
 
 	public static void main(String[] args) {

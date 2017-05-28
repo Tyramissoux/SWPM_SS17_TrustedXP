@@ -1,12 +1,15 @@
 package backend;
 
 import java.util.ArrayList;
+
+import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 
 public class KMeansCluster {
 	
 	ArrayList<Instance> assignedInstances;
+	ArrayList<Integer> originalInstanceNumber;
 	private int clusterNum;
 	private int attributesNum;
 	Instance centroid;
@@ -16,11 +19,15 @@ public class KMeansCluster {
 		this.clusterNum = numOfClusters;
 		this.attributesNum = numOfAttributes;
 		this.assignedInstances = new ArrayList<Instance>();
-		
+		this.originalInstanceNumber = new ArrayList<Integer>();	
 	}
 
 	protected void addInstance(Instance in){
 		assignedInstances.add(in);
+	}
+	
+	protected void addOriginalInstanceNum(int in){
+		originalInstanceNumber.add(in);
 	}
 	
 	protected int getClusterNumber(){
@@ -58,7 +65,11 @@ public class KMeansCluster {
 		Instance inst = assignedInstances.get(i);
 		System.out.print("Instance "+i+":\t");
 		for (int j = 0; j < attributesNum; j++) {
-			System.out.print(inst.toString(j)+"\t");
+			Attribute a = inst.attribute(j); 
+			System.out.print(inst.toString(j) +" ("+a.isNominal()+")\t");
+			
+			
+			
 		}
 		System.out.println();
 		

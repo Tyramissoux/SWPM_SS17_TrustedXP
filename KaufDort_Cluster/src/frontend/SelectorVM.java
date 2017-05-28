@@ -1,73 +1,122 @@
 package frontend;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
+import org.zkoss.idom.Item;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import backend.BackEndController;
 
-@SuppressWarnings({ "serial", "rawtypes" })
-public class SelectorVM extends GenericForwardComposer {
+@SuppressWarnings({ "serial" })
+public class SelectorVM extends SelectorComposer<Component> {
 
 	@Wire
 	Intbox intBoxCluster;
-	
-	protected Listbox listbox; // autowired
-	private ListModelList list; // the model of the listbox
+	private ListModel<FeatureItem> featureChoice;
+
+	@Wire
+	protected Listbox listbox;
+	// private ListModelList list; // the model of the listbox
+
+	@Wire
+	private Window win;
+
+	int chosenNumOfClusters;
+	ArrayList<Integer> chosenListBoxIndices;
 
 	@SuppressWarnings("unchecked")
-	@Override
+	public SelectorVM() {
+		featureChoice = new ListModelList<FeatureItem>(
+				(Collection<? extends FeatureItem>) Sessions.getCurrent()
+						.getAttribute("headerValues"));
+
+		((ListModelList<FeatureItem>) featureChoice).setMultiple(true);
+	}
+
+	/**
+	 * Methode wird aufgerufen nachdem alle Komponenten in der
+	 * customerChoice.zul initialisiert wurden - preselect funktioniert nicht
+	 */
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		List<String> data = Arrays.asList((String[]) Sessions.getCurrent()
-				.getAttribute("headerValues"));
-		list = new ListModelList(data, true);
-		list.setMultiple(true);
-		
-		listbox.setCheckmark(true);
-		listbox.setModel(list);
-		
+		for(int i = 0; i< listbox.getItems().size();i++){
+			listbox.getItems().get(i).setSelected(true);
+		}
 	}
 
-	public void onClick$btnGO(Event event)
-	{
-		//uploadedFilePath
+	public ListModel<FeatureItem> getFeatureChoice() {
+		return featureChoice;
+	}
+
+	/*
+	 * @SuppressWarnings("unchecked")
+	 * 
+	 * @Override public void doAfterCompose(Component comp) throws Exception {
+	 * super.doAfterCompose(comp); List<String> data = Arrays.asList((String[])
+	 * Sessions.getCurrent() .getAttribute("headerValues")); list = new
+	 * ListModelList(data, true); list.setMultiple(true);
+	 * 
+	 * listbox.setCheckmark(true); listbox.setModel(list);
+	 * 
+	 * }
+	 */
+	@Listen("onClick  = #btnGO")
+	public void checkValues(Event event) {
+
+		if (!checkIntBox())
+			return;
+		if (!checkListBox())
+			return;
+		new BackEndController(chosenListBoxIndices, (String) Sessions
+				.getCurrent().getAttribute("uploadedFilePath"),
+				chosenNumOfClusters);
+	}
+
+	private boolean checkIntBox() {
+		chosenNumOfClusters = intBoxCluster.getValue();
+		if (chosenNumOfClusters > 1 && chosenNumOfClusters < 16)
+			return true;
+		else {
+			Messagebox
+					.show("Gewählte Anzahl an gewünschten Clustern muss zwischen 2 und 15 liegen",
+							"Warnung", Messagebox.OK, Messagebox.INFORMATION);
+			return false;
+		}
+	}
+
+	private boolean checkListBox() {
 		Set<Listitem> set = listbox.getSelectedItems();
 		if (set.size() != 0) {
-			ArrayList<Integer> list = new ArrayList<Integer>();
+			chosenListBoxIndices = new ArrayList<Integer>();
 			Sessions.getCurrent().setAttribute("selectedIndices", set);
-			for(Listitem li: set){
-				list.add(li.getIndex());
+			for (Listitem li : set) {
+				chosenListBoxIndices.add(li.getIndex());
 			}
-			int cluster = intBoxCluster.getValue();
-			
-			new BackEndController(list, (String)Sessions.getCurrent()
-					.getAttribute("uploadedFilePath"),cluster);
-		} else
-			System.out.println("Error");
+			return true;
+		} else {
+			Messagebox
+					.show("Kein Feature ausgewählt - mindestens ein Feature muss ausgewählt werden",
+							"Warnung", Messagebox.OK, Messagebox.INFORMATION);
+
+			return false;
+		}
 	}
 
-	private int convertValue(String in){
-		try{
-			return Integer.valueOf(in);
-		}
-		catch(NumberFormatException nfe){
-			System.out.println("Error");
-			return 0;
-		}
-	}
-	
 	//
 
 	/*
