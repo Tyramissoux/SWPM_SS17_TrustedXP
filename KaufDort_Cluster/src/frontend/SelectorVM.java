@@ -2,10 +2,7 @@ package frontend;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
-
-import org.zkoss.idom.Item;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -19,7 +16,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
-
+import frontend.helper.FeatureItem;
 import backend.BackEndController;
 
 @SuppressWarnings({ "serial" })

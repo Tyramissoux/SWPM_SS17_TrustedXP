@@ -1,6 +1,8 @@
 package backend;
 
 import java.util.ArrayList;
+
+import org.zkoss.zk.ui.Sessions;
 /**
  * Einfache Steuerklasse um die Vorgänge im Backend zentral zu steuern
  * @author wooooot
@@ -8,14 +10,22 @@ import java.util.ArrayList;
  */
 public class BackEndController {
 	
-	ArrayList<KMeansCluster> clusterList;
+	
 
 	public BackEndController(ArrayList<Integer> selectedIndices, String uploadedFilePath, int chosenNumOfClusters){
 		//Reihenfolge ist notwendig
 		String csv = new CSVRewriter(selectedIndices, uploadedFilePath).getGeneratedCSV();
-		System.out.println(csv);
+		//System.out.println(csv);
 		String arff = new ArffCreator(csv).getArffFilePath();
-		clusterList = new WekaClustering(arff, chosenNumOfClusters).getKMeansClusterList();
+		
+		WekaClustering wc = new WekaClustering(arff, chosenNumOfClusters);
+		
+		ArrayList<KMeansCluster> clusterList = wc.getKMeansClusterList();
+		ArrayList<Feature> featureList = wc.getFeatureList();
+		
+		//Variablen werden global gesetzt
+		Sessions.getCurrent().setAttribute("finalClusterList", clusterList);
+		Sessions.getCurrent().setAttribute("finalFeatureList", featureList);
 	}
 
 }

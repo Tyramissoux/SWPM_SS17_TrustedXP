@@ -22,6 +22,9 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
+import frontend.helper.FeatureItem;
+import frontend.helper.OldUploadItem;
+
 public class FileUploadVM {
 
 	// INFO: es handelt sich hier um MVVM

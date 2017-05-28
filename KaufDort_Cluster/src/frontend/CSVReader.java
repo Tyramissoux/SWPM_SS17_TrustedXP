@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import frontend.helper.FeatureItem;
+
 public class CSVReader {
 
 	private ArrayList<FeatureItem> list;

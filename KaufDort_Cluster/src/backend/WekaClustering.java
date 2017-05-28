@@ -82,9 +82,13 @@ public class WekaClustering {
 		// eigene Kreationen
 		createBasicFeatureList(numOfClusters, data);
 		fillKMeansClusterList(numOfClusters);
-		assignInstancesToKMeansCluster(data, features.size(),
+		assignInstancesAndFeatures(data, features.size(),
 				kmeans.getAssignments());
 		addCentroids(kmeans);
+
+		for (int i = 0; i < features.size(); i++) {
+			System.out.println(features.get(i).getFeatureName());
+		}
 
 		/*
 		 * FOR TESTING: HashMap<String,Integer> map =
@@ -96,6 +100,11 @@ public class WekaClustering {
 	}
 
 	/**
+	 * Füllt die kMeansClusterList mit so vielen Objekten vom Typ KMeansCluster
+	 * auf wie Cluster für das Clustering festgelegt wurden. Methode ist
+	 * notwendig um Nullpointer Exceptions zu vermeiden. Später wird auf die
+	 * Objekte in der Liste zugegriffen. Speicherplatz 0 entspricht hierbei
+	 * Cluster 0
 	 * 
 	 * @param numOfClusters
 	 */
@@ -107,15 +116,20 @@ public class WekaClustering {
 	}
 
 	/**
+	 * Füllt die ArrayList features mit so vielen Objekten vom Typ Feature wie
+	 * Features in der custumerChoice.zul ausgewählt wurden. Methode ist
+	 * notwendig um Nullpointer Exceptions zu vermeiden. Später wird auf die
+	 * Objekte in der Liste zugegriffen. Speicherplatz 0 entspricht hierbei
+	 * Feature 0
 	 * 
 	 * @param numOfClusters
 	 * @param data
 	 */
 	private void createBasicFeatureList(int numOfClusters, Instances data) {
-		@SuppressWarnings("unchecked")
 		Enumeration<Attribute> enu = data.enumerateAttributes();
 		while (enu.hasMoreElements()) {
-			Attribute a = enu.nextElement();
+			Attribute a = enu.nextElement();// saemtliche Features aus dem
+											// Datensatz
 			features.add(new Feature(a.name(), a.type(), numOfClusters));
 			a = null;
 		}
@@ -123,20 +137,26 @@ public class WekaClustering {
 	}
 
 	/**
+	 * Weist die geclusterten Instanzen den entsprechenden KMeansClustern in der
+	 * kMeansClusterList zu und laedt Featuredaten per Cluster um
 	 * 
 	 * @param data
 	 * @param numOfFeatures
 	 * @param assignments
 	 */
-	private void assignInstancesToKMeansCluster(Instances data,
-			int numOfFeatures, int[] assignments) {
+	private void assignInstancesAndFeatures(Instances data, int numOfFeatures,
+			int[] assignments) {
 		for (int i = 0; i < assignments.length; i++) {
-			int assignment = assignments[i];
+			// assignments enthaelt eine Liste von Clusterzuweisungen
+			int assignment = assignments[i]; 
+			// Datenzeile i aus dem Datensatz
 			Instance inst = data.instance(i);
 
-			kMeansClusterList.get(assignment).addInstance(inst);
+			// fuegt dieDatenzeile dem entsprechenden KMeansCluster hinzu
+			kMeansClusterList.get(assignment).addInstance(inst); 
 			kMeansClusterList.get(assignment).addOriginalInstanceNum(i);
 			for (int j = 0; j < numOfFeatures; j++) {
+				//geht die einzelnen Features pro Instanz durch weist die Werte den Clustern zu
 				features.get(j).addFeatureElementForCluster(assignment,
 						inst.toString(j));
 			}
@@ -157,7 +177,7 @@ public class WekaClustering {
 	}
 
 	/**
-	 * Gibt die KMeansClusterList zurück, die alle KMeansCluster Objekte
+	 * Gibt die kMeansClusterList zurück, die alle KMeansCluster Objekte
 	 * enthaelt
 	 * 
 	 * @return ArrayList<KMeansCluster>
@@ -165,8 +185,14 @@ public class WekaClustering {
 	protected ArrayList<KMeansCluster> getKMeansClusterList() {
 		return kMeansClusterList;
 	}
-	
-	protected ArrayList<Feature> getFeatureList(){
+
+	/**
+	 * Gibt die Instanzvariable features zurück, die alle featurebezogenen Daten
+	 * enthält
+	 * 
+	 * @return
+	 */
+	protected ArrayList<Feature> getFeatureList() {
 		return features;
 	}
 

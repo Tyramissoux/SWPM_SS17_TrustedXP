@@ -1,27 +1,33 @@
 <?page title="Feature und Clusteranzahl" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="win" title="Clusteranzahl und Featurewahl" border="normal"
-		apply="frontend.SelectorVM">
-		<vbox hflex="1" vflex="0.2">
-			<label value="Gewünschte Clusteranzahl:" />
-			<intbox value="5" id="intBoxCluster"
-				constraint="no empty : Feld darf nicht leer sein, no negative: Keine negativen Zahlen, no zero : Bitte einen anderen Wert als 0 waehlen, " />
-			<button id="btnGO" label="Start" type="button" />
+	<window id="win" title="Clusteranzahl und Featurewahl"
+		border="normal" apply="frontend.SelectorVM">
+		<vbox width="100%">
+			<hbox width="100%">
+				<label value="Gewünschte Clusteranzahl:" />
+				<intbox value="5" id="intBoxCluster"
+					constraint="no empty : Feld darf nicht leer sein, no negative: Keine negativen Zahlen, no zero : Bitte einen anderen Wert als 0 waehlen, " />
+				<button id="btnGO" label="Start" type="button" orient="horizontal"/>
+			</hbox>
 		</vbox>
-		<vbox hflex="1" vflex="0.8">
+		<hbox width="100%">
 			<listbox id="listbox" model="${win$composer.featureChoice}"
-				checkmark="true" >
+				checkmark="true" width="100%">
 				<listhead sizable="true">
-					<listheader label="Feature" sort="false" align="left"/>
-					<listheader label="Beispiel" sort="false" align="left" />
+					<listheader label="Feature" sort="false"
+						align="left" width="50%"/>
+					<listheader label="Beispiel" sort="false"
+						align="left" width="50%" />
 				</listhead>
 				<template name="model">
 					<listitem>
-						<listcell label="${each.feature}" style="text-align: left"/>
-						<listcell label="${each.example}" style="text-align: left"/>
+						<listcell label="${each.feature}"
+							style="text-align: left" />
+						<listcell label="${each.example}"
+							style="text-align: left"  />
 					</listitem>
 				</template>
 			</listbox>
-		</vbox>
+		</hbox>
 	</window>
 </zk>
