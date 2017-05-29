@@ -3,9 +3,7 @@ package frontend;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -14,11 +12,10 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-
 import demo.User;
 import demo.UserCredentialManager;
 import demo.UserDatenbank;
-import frontend.helper.OldUploadItem;
+
 
 @SuppressWarnings("rawtypes")
 public class userManagmentController extends GenericForwardComposer {
@@ -53,7 +50,7 @@ public class userManagmentController extends GenericForwardComposer {
     
     public List<User> getItems() {
 		if (items == null) {
-			@SuppressWarnings("unused")
+		
 			UserDatenbank tmp= new UserDatenbank();
 				try {
         		

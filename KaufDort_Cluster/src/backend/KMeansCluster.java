@@ -8,10 +8,10 @@ import weka.core.Instances;
 
 public class KMeansCluster {
 	
-	ArrayList<Instance> assignedInstances;
-	ArrayList<Integer> originalInstanceNumber;
+	private ArrayList<Instance> assignedInstances;
+	private ArrayList<Integer> originalInstanceNumber;
 	private int clusterNum;
-	private int attributesNum;
+	private int attributesNum;//for test
 	Instance centroid;
 	
 	
@@ -22,59 +22,56 @@ public class KMeansCluster {
 		this.originalInstanceNumber = new ArrayList<Integer>();	
 	}
 
-	protected void addInstance(Instance in){
+	public void addInstance(Instance in){
 		assignedInstances.add(in);
 	}
 	
-	protected void addOriginalInstanceNum(int in){
+	public void addOriginalInstanceNum(int in){
 		originalInstanceNumber.add(in);
 	}
 	
-	protected int getClusterNumber(){
+	public int getClusterNumber(){
 		return clusterNum;
 	}
 	
-	protected ArrayList<Instance> getAllInstances(){
+	public ArrayList<Instance> getAllInstances(){
 		return assignedInstances;
 	}
 	
-	protected int instancesAssignedToCluster(){
+	public int instancesAssignedToCluster(){
 		return assignedInstances.size();
 	}
 	
-	protected void addCenteroid(Instance instance){
+	public void addCenteroid(Instance instance){
 		centroid = instance;
 	}
 	
-	protected Instance getCenteroid(){
+	public Instance getCenteroid(){
 		return centroid;
 	}
 	
-	protected String getCentroidValues(){
+	public String getCentroidValues(){
 		return centroid.toString();
 	}
 	
-	protected int getNumberOfInstancesAssgned(){
+	public int getNumberOfInstancesAssgned(){
 		return assignedInstances.size();
 	}
 	
-	// hrrrrm
-	protected void test(){
+	/* hrrrrm
+	public void test(){
 		System.out.println("Cluster "+clusterNum+":");
 	for(int i = 0; i < assignedInstances.size(); i++){
 		Instance inst = assignedInstances.get(i);
 		System.out.print("Instance "+i+":\t");
 		for (int j = 0; j < attributesNum; j++) {
 			Attribute a = inst.attribute(j); 
-			System.out.print(inst.toString(j) +" ("+a.isNominal()+")\t");
-			
-			
-			
+			System.out.print(inst.toString(j) +" ("+a.isNominal()+")\t");	
 		}
 		System.out.println();
 		
 	}
-	}
+	}*/
 	
 	
 }

@@ -2,40 +2,36 @@
 
 
 <zk xmlns:n="native" xmlns:c="client">
-	<window id="Upload" apply="org.zkoss.bind.BindComposer"
+	<window id="win" apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('frontend.ClusteringOutputVM')"
-		title="KaufDort Cluster - Clustering Output " border="normal" width="1000px"
-		position="center,top" mode="embedded">
+		title="KaufDort Cluster - Clustering Output " border="normal"
+		width="100%" position="center,top" mode="embedded">
 
 		<hbox>
-			<box orient="horizontal" visible="true">
-				
-				<listbox model="@load(vm.items)"
-					selectedItem="@bind(vm.selected)" hflex="true" height="300px"
-					checkmark="true">
-					<listhead>
-						<listheader label="Datum" align="center"
-							sort="true" />
-						<listheader label="Datei" align="center"
-							sort="true" />
-						<listheader label="Clusteranzahl" align="center"
-							sort="true" />
-					</listhead>
-					<template name="model" var="item">
-						<listitem value="@bind(item)">
-							<listcell label="@bind(item.name)"
-								style="text-align: left" />
-							<listcell label="@bind(item.price)"
-								style="text-align: left" />
-							<listcell label="@bind(item.quantity)"
-								style="text-align: left" />
-						</listitem>
+			<grid id="grid" model="@load(vm.mapModel)">
+				<columns children="@load(vm.columnsModel)">
+					<template
+						name="children">
+						<column  hflex="max" label="@load(each)" />
 					</template>
-				</listbox>
-			</box>
+				</columns>
+				<template name="model" var="cur_row">
+					<row children="@load(vm.columnsModel) @template(forEachStatus.index lt (vm.columnsModel.size()- cur_row.value.size()) ? 'fixed' : 'variable')">
+						<template name="fixed">
+							<cell>
+								<label value="@load(cur_row.key)" />
+							</cell>
+						</template>
+						<template name="variable">
+							<cell>
+								<label value="@load(cur_row.value[forEachStatus.index- vm.columnsModel.size()+ cur_row.value.size()])" />
+							</cell>
+						</template>
+					</row>
+				</template>
+			</grid>
+			       
 		</hbox>
-
-
 	</window>
 
 </zk>
