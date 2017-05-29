@@ -1,4 +1,0 @@
-<vlayout>
-	<checkbox label="Enable checkmark" checked="true" onCheck="box.checkmark = self.checked"/>
-	<checkbox label="Multiple selection" checked="true" onCheck="box.multiple = self.checked"/>
-</vlayout>
