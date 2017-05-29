@@ -6,6 +6,8 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.util.Initiator;
 
+import frontend.UserCredentialManager;
+
 /**
  * initialization class.
  */

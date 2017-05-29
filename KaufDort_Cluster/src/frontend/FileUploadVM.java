@@ -22,7 +22,6 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
-import demo.UserCredentialManager;
 
 import frontend.helper.FeatureItem;
 import frontend.helper.OldUploadItem;

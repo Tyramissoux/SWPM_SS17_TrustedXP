@@ -29,6 +29,8 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Textbox;
 
+import frontend.UserCredentialManager;
+
 /**
  * @author jumperchen
  * 

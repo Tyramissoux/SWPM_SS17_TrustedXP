@@ -1,4 +1,4 @@
-package demo;
+package frontend;
 
 import java.awt.List;
 import java.io.Serializable;

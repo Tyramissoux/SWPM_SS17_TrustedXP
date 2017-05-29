@@ -9,7 +9,6 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import demo.UserCredentialManager;
 
 @SuppressWarnings("rawtypes")
 public class LoginController extends GenericForwardComposer {

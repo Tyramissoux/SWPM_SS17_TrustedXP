@@ -1,4 +1,4 @@
-package demo;
+package frontend;
 
 
 import java.io.File;
@@ -71,7 +71,7 @@ public class UserCredentialManager {
         	UserDatenbank tmp= new UserDatenbank();
         	try {
         		File file= new File("Daten.ser");
-        		
+        		//System.getProperty("user.dir");
                 if(file.createNewFile()){
                 	FileOutputStream fileOut= new FileOutputStream(file);
                 	ObjectOutputStream out = new ObjectOutputStream(fileOut);

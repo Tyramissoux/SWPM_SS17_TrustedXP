@@ -12,9 +12,6 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import demo.User;
-import demo.UserCredentialManager;
-import demo.UserDatenbank;
 
 
 @SuppressWarnings("rawtypes")
