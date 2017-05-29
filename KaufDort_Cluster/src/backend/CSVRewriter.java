@@ -89,19 +89,25 @@ public class CSVRewriter {
 
 			StringBuilder sb = new StringBuilder();
 			String line = null;
-			int lineSize = selectedIndices.size() - 1;
+			
+			int endValue = selectedIndices.size();
+
+			
 			while ((line = read.readLine()) != null) {
 				String[] lineArr = line.split(",");
-
+				int counter = 1;
 				for (int i = 0; i < lineArr.length; i++) {
 					if (selectedIndices.contains(i)) {
-						String temp = Normalizer
-								.normalize(lineArr[i], Form.NFD);
-						temp = temp.replaceAll("[^\\p{ASCII}]", "");
-						if (i < lineSize)
+						
+						 String temp = Normalizer.normalize(lineArr[i],
+						 Form.NFD); temp = temp.replaceAll("[^\\p{ASCII}]","");
+						 
+						if (counter < endValue) {
 							sb.append(temp + ",");
-						else
+						} else {
 							sb.append(temp);
+						}
+						counter++;
 					}
 				}
 				write.write(sb.toString() + "\n");
@@ -119,6 +125,7 @@ public class CSVRewriter {
 
 	/**
 	 * Gibt den Pfad der neu erzeugten CSV Datei zurück
+	 * 
 	 * @return
 	 */
 	protected String getGeneratedCSV() {
@@ -127,7 +134,7 @@ public class CSVRewriter {
 	}
 
 	public static void main(String[] args) {
-		new CSVRewriter(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4)),
+		new CSVRewriter(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 7, 9)),
 				"C:\\Users\\wooooot\\Downloads\\SPM_TestdatensatzKlein_2017.csv");
 	}
 

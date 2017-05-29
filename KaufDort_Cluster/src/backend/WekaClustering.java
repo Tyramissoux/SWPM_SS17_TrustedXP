@@ -85,12 +85,13 @@ public class WekaClustering {
 		assignInstancesAndFeatures(data, features.size(),
 				kmeans.getAssignments());
 		addCentroids(kmeans);
-
-		for (int i = 0; i < features.size(); i++) {
-			System.out.println(features.get(i).getFeatureName());
-		}
-
 		/*
+		 * for (int i = 0; i < kMeansClusterList.size(); i++) { Instance in =
+		 * kMeansClusterList.get(i).getCenteroid(); for(int j = 0; j <
+		 * in.numValues(); j++) System.out.print(in.toString(j)+" | ");
+		 * System.out.println(); }
+		 * 
+		 * 
 		 * FOR TESTING: HashMap<String,Integer> map =
 		 * features.get(1).getElementValuesForCluster(4); for(Entry<String,
 		 * Integer> e : map.entrySet()){
@@ -148,15 +149,16 @@ public class WekaClustering {
 			int[] assignments) {
 		for (int i = 0; i < assignments.length; i++) {
 			// assignments enthaelt eine Liste von Clusterzuweisungen
-			int assignment = assignments[i]; 
+			int assignment = assignments[i];
 			// Datenzeile i aus dem Datensatz
 			Instance inst = data.instance(i);
 
 			// fuegt dieDatenzeile dem entsprechenden KMeansCluster hinzu
-			kMeansClusterList.get(assignment).addInstance(inst); 
+			kMeansClusterList.get(assignment).addInstance(inst);
 			kMeansClusterList.get(assignment).addOriginalInstanceNum(i);
 			for (int j = 0; j < numOfFeatures; j++) {
-				//geht die einzelnen Features pro Instanz durch weist die Werte den Clustern zu
+				// geht die einzelnen Features pro Instanz durch weist die Werte
+				// den Clustern zu
 				features.get(j).addFeatureElementForCluster(assignment,
 						inst.toString(j));
 			}

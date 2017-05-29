@@ -22,7 +22,7 @@ public class Feature {
 		}
 	}
 
-	protected void addFeatureElementForCluster(int clusterNum,
+	public void addFeatureElementForCluster(int clusterNum,
 			String nominalElement) {
 		if (elementCountsPerCluster.get(clusterNum).containsKey(nominalElement)) {
 			int value = elementCountsPerCluster.get(clusterNum).get(
@@ -34,11 +34,11 @@ public class Feature {
 		}
 	}
 	
-	protected ArrayList<HashMap<String,Integer>> getAllClusterData(){
+	public ArrayList<HashMap<String,Integer>> getAllClusterData(){
 		return elementCountsPerCluster;
 	}
 
-	protected HashMap<String, Integer> getElementValuesForCluster(int clusterNum) {
+	public HashMap<String, Integer> getElementValuesForCluster(int clusterNum) {
 		try {
 			return elementCountsPerCluster.get(clusterNum);
 		} catch (IndexOutOfBoundsException e) {
@@ -47,11 +47,11 @@ public class Feature {
 		}
 	}
 	
-	protected String getFeatureName() {
+	public String getFeatureName() {
 		return featureName;
 	}
 
-	protected int getFeatureType() {
+	public int getFeatureType() {
 		return featureType;
 	}
 
@@ -60,7 +60,7 @@ public class Feature {
 	 * 
 	 * @return Typ des Features
 	 */
-	private String featureType() {
+	/*private String featureType() {
 		switch (featureType) {
 		case 0:
 			return "numeric";
@@ -75,6 +75,6 @@ public class Feature {
 		default:
 			return null;
 		}
-	}
+	}*/
 
 }

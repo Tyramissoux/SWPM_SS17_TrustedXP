@@ -2,6 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 /**
  * Einfache Steuerklasse um die Vorgänge im Backend zentral zu steuern
@@ -26,6 +27,10 @@ public class BackEndController {
 		//Variablen werden global gesetzt
 		Sessions.getCurrent().setAttribute("finalClusterList", clusterList);
 		Sessions.getCurrent().setAttribute("finalFeatureList", featureList);
+		Sessions.getCurrent().setAttribute("chosenNumOfClusters", chosenNumOfClusters);
+		
+		Executions.sendRedirect("clusteringOutput.zul");
+		
 	}
 
 }
