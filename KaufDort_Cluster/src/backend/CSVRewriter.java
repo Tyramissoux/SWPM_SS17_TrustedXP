@@ -60,7 +60,7 @@ public class CSVRewriter {
 	private BufferedReader createFileReader() throws FileNotFoundException,
 			UnsupportedEncodingException {
 		return new BufferedReader(new InputStreamReader(new FileInputStream(
-				filePathIn), "UTF-8"));
+				filePathIn), "windows-1252"));
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class CSVRewriter {
 	 */
 	private BufferedWriter createFileWriter() throws IOException {
 		return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
-				filePathOut), Charset.forName("UTF-8").newEncoder()));
+				filePathOut), Charset.forName("windows-1252").newEncoder()));
 	}
 
 	/**
@@ -99,13 +99,13 @@ public class CSVRewriter {
 				for (int i = 0; i < lineArr.length; i++) {
 					if (selectedIndices.contains(i)) {
 						
-						 String temp = Normalizer.normalize(lineArr[i],
-						 Form.NFD); temp = temp.replaceAll("[^\\p{ASCII}]","");
+						 /*String temp = Normalizer.normalize(lineArr[i],
+						 Form.NFD); temp = temp.replaceAll("[^\\p{ASCII}]","");*/
 						 
 						if (counter < endValue) {
-							sb.append(temp + ",");
+							sb.append(lineArr[i] + ",");
 						} else {
-							sb.append(temp);
+							sb.append(lineArr[i]);
 						}
 						counter++;
 					}

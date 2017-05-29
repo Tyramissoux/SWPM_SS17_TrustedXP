@@ -9,29 +9,52 @@
 
 		<hbox>
 			<grid id="grid" model="@load(vm.mapModel)">
-				<columns children="@load(vm.columnsModel)">
-					<template
-						name="children">
-						<column  hflex="max" label="@load(each)" />
+				<columns children="@load(vm.columnsModel)" >
+					<template name="children">
+						<column hflex="max" label="@load(each)"
+							sort="none" />
 					</template>
 				</columns>
 				<template name="model" var="cur_row">
-					<row children="@load(vm.columnsModel) @template(forEachStatus.index lt (vm.columnsModel.size()- cur_row.value.size()) ? 'fixed' : 'variable')">
+					<row 
+						children="@load(vm.columnsModel) @template(forEachStatus.index lt (vm.columnsModel.size()- cur_row.value.size()) ? 'fixed' : 'variable')">
 						<template name="fixed">
 							<cell>
-								<label value="@load(cur_row.key)" />
+							<button label="@load(cur_row.key)"  onClick="@command('showDiagram')"  width="100%"/>				
 							</cell>
 						</template>
+						
 						<template name="variable">
 							<cell>
-								<label value="@load(cur_row.value[forEachStatus.index- vm.columnsModel.size()+ cur_row.value.size()])" />
+								<label
+									value="@load(cur_row.value[forEachStatus.index- vm.columnsModel.size()+ cur_row.value.size()])" />
 							</cell>
 						</template>
 					</row>
 				</template>
 			</grid>
-			       
+			    
+			<image src="@load(vm.picPath)" 
+				tooltip="centroid" style="cursor: help" />
+			  
 		</hbox>
 	</window>
+	<popup id="centroid" width="300px">
+		<html>
 
+			<![CDATA[ Der Cluster Centroid ist die berechnete Mitte
+			eines Clusters. Ein Centroid ist ein Vektor, der einen Wert
+			für jedes Feature (Variable) enthält, wobei jeder Wert den
+			Mittelwert einer Variable für die Beobachtungen in dem
+			Cluster darstellt.
+			<br><br>
+			Man kann den Centroiden as Maß der Clusterlage verwenden.
+			Für einen einzelnen Cluster ist die durchschnittliche
+			Distanz zwischen den Beobachtungen und dem Centroid. 
+			<br><br>
+			Centroid 1 entspricht dem Mittelpunkt von Cluster 1 usw.
+			]]>
+	
+		</html>
+	</popup>
 </zk>

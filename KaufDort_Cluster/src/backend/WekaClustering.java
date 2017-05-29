@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
 import weka.clusterers.SimpleKMeans;
 import weka.core.Attribute;
 import weka.core.Instance;
@@ -85,18 +88,20 @@ public class WekaClustering {
 		assignInstancesAndFeatures(data, features.size(),
 				kmeans.getAssignments());
 		addCentroids(kmeans);
-		/*
-		 * for (int i = 0; i < kMeansClusterList.size(); i++) { Instance in =
-		 * kMeansClusterList.get(i).getCenteroid(); for(int j = 0; j <
-		 * in.numValues(); j++) System.out.print(in.toString(j)+" | ");
-		 * System.out.println(); }
-		 * 
-		 * 
-		 * FOR TESTING: HashMap<String,Integer> map =
-		 * features.get(1).getElementValuesForCluster(4); for(Entry<String,
-		 * Integer> e : map.entrySet()){
-		 * System.out.println(e.getKey()+" "+e.getValue()); }
-		 */
+
+		for (int i = 0; i < kMeansClusterList.size(); i++) {
+			Instance in = kMeansClusterList.get(i).getCenteroid();
+			for (int j = 0; j < in.numValues(); j++)
+				System.out.print(in.toString(j) + " | ");
+			System.out.println();
+		}
+
+		// FOR TESTING:
+		HashMap<String, Integer> map = features.get(0)
+				.getElementValuesForCluster(0);
+		for (Entry<String, Integer> e : map.entrySet()) {
+			System.out.println(e.getKey() + " " + e.getValue());
+		}
 
 	}
 

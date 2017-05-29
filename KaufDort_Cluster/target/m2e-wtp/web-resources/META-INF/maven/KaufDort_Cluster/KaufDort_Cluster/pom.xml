@@ -4,6 +4,18 @@
 	<groupId>KaufDort_Cluster</groupId>
 	<artifactId>KaufDort_Cluster</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<repositories>
+		<repository>
+			<id>ZK CE</id>
+			<name>ZK CE Repository</name>
+			<url>http://mavensync.zkoss.org/maven2</url>
+		</repository>
+		<repository>
+			<id>ZK EVAL</id>
+			<name>ZK Evaluation Repository</name>
+			<url>http://mavensync.zkoss.org/eval</url>
+		</repository>
+	</repositories>
 	<packaging>war</packaging>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -33,6 +45,11 @@
 			<groupId>nz.ac.waikato.cms.weka</groupId>
 			<artifactId>weka-stable</artifactId>
 			<version>3.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.chart</groupId>
+			<artifactId>zkcharts</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>

@@ -7,10 +7,12 @@ public class Feature {
 	private String featureName;
 	private int featureType;
 	private ArrayList<HashMap<String, Integer>> elementCountsPerCluster;
+	private ArrayList<String> uniqueItems;
 
 	public Feature(String featureName, int featureType, int numOfClusters) {
 		super();
 		this.elementCountsPerCluster = new ArrayList<HashMap<String, Integer>>();
+		this.uniqueItems = new ArrayList<String>();
 		preFillArrayList(numOfClusters);
 		this.featureName = featureName;
 		this.featureType = featureType;
@@ -24,6 +26,7 @@ public class Feature {
 
 	public void addFeatureElementForCluster(int clusterNum,
 			String nominalElement) {
+		if(!uniqueItems.contains(nominalElement))uniqueItems.add(nominalElement);
 		if (elementCountsPerCluster.get(clusterNum).containsKey(nominalElement)) {
 			int value = elementCountsPerCluster.get(clusterNum).get(
 					nominalElement);
@@ -51,6 +54,10 @@ public class Feature {
 		return featureName;
 	}
 
+	public ArrayList<String> getUniqueItem(){
+		return uniqueItems;
+	}
+	
 	public int getFeatureType() {
 		return featureType;
 	}
