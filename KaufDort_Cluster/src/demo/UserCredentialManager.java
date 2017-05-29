@@ -1,6 +1,13 @@
 package demo;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.zkoss.zk.ui.Executions;
@@ -61,14 +68,50 @@ public class UserCredentialManager {
                 //error occured
                 user = null;
             }*/
-        	
-        	if (username.equals("admin") && password.equals("admin")) {
-                User tmpUser = new User(username, password);
-                user= tmpUser;
-             } else {
-                 //error occured
-                 user = null;
+        	UserDatenbank tmp= new UserDatenbank();
+        	try {
+        		File file= new File("Daten.ser");
+        		
+                if(file.createNewFile()){
+                	FileOutputStream fileOut= new FileOutputStream(file);
+                	ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                	out.writeObject(tmp);
+                	out.close();
+                	fileOut.close();
+                	System.out.printf("Neue Userdatenbank wurde erstellt");
+                }
+             }catch(IOException i) {
+                i.printStackTrace();
              }
+        	
+        	try {
+        		
+                FileInputStream fileIn = new FileInputStream("Daten.ser");
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                tmp = (UserDatenbank) in.readObject();
+                in.close();
+                fileIn.close();
+             }catch(IOException i) {
+                i.printStackTrace();
+                return;
+             }catch(ClassNotFoundException c) {
+                System.out.println("Datenbank wurde nicht gefunden");
+                c.printStackTrace();
+                return;
+             
+        	
+        }
+        	
+        	for(User a : tmp.users){
+        		if (username.equals(a.getName()) && password.equals(a.getPassword())) {
+        			User tmpUser = new User(username, password);
+        			user= tmpUser;
+        		} else {
+        			//error occured
+        			user = null;
+        		}	
+        	}
+        	
 
         } catch (Exception ex) {
             Logger.getLogger(UserCredentialManager.class.getName()).log(Level.SEVERE, null, ex);

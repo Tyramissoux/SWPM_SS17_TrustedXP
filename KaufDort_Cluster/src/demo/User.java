@@ -1,10 +1,11 @@
 package demo;
 
-import java.security.Permissions;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable{
 
     private long id;
     private String name;
@@ -15,7 +16,7 @@ public class User {
     private String remoteAddy;
 //adding some cred info so we can get important bits set for secrets
     String accessKey;
-    private List<Permissions> permissionList = new ArrayList<Permissions>();
+    private List<PermissionModel> permissionList = new ArrayList<PermissionModel>();
 
     public User() {
     }
@@ -26,7 +27,7 @@ public class User {
         this.permissionList = null;
     }
 
-    public User(String name, String password, List<Permissions> permissionList) {
+    public User(String name, String password, List<PermissionModel> permissionList) {
         this.name = name;
         this.password = password;
         this.permissionList = permissionList;
@@ -88,11 +89,11 @@ public class User {
         this.role = role;
     }
 
-    public List<Permissions> getPermissionList() {
+    public List<PermissionModel> getPermissionList() {
         return permissionList;
     }
 
-    public void setPermissionList(List<Permissions> permissionList) {
+    public void setPermissionList(List<PermissionModel> permissionList) {
         this.permissionList = permissionList;
     }
 
