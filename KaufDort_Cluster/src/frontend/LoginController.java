@@ -32,7 +32,7 @@ public class LoginController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         if (UserCredentialManager.getIntance(session).isAuthenticated()) {
-            execution.sendRedirect("index1.zul");
+            execution.sendRedirect("upload.zul");
         }
         usernameTxtbox.setFocus(true);
     }
@@ -53,7 +53,7 @@ public class LoginController extends GenericForwardComposer {
         //add checks to ensure that no empty data is passed to the backend for processing
         mgmt.login(usernameTxtbox.getValue().trim(), passwordTxtbox.getValue().trim());
         if (mgmt.isAuthenticated()) {
-            execution.sendRedirect("index1.zul");
+            execution.sendRedirect("upload.zul");
         } else {
             mesgLbl.setValue("The UserName or Password provided is invalid.");
         }

@@ -20,7 +20,11 @@ public class User {
     public User() {
     }
 
-
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+        this.permissionList = null;
+    }
 
     public User(String name, String password, List<Permissions> permissionList) {
         this.name = name;

@@ -61,6 +61,14 @@ public class UserCredentialManager {
                 //error occured
                 user = null;
             }*/
+        	
+        	if (username.equals("admin") && password.equals("admin")) {
+                User tmpUser = new User(username, password);
+                user= tmpUser;
+             } else {
+                 //error occured
+                 user = null;
+             }
 
         } catch (Exception ex) {
             Logger.getLogger(UserCredentialManager.class.getName()).log(Level.SEVERE, null, ex);

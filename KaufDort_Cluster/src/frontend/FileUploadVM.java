@@ -22,6 +22,8 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
+import demo.UserCredentialManager;
+
 import frontend.helper.FeatureItem;
 import frontend.helper.OldUploadItem;
 
@@ -34,6 +36,15 @@ public class FileUploadVM {
 	private File saveFolder;
 	private List<OldUploadItem> items;
 	private Listitem _selected;
+
+	
+	
+	public FileUploadVM() {
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
+		if (!mgmt.isAuthenticated()) {
+			Executions.sendRedirect("login.zul");
+        } 
+	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<OldUploadItem> getItems() {
