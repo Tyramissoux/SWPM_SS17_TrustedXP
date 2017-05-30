@@ -23,6 +23,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
 
+import frontend.helper.CSVReader;
 import frontend.helper.FeatureItem;
 import frontend.helper.OldUploadItem;
 
@@ -39,10 +40,10 @@ public class FileUploadVM {
 	
 	
 	public FileUploadVM() {
-		/*UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
 		if (!mgmt.isAuthenticated()) {
 			Executions.sendRedirect("login.zul");
-        } */
+        } 
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

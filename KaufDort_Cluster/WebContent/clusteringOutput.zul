@@ -8,10 +8,10 @@
 		width="100%" position="center,top" mode="embedded">
 
 		<hbox>
-			<grid id="grid" model="@load(vm.mapModel)">
+			<grid id="grid" model="@load(vm.mapModel)"  height="500px" hflex="max" style="overflow: scroll;">
 				<columns children="@load(vm.columnsModel)" >
 					<template name="children">
-						<column hflex="max" label="@load(each)"
+						<column hflex="min" label="@load(each)"
 							sort="none" />
 					</template>
 				</columns>
@@ -34,8 +34,7 @@
 				</template>
 			</grid>
 			    
-			<image src="@load(vm.picPath)" 
-				tooltip="centroid" style="cursor: help" />
+			<image id="questionmark" src="Files/QuestionmarkButton.png" tooltip="centroid" style="cursor: help" />
 			  
 		</hbox>
 	</window>

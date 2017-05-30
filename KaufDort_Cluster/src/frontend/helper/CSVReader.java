@@ -1,11 +1,10 @@
-package frontend;
+package frontend.helper;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import frontend.helper.FeatureItem;
 
 public class CSVReader {
 
@@ -16,7 +15,7 @@ public class CSVReader {
 		readHeader(in);
 	}
 	
-	protected ArrayList<FeatureItem> getFeatureExampleList(){
+	public ArrayList<FeatureItem> getFeatureExampleList(){
 		return list;
 	}
 	

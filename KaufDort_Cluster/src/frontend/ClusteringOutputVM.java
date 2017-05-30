@@ -2,35 +2,22 @@ package frontend;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.ServletContext;
-
-import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.image.AImage;
+import org.zkoss.image.Image;
+import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zk.ui.event.ForwardEvent;
-import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Image;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.ListModelMap;
-import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Row;
-
 import weka.core.Instance;
-
 import backend.KMeansCluster;
 import backend.Feature;
 
@@ -49,7 +36,8 @@ public class ClusteringOutputVM {
 
 	private ListModelMap data;
 	private ListModel columns_model;
-	private AImage picPath;
+	private String picPath;
+
 
 	public ClusteringOutputVM() {
 
@@ -60,26 +48,26 @@ public class ClusteringOutputVM {
 		transferDataToListModelMap();
 		fillColumnsModel(numOfClusters);
 		// non funktiona
-		try {
-			picPath = new AImage(createServerPath("QuestionmarkButton.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(picPath);
 		
-
+		picPath = getRealPath("Files/QuestionmarkButton.png");
+		
+		//System.out.println(picPath);
 	}
 
+	
+	
 	private String createServerPath(String name) {
 		String webAppPath = Executions.getCurrent().getDesktop().getWebApp()
 				.getRealPath(File.separator);
 		webAppPath += "Files" + File.separator;
 		return webAppPath + name;
-
+	}
+	
+	private String getRealPath(String file){
+		return Sessions.getCurrent().getWebApp().getRealPath(file);
 	}
 
-	public AImage getPicPath() {
+	public String getPicPath() {
 		return picPath;
 	}
 
