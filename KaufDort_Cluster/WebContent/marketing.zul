@@ -1,0 +1,92 @@
+<zk>
+	<listbox>
+		<listhead>
+			<listheader hflex="min" label="Maßnahme" sort="auto" />
+			<listheader hflex="max" label="Beschreibung" sort="auto" />
+		</listhead>
+		<listitem>
+			<listcell>Social Network Marketing</listcell>
+			<listcell>
+			Portale wie zum Beispiel Facebook, Twitter und Instagram haben eine riesige
+			Reichweite. Diese bieten eine simple Möglichkeit schnell viele Nutzer
+			gleichzeitig zu erreichen. Auf diese Weise kann man Produktneuerungen und
+			-angebote bewerben. Auch kann man hier mit einzelnen Kunden unkompliziert
+			in Kontakt treten, um Fragen oder auch Probleme zu klären.
+			</listcell>
+		</listitem>
+		<listitem>
+			<listcell>Persönliches Marketing</listcell>
+			<listcell>
+			Kunden schätzen den persönlichen Kontakt. Nutzen Sie deshalb die Möglichkeit
+			Probierstände im Geschäft aufzustellen. Promoter sollten hier Produkte
+			anpreisen, um Kunden auf diese aufmerksam zu machen. Mitarbeiter können
+			ebenfalls in die Fußgängerzone geschickt werden, um Passanten auf aktuelle
+			Angebote hinzuweisen. Werbeware (Kartenspiel mit Firmenlogo, Süßigkeiten,
+			etc.) lockt Kinder an.
+			</listcell>
+		</listitem>
+		<listitem>
+			<listcell>Webseite</listcell>
+			<listcell>
+			Die eigene Webseite sollte einen Überblick über die eigene Produktpalette
+			liefern. Auch sollten die einzelnen Filialen hier zu finden sein. Des
+			Weiteren, besteht die Möglichkeit einen regionalen Lieferdienst anzubieten.
+			Beachten Sie ebenfalls die Suchmaschinenoptimierung (SEO), um auf
+			Suchmaschinen möglichst weit oben gelistet zu werden. Eine Webseite bietet
+			ebenfalls die Möglichkeit einen Newsletter bereitzustellen, über den Kunden
+			über Leistungen, Produkte und Aktionen auf dem Laufenden gehalten werden.
+			</listcell>
+		</listitem>
+		<listitem>
+			<listcell>News</listcell>
+			<listcell>
+			Lassen Sie Kunden daran teilhaben, was in Ihrem Unternehmen geschieht.
+			Hierfür bieten sich vor allem Printmedien, Social Networks und die eigene
+			Webseite an.
+			</listcell>
+		</listitem>
+		<listitem>
+			<listcell>Flyer</listcell>
+			<listcell>
+			Nutzen Sie regelmäßige Flyer, um auf aktuelle Angebote aufmerksam zu machen.
+			Zudem können Coupons hierüber verteilt werden, die exklusive Vorteile bieten.
+			Werden in Ihrer Region kostenlose Zeitungen verteilt, können diesen die
+			Flyer beigelegt werden.
+			</listcell>
+		</listitem>
+		<listitem>
+			<listcell>Events</listcell>
+			<listcell>
+			Nutzen Sie saisonale Veranstaltungen (Sommerspiele), um Kunden zu
+			unterhalten und um sie in den Markt zu locken. Dies steigert die
+			Kundenbindung und bringt Neukunden.
+			</listcell>
+		</listitem>
+		<listitem>
+			<listcell>Services</listcell>
+			<listcell>
+			Bieten Sie, nach Möglichkeit, verschiedene Services an. Ein Lieferdienst
+			wäre für ältere Menschen, die nicht mehr eigenständig einkaufen können,
+			hilfreich.
+			</listcell>
+		</listitem>
+		<listitem>
+			<listcell>Workshops</listcell>
+			<listcell>
+			Workshops bieten den Vorteil, dass man hier mit Kunden intensiv in Kontakt
+			tritt und so deren Bindung zum Geschäft erhöht. Geeignete Workshops wären
+			zum Beispiel: Weinverkostung und Kochkurse. Hier haben Sie zudem die
+			Gelegenheit eigene Produkte anzupreisen.
+			</listcell>
+		</listitem>
+	</listbox>
+	<zscript>
+	<![CDATA[
+	    import frontend.UserCredentialManager;
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
+		if (!mgmt.isAuthenticated()) {
+			Executions.sendRedirect("login.zul");
+		}
+    ]]>
+	</zscript>
+</zk>
