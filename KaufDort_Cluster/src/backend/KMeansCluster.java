@@ -1,77 +1,136 @@
 package backend;
 
 import java.util.ArrayList;
-
-import weka.core.Attribute;
 import weka.core.Instance;
-import weka.core.Instances;
 
+/**
+ * Datenstruktur, die einen einzelnen Cluster repräsentiert, der von Weka
+ * erzeugt wurde. Sämtliche Instanzen (Datenreihen), die von Weka diesem Cluster
+ * zugewiesen wurden, befinden sich ebenfalls hier. Des weiteren auch der
+ * Centroid. Potentiell kann diese Klasse auch für weitere Analysen dienen oder
+ * zur Speicherung des Outputs in einer Excel Tabelle als Vorlage verwendet
+ * werden.
+ * 
+ * @author Insa Kruse
+ * 
+ */
 public class KMeansCluster {
-	
+
 	private ArrayList<Instance> assignedInstances;
 	private ArrayList<Integer> originalInstanceNumber;
 	private int clusterNum;
-	private int attributesNum;//for test
+	private int attributesNum;// for test
 	Instance centroid;
-	
-	
-	public KMeansCluster(int numOfClusters, int numOfAttributes){
+
+	/**
+	 * Erzeugt einen neuen KMeansCluster
+	 * 
+	 * @param numOfClusters
+	 *            - Anzahl an Clustern, die vorher festgelegt wurden
+	 * @param numOfAttributes
+	 *            - Anzahl an Attributen (Features) in der arff-Datei
+	 */
+	public KMeansCluster(int numOfClusters, int numOfAttributes) {
 		this.clusterNum = numOfClusters;
 		this.attributesNum = numOfAttributes;
 		this.assignedInstances = new ArrayList<Instance>();
-		this.originalInstanceNumber = new ArrayList<Integer>();	
+		this.originalInstanceNumber = new ArrayList<Integer>();
 	}
 
-	public void addInstance(Instance in){
+	/**
+	 * Fügt eine Weka-Instanz (Datenreihe) dem Cluster hinzu
+	 * 
+	 * @param in
+	 */
+	public void addInstance(Instance in) {
 		assignedInstances.add(in);
 	}
-	
-	public void addOriginalInstanceNum(int in){
+
+	/**
+	 * Fügt die originale Zeilennummer der Instanz hinzu. Kann verwendet werden,
+	 * um in die Datenreihen in der ursprünglich hochgeladenen Datei zurück zu
+	 * verfolgen.
+	 * 
+	 * @param in
+	 */
+	public void addOriginalInstanceNum(int in) {
 		originalInstanceNumber.add(in);
 	}
-	
-	public int getClusterNumber(){
+
+	/**
+	 * Gibt die Nummer des Clusters zurück (aus assignments[])
+	 * 
+	 * @return
+	 */
+	public int getClusterNumber() {
 		return clusterNum;
 	}
-	
-	public ArrayList<Instance> getAllInstances(){
+
+	/**
+	 * Gibt eine ArrayList aller gespeicherten Instanzen (Datenreihen) zurück
+	 * 
+	 * @return
+	 */
+	public ArrayList<Instance> getAllInstances() {
 		return assignedInstances;
 	}
-	
-	public int instancesAssignedToCluster(){
+
+	/**
+	 * Gibt die Liste der Zeilennummern der zugewiesenen Instanzen (Datenreihen)
+	 * aus der Originaldatei zurück
+	 * 
+	 * @return
+	 */
+	public ArrayList<Integer> getOriginalInstanceNumbers() {
+		return originalInstanceNumber;
+	}
+
+	/**
+	 * Gibt die Anzahl der zu diesem Cluster zugewiesenen Instanzen
+	 * (Datenreihen) zurück
+	 * 
+	 * @return
+	 */
+	public int getNumberOfInstancesAssignedToCluster() {
 		return assignedInstances.size();
 	}
-	
-	public void addCenteroid(Instance instance){
+
+	/**
+	 * Fügt den Centroid (Clustermittelpunkt) dem Cluster hinzu
+	 * 
+	 * @param instance
+	 */
+	public void addCenteroid(Instance instance) {
 		centroid = instance;
 	}
-	
-	public Instance getCenteroid(){
+
+	/**
+	 * Gibt den gespeicherten Centroid zurück
+	 * 
+	 * @return
+	 */
+	public Instance getCenteroid() {
 		return centroid;
 	}
-	
-	public String getCentroidValues(){
+
+	/**
+	 * Gibt die Centroid-Werte als String zurück
+	 * 
+	 * @return
+	 */
+	public String getCentroidValues() {
 		return centroid.toString();
 	}
-	
-	public int getNumberOfInstancesAssgned(){
-		return assignedInstances.size();
-	}
-	
-	/* hrrrrm
-	public void test(){
-		System.out.println("Cluster "+clusterNum+":");
-	for(int i = 0; i < assignedInstances.size(); i++){
-		Instance inst = assignedInstances.get(i);
-		System.out.print("Instance "+i+":\t");
-		for (int j = 0; j < attributesNum; j++) {
-			Attribute a = inst.attribute(j); 
-			System.out.print(inst.toString(j) +" ("+a.isNominal()+")\t");	
-		}
-		System.out.println();
-		
-	}
-	}*/
-	
-	
+
+	/*
+	 * hrrrrm public void test(){ System.out.println("Cluster "+clusterNum+":");
+	 * for(int i = 0; i < assignedInstances.size(); i++){ Instance inst =
+	 * assignedInstances.get(i); System.out.print("Instance "+i+":\t"); for (int
+	 * j = 0; j < attributesNum; j++) { Attribute a = inst.attribute(j);
+	 * System.out.print(inst.toString(j) +" ("+a.isNominal()+")\t"); }
+	 * System.out.println();
+	 * 
+	 * } }
+	 */
+
 }

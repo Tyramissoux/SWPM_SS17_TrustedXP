@@ -5,9 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
 import weka.clusterers.SimpleKMeans;
 import weka.core.Attribute;
 import weka.core.Instance;
@@ -18,7 +15,7 @@ import weka.core.Instances;
  * und leitet die geclusterten Instanzen (Datenzeilen aus der CSV) in ihre
  * zugehörigen KMeansCluster um
  * 
- * @author wooooot
+ * @author Insa Kruse
  * 
  */
 public class WekaClustering {
@@ -89,19 +86,20 @@ public class WekaClustering {
 				kmeans.getAssignments());
 		addCentroids(kmeans);
 
-		for (int i = 0; i < kMeansClusterList.size(); i++) {
-			Instance in = kMeansClusterList.get(i).getCenteroid();
-			for (int j = 0; j < in.numValues(); j++)
-				System.out.print(in.toString(j) + " | ");
-			System.out.println();
-		}
-
 		// FOR TESTING:
-		HashMap<String, Integer> map = features.get(0)
-				.getElementValuesForCluster(0);
-		for (Entry<String, Integer> e : map.entrySet()) {
-			System.out.println(e.getKey() + " " + e.getValue());
-		}
+		//for (int i = 0; i < kMeansClusterList.size(); i++) {
+		//	Instance in = kMeansClusterList.get(i).getCenteroid();
+		//	for (int j = 0; j < in.numValues(); j++)
+		//		System.out.print(in.toString(j) + " | ");
+		//	System.out.println();
+		//}
+
+		
+		//HashMap<String, Integer> map = features.get(0)
+		//		.getElementValuesForCluster(0);
+		//for (Entry<String, Integer> e : map.entrySet()) {
+		//	System.out.println(e.getKey() + " " + e.getValue());
+		//}
 
 	}
 

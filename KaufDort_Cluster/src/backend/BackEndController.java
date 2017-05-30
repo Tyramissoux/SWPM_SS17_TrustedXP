@@ -6,7 +6,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 /**
  * Einfache Steuerklasse um die Vorgänge im Backend zentral zu steuern
- * @author wooooot
+ * @author Insa Kruse
  *
  */
 public class BackEndController {

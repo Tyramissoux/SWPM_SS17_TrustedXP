@@ -1,6 +1,7 @@
 package frontend;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -47,7 +49,7 @@ public class ClusteringOutputVM {
 
 	private ListModelMap data;
 	private ListModel columns_model;
-	private Image picPath;
+	private AImage picPath;
 
 	public ClusteringOutputVM() {
 
@@ -58,20 +60,26 @@ public class ClusteringOutputVM {
 		transferDataToListModelMap();
 		fillColumnsModel(numOfClusters);
 		// non funktiona
-		picPath = new Image(createServerPath("QuestionmarkButton.png"));
+		try {
+			picPath = new AImage(createServerPath("QuestionmarkButton.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(picPath);
+		
 
 	}
 
 	private String createServerPath(String name) {
 		String webAppPath = Executions.getCurrent().getDesktop().getWebApp()
-				.getRealPath("/");
+				.getRealPath(File.separator);
 		webAppPath += "Files" + File.separator;
 		return webAppPath + name;
 
 	}
 
-	public Image getPicPath() {
+	public AImage getPicPath() {
 		return picPath;
 	}
 

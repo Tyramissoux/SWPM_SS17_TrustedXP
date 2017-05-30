@@ -39,10 +39,10 @@ public class FileUploadVM {
 	
 	
 	public FileUploadVM() {
-		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
+		/*UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
 		if (!mgmt.isAuthenticated()) {
 			Executions.sendRedirect("login.zul");
-        } 
+        } */
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

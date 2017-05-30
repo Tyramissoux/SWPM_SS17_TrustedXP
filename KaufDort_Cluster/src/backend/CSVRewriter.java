@@ -10,8 +10,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.text.Normalizer;
-import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -19,7 +17,7 @@ import java.util.Arrays;
  * Erzeugt aus einer gegebenen CSV-Datei eine neue CSV-Datei mit nur noch den
  * wünschten Spalten
  * 
- * @author wooooot
+ * @author Insa Kruse
  * 
  */
 public class CSVRewriter {
@@ -28,6 +26,13 @@ public class CSVRewriter {
 	private String filePathOut;
 	private ArrayList<Integer> selectedIndices;
 
+	/**
+	 * Erzeugt einen neuen CSVRewriter, der eine Liste von ausgewählten Indices
+	 * und den Pfad der zu bearbeitenden csv-Datei entgegen nimmt
+	 * 
+	 * @param selectedIndices
+	 * @param filePath
+	 */
 	public CSVRewriter(ArrayList<Integer> selectedIndices, String filePath) {
 		this.filePathIn = filePath;
 		this.filePathOut = createFileOut(filePath);
@@ -89,19 +94,21 @@ public class CSVRewriter {
 
 			StringBuilder sb = new StringBuilder();
 			String line = null;
-			
+
 			int endValue = selectedIndices.size();
 
-			
 			while ((line = read.readLine()) != null) {
 				String[] lineArr = line.split(",");
 				int counter = 1;
 				for (int i = 0; i < lineArr.length; i++) {
 					if (selectedIndices.contains(i)) {
-						
-						 /*String temp = Normalizer.normalize(lineArr[i],
-						 Form.NFD); temp = temp.replaceAll("[^\\p{ASCII}]","");*/
-						 
+
+						/*
+						 * String temp = Normalizer.normalize(lineArr[i],
+						 * Form.NFD); temp =
+						 * temp.replaceAll("[^\\p{ASCII}]","");
+						 */
+
 						if (counter < endValue) {
 							sb.append(lineArr[i] + ",");
 						} else {

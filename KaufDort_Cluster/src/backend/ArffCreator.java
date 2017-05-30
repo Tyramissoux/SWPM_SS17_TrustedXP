@@ -9,6 +9,8 @@ import weka.core.converters.CSVLoader;
 /**
  * Klasse erzeugt eine Arff-Datei aus einem gegebenen Pfad (String) zu einer CSV
  * Datei
+ * @author Insa Kruse
+ *
  */
 public class ArffCreator {
 	private String arffPath;

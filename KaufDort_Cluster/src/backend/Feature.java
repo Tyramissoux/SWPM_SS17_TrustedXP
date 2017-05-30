@@ -2,7 +2,11 @@ package backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * 
+ * @author Insa Kruse
+ *
+ */
 public class Feature {
 	private String featureName;
 	private int featureType;
