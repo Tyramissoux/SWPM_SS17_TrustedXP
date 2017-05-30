@@ -39,7 +39,16 @@ public class UserCredentialManager {
             return userModel;
         }
     }
+    
+    private String createServerPath(String name) {
+		String webAppPath = Executions.getCurrent().getDesktop().getWebApp()
+				.getRealPath("/");
+		webAppPath += "Files" + File.separator;
+		System.out.println(webAppPath);
+		return webAppPath + name;
 
+	}
+    
     /**
      * Login Method,executed on click of Login button.
      * input is mashalled to xml and web service call is made
@@ -70,7 +79,7 @@ public class UserCredentialManager {
             }*/
         	UserDatenbank tmp= new UserDatenbank();
         	try {
-        		File file= new File("Daten.ser");
+        		File file= new File(createServerPath("Daten.ser"));
         		//System.getProperty("user.dir");
                 if(file.createNewFile()){
                 	FileOutputStream fileOut= new FileOutputStream(file);
@@ -86,7 +95,7 @@ public class UserCredentialManager {
         	
         	try {
         		
-                FileInputStream fileIn = new FileInputStream("Daten.ser");
+                FileInputStream fileIn = new FileInputStream(createServerPath("Daten.ser"));
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 tmp = (UserDatenbank) in.readObject();
                 in.close();
@@ -106,6 +115,7 @@ public class UserCredentialManager {
         		if (username.equals(a.getName()) && password.equals(a.getPassword())) {
         			User tmpUser = new User(username, password);
         			user= tmpUser;
+        			return;
         		} else {
         			//error occured
         			user = null;

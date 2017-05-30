@@ -1,10 +1,15 @@
 package frontend;
 //https://www.zkoss.org/wiki/Small_Talks/2012/February/ZK_And_JAX_WS
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -24,7 +29,7 @@ public class userManagmentController extends GenericForwardComposer {
     protected Textbox usernameTxtbox;
     protected Textbox passwordTxtbox;
     protected Button resetButton;
-    protected Button loginButton;
+    protected Button newUserButton;
 
     /**
      * Standard doAfterCompose with added authentication check before proceed
@@ -36,7 +41,7 @@ public class userManagmentController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         if (UserCredentialManager.getIntance(session).isAuthenticated()) {
-            execution.sendRedirect("upload.zul");
+           // execution.sendRedirect("upload.zul");
         }
         usernameTxtbox.setFocus(true);
     }
@@ -69,23 +74,86 @@ public class userManagmentController extends GenericForwardComposer {
 		return items;
 	}
     
-    public void onClick$loginButton(Event event) {
-        doLogin();
+    public void onClick$newUserButton(Event event) {
+        addUser();
     }
+    
+    private String createServerPath(String name) {
+		String webAppPath = Executions.getCurrent().getDesktop().getWebApp()
+				.getRealPath("/");
+		webAppPath += "Files" + File.separator;
+		System.out.println(webAppPath);
+		return webAppPath + name;
+
+	}
 
     /**
      * Method that will initiate the login action
      * Input values are taken from front end and passed to the manager for processing
      */
-    private void doLogin() {
-        UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
-        //add checks to ensure that no empty data is passed to the backend for processing
-        mgmt.login(usernameTxtbox.getValue().trim(), passwordTxtbox.getValue().trim());
-        if (mgmt.isAuthenticated()) {
-            execution.sendRedirect("upload.zul");
-        } else {
-            mesgLbl.setValue("The UserName or Password provided is invalid.");
-        }
+    private void addUser() {
+    	UserDatenbank tmp= new UserDatenbank();
+    	try {
+    		
+    		File file= new File(createServerPath("Daten.ser"));
+    		//System.getProperty("user.dir");
+            if(file.createNewFile()){
+            	FileOutputStream fileOut= new FileOutputStream(file);
+            	ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            	out.writeObject(tmp);
+            	out.close();
+            	fileOut.close();
+            	System.out.printf("Datenbank wurde neu erstellt");
+            }
+         }catch(IOException i) {
+            i.printStackTrace();
+         }
+    	
+    	try {
+    		
+            FileInputStream fileIn = new FileInputStream(createServerPath("Daten.ser"));
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            tmp = (UserDatenbank) in.readObject();
+            in.close();
+            fileIn.close();
+         }catch(IOException i) {
+            i.printStackTrace();
+            return;
+         }catch(ClassNotFoundException c) {
+            System.out.println("Datenbank wurde nicht gefunden");
+            c.printStackTrace();
+            return;
+         
+    	
+    }
+    	
+    	for(User a : tmp.users){
+    		if (usernameTxtbox.getValue().trim().equals(a.getName()) && passwordTxtbox.getValue().trim().equals(a.getPassword())) {
+    			mesgLbl.setValue("The UserName or Password provided is already existing.");
+    			return;
+    		}
+    	}
+    	PermissionModel user = new PermissionModel("1","User");
+		ArrayList<PermissionModel> Premissions = new ArrayList<PermissionModel>();
+		Premissions.add(user);
+		
+		User newUser = new User(usernameTxtbox.getValue().trim(),passwordTxtbox.getValue().trim(),Premissions);
+		tmp.users.add(newUser);
+		try {
+    		File file= new File(createServerPath("Daten.ser"));
+    		//System.getProperty("user.dir");
+            	file.createNewFile();
+            	FileOutputStream fileOut= new FileOutputStream(file);
+            	ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            	out.writeObject(tmp);
+            	out.close();
+            	fileOut.close();
+            	System.out.printf("User erfolgreich angelegt");
+            
+         }catch(IOException i) {
+            i.printStackTrace();
+         }
+		mesgLbl.setValue("User successful created");
     }
 /**
  * Just clears the screen 
