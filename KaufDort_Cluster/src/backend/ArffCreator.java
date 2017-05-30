@@ -24,7 +24,7 @@ public class ArffCreator {
 
 	/**
 	 * Per Weka Bibliotheken wird aus einer einfachen csv eine speziell für weka
-	 * formatierte arff Datei
+	 * formatierte arff-Datei
 	 * 
 	 * @param csv
 	 *            Input Datei im CSV Format

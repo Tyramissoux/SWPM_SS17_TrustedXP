@@ -21,7 +21,7 @@ import backend.Feature;
 //http://zkfiddle.org/sample/h20ktc/2-Fixed-and-Dynamic-Columns
 /**
  * 
- * @author wooooot
+ * @author Insa Kruse
  * 
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })

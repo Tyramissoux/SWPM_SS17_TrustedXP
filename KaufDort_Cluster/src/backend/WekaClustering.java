@@ -162,7 +162,7 @@ public class WekaClustering {
 			for (int j = 0; j < numOfFeatures; j++) {
 				// geht die einzelnen Features pro Instanz durch weist die Werte
 				// den Clustern zu
-				features.get(j).addFeatureElementForCluster(assignment,
+				features.get(j).addNominalFeatureElementForCluster(assignment,
 						inst.toString(j));
 			}
 			inst = null;

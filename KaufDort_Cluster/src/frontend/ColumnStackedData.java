@@ -16,7 +16,7 @@ public class ColumnStackedData {
 	public ColumnStackedData() {
 		Feature feat = (Feature) Sessions.getCurrent().getAttribute(
 				"chosenFeature");
-		ArrayList<HashMap<String, Integer>> mapList = feat.getAllClusterData();
+		ArrayList<HashMap<String, Integer>> mapList = feat.getAllNominalClusterData();
 		//ArrayList<String> unique = feat.getUniqueItem();
 
 		model = new DefaultCategoryModel();
