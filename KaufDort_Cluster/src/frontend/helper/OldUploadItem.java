@@ -1,35 +1,53 @@
 package frontend.helper;
 
-public class OldUploadItem {
+import java.io.Serializable;
+import java.util.ArrayList;
+import backend.Feature;
+import backend.KMeansCluster;
+
+@SuppressWarnings("serial")
+public class OldUploadItem implements Serializable{
 	
 	//Basisklasse für Veränderungen
 	
-	private String _name;
-	private int _price;
-	private int _quantity;
+	private String date;
+	private int clustersUsed;
+	private String fileName;
+	private ArrayList<Feature> featureList;
+	private ArrayList<KMeansCluster> clusterList;
 
-	public OldUploadItem (String name, int price, int quantity) {
-		setName (name);
-		setPrice (price);
-		setQuantity (quantity);
+	public OldUploadItem (String fileName, String date, int clustersUsed) {
+		this.fileName = fileName;
+		this.date = date;
+		this.clustersUsed = clustersUsed;
 	}
-	public void setName (String name) {
-		_name = name;
+	
+	public String getFileName () {
+		return fileName;
 	}
-	public String getName () {
-		return _name;
+	
+	public int getClustersUsed () {
+		return clustersUsed;
 	}
-	public void setPrice (int price) {
-		_price = price;
+	
+	public String getDate() {
+		return date;
 	}
-	public int getPrice () {
-		return _price;
+	
+	public void setFeatureList(ArrayList<Feature> list){
+		featureList = list;
 	}
-	public void setQuantity (int quantity) {
-		_quantity = quantity;
+	
+	public ArrayList<Feature> getFeatureList(){
+		return featureList;
 	}
-	public int getQuantity () {
-		return _quantity;
+	
+	public void setClusterList(ArrayList<KMeansCluster> list){
+		clusterList = list;
+	}
+	
+	public ArrayList<KMeansCluster> getClusterList(){
+		return clusterList;
 	}
 }
 

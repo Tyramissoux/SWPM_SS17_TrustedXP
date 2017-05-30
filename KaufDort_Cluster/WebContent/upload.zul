@@ -21,19 +21,19 @@
 					checkmark="true">
 					<listhead>
 						<listheader label="Datum" align="center"
-							sort="true" />
+							sort="true" hflex="min" />
 						<listheader label="Datei" align="center"
-							sort="true" />
+							sort="true" hflex="min" />
 						<listheader label="Clusteranzahl" align="center"
-							sort="true" />
+							sort="true" hflex="min"/>
 					</listhead>
 					<template name="model" var="item">
-						<listitem value="@bind(item)">
-							<listcell label="@bind(item.name)"
+						<listitem value="@bind(item)" >
+							<listcell label="@bind(item.date)"
 								style="text-align: left" />
-							<listcell label="@bind(item.price)"
+							<listcell label="@bind(item.fileName)"
 								style="text-align: left" />
-							<listcell label="@bind(item.quantity)"
+							<listcell label="@bind(item.clustersUsed)"
 								style="text-align: left" />
 						</listitem>
 					</template>

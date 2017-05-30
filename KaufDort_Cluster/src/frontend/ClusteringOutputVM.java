@@ -1,15 +1,11 @@
 package frontend;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.List;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.image.AImage;
-import org.zkoss.image.Image;
-import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -17,6 +13,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.ListModelMap;
+import frontend.helper.OldUploadItem;
 import weka.core.Instance;
 import backend.KMeansCluster;
 import backend.Feature;
@@ -33,10 +30,9 @@ public class ClusteringOutputVM {
 	private ArrayList<KMeansCluster> clusterList;
 	private ArrayList<Feature> featureList;
 	private int numOfClusters;
-
 	private ListModelMap data;
 	private ListModel columns_model;
-	private String picPath;
+
 
 
 	public ClusteringOutputVM() {
@@ -47,29 +43,36 @@ public class ClusteringOutputVM {
 		getSessionGlobalVariables();
 		transferDataToListModelMap();
 		fillColumnsModel(numOfClusters);
-		// non funktiona
-		
-		picPath = getRealPath("Files/QuestionmarkButton.png");
+		storeUploadItem();
 		
 		//System.out.println(picPath);
 	}
 
+
+
+	private void storeUploadItem() {
+		String fileName = (String)Sessions.getCurrent().getAttribute("originalFileName");
+		String date = (String)Sessions.getCurrent().getAttribute("uploadDate");
+		OldUploadItem old = new OldUploadItem(fileName, date, clusterList.size());
+		old.setClusterList(clusterList);
+		old.setFeatureList(featureList);
+		new StoreToDataBase(old);
+	}
+
 	
 	
-	private String createServerPath(String name) {
+	/*private String createServerPath(String name) {
 		String webAppPath = Executions.getCurrent().getDesktop().getWebApp()
 				.getRealPath(File.separator);
 		webAppPath += "Files" + File.separator;
 		return webAppPath + name;
-	}
+	}*/
 	
-	private String getRealPath(String file){
+	/*private String getRealPath(String file){
 		return Sessions.getCurrent().getWebApp().getRealPath(file);
-	}
+	}*/
 
-	public String getPicPath() {
-		return picPath;
-	}
+	
 
 	private void transferDataToListModelMap() {
 		List<String> value = new java.util.ArrayList<String>();

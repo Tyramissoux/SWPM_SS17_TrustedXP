@@ -50,9 +50,9 @@ public class FileUploadVM {
 	public List<OldUploadItem> getItems() {
 		if (items == null) {
 			items = new ArrayList();
-			items.add(new OldUploadItem("Item 1", 1, 1));
-			items.add(new OldUploadItem("Item 2", 2, 2));
-			items.add(new OldUploadItem("Item 3", 3, 3));
+			items.add(new OldUploadItem("file1.csv","20.05.2017-14:58:16",4));
+			items.add(new OldUploadItem("file2.csv","21.05.2017-15:58:16",3));
+			items.add(new OldUploadItem("file3.csv","22.05.2017-16:58:16",5));
 		}
 		return items;
 	}
@@ -65,11 +65,11 @@ public class FileUploadVM {
 		return _selected;
 	}
 
-	@Command
+	/*@Command
 	@NotifyChange("items")
 	public void addItem() {
 		items.get(1).setQuantity(items.get(1).getQuantity() + 1);
-	}
+	}*/
 
 	public File getSaveFolder() {
 		return saveFolder;
@@ -98,6 +98,8 @@ public class FileUploadVM {
 		if (!tmpPath.endsWith(File.separatorChar + ""))
 			tmpPath = tmpPath + File.separatorChar;
 
+		String date =day+"."+month+"."+year+"-"+hour+":"+min+":"+sec;
+		Sessions.getCurrent().setAttribute("uploadDate", date);
 		String filePath = tmpPath + year + "_" + month + "_" + day + "_" + hour
 				+ "_" + min + "_" + sec + File.separatorChar;
 
@@ -149,10 +151,12 @@ public class FileUploadVM {
 					Messagebox.OK, Messagebox.EXCLAMATION);
 			return;
 		}
+		String originalName = media.getName();
+		Sessions.getCurrent().setAttribute("originalFileName", originalName);
 
 		saveFolder = createFolder();
 		filePath = saveFolder.getAbsolutePath() + File.separatorChar
-				+ media.getName();
+				+ originalName;
 
 		try {
 			Files.copy(new File(filePath), media.getStreamData());
