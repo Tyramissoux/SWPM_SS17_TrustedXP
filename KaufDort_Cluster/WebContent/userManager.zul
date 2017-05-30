@@ -77,7 +77,7 @@
                                     <separator bar="false" />
                                     <separator bar="true" />
                                     <hbox>
-                                        <button id="loginButton" type="submit" height="22px" label="Erstellen" />
+                                        <button id="newUserButton" type="submit" height="22px" label="Erstellen" />
                                         <button id="resetButton" type="reset" height="22px" label="Reset" />
                                     </hbox>
                                         <label id="mesgLbl" />
