@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window apply="frontend.ColumnStackedComposer">
+    <charts id="chart" type="column" title="Stacked column chart"/>
+</window>
