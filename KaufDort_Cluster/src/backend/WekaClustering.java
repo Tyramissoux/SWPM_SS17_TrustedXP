@@ -87,19 +87,18 @@ public class WekaClustering {
 		addCentroids(kmeans);
 
 		// FOR TESTING:
-		//for (int i = 0; i < kMeansClusterList.size(); i++) {
-		//	Instance in = kMeansClusterList.get(i).getCenteroid();
-		//	for (int j = 0; j < in.numValues(); j++)
-		//		System.out.print(in.toString(j) + " | ");
-		//	System.out.println();
-		//}
+		// for (int i = 0; i < kMeansClusterList.size(); i++) {
+		// Instance in = kMeansClusterList.get(i).getCenteroid();
+		// for (int j = 0; j < in.numValues(); j++)
+		// System.out.print(in.toString(j) + " | ");
+		// System.out.println();
+		// }
 
-		
-		//HashMap<String, Integer> map = features.get(0)
-		//		.getElementValuesForCluster(0);
-		//for (Entry<String, Integer> e : map.entrySet()) {
-		//	System.out.println(e.getKey() + " " + e.getValue());
-		//}
+		// HashMap<String, Integer> map = features.get(0)
+		// .getElementValuesForCluster(0);
+		// for (Entry<String, Integer> e : map.entrySet()) {
+		// System.out.println(e.getKey() + " " + e.getValue());
+		// }
 
 	}
 
@@ -132,9 +131,16 @@ public class WekaClustering {
 	private void createBasicFeatureList(int numOfClusters, Instances data) {
 		Enumeration<Attribute> enu = data.enumerateAttributes();
 		while (enu.hasMoreElements()) {
-			Attribute a = enu.nextElement();// saemtliche Features aus dem
-											// Datensatz
-			features.add(new Feature(a.name(), a.type(), numOfClusters));
+			Attribute a = enu.nextElement();
+			int type = a.type();
+			// 0=numerisch, alle anderen werden wie Strings behandelt
+			if (type != 0)
+				features.add(new NominalFeature(a.name(), a.type(),
+						numOfClusters));
+			else {
+				features.add(new NumericFeature(a.name(), a.type(),
+						numOfClusters));
+			}
 			a = null;
 		}
 		enu = null;
@@ -162,9 +168,13 @@ public class WekaClustering {
 			for (int j = 0; j < numOfFeatures; j++) {
 				// geht die einzelnen Features pro Instanz durch weist die Werte
 				// den Clustern zu
-				features.get(j).addNominalFeatureElementForCluster(assignment,
-						inst.toString(j));
-			}
+				int type = features.get(j).getFeatureType();
+				if (type != 0)
+					((NominalFeature) features.get(j)).addFeatureElementForCluster(
+							assignment, inst.toString(j));
+				else ((NumericFeature) features.get(j)).addFeatureElementForCluster(
+						assignment, Double.valueOf(inst.toString(j)));
+			}	
 			inst = null;
 		}
 	}

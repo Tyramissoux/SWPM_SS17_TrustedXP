@@ -3,20 +3,20 @@ package frontend;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
 import org.zkoss.chart.model.CategoryModel;
 import org.zkoss.chart.model.DefaultCategoryModel;
 import org.zkoss.zk.ui.Sessions;
 
-import backend.Feature;
+import backend.NominalFeature;
 
 public class ColumnStackedData {
 	private CategoryModel model;
 
 	public ColumnStackedData() {
-		Feature feat = (Feature) Sessions.getCurrent().getAttribute(
+		NominalFeature feat = (NominalFeature) Sessions.getCurrent().getAttribute(
 				"chosenFeature");
-		ArrayList<HashMap<String, Integer>> mapList = feat.getAllNominalClusterData();
+		
+		ArrayList<HashMap<String, Integer>> mapList = feat.getAllClusterData();
 		//ArrayList<String> unique = feat.getUniqueItem();
 
 		model = new DefaultCategoryModel();

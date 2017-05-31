@@ -129,8 +129,12 @@ public class ClusteringOutputVM {
 			}
 		}
 		Sessions.getCurrent().setAttribute("chosenFeature", feat);
+		
+		if(feat.getFeatureType()!= 0)
 		//koennte problematisch werden bei anderen Browsern
 		Executions.getCurrent().sendRedirect("stackedColumns.zul");
+		else 
+			Executions.getCurrent().sendRedirect("boxplot.zul");
 		
 	}
 
