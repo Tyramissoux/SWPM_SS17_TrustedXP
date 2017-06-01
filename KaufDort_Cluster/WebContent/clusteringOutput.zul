@@ -13,10 +13,10 @@
 		mode="embedded">
 		<caption label="KaufDort Cluster - Clustering Output"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
-			<include style="margin-top: 20px; margin-bottom: 20px;" src="/marketing.zul"/>
+		<include style="margin-top: 20px; margin-bottom: 20px;"
+			src="/marketing.zul" />
 		<hbox>
-			<grid id="grid" model="@load(vm.mapModel)"
-				hflex="max">
+			<grid id="grid" model="@load(vm.mapModel)" hflex="max">
 				<columns children="@load(vm.columnsModel)">
 					<template name="children">
 						<column hflex="min" label="@load(each)"
@@ -59,6 +59,7 @@
 
 
 
+
 			
 			<![CDATA[ Der Cluster Centroid ist die berechnete Mitte
 			eines Clusters. Ein Centroid ist ein Vektor, der einen Wert
@@ -69,6 +70,7 @@
 			die durchschnittliche Distanz zwischen den Beobachtungen und
 			dem Centroid. <br><br> Centroid 1 entspricht dem Mittelpunkt
 			von Cluster 1 usw. ]]>
+			
 			
 			
 			
