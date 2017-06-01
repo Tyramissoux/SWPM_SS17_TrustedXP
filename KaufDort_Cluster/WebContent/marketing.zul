@@ -1,12 +1,12 @@
 <zk>	
 	<listbox hflex="min">
 		<listitem popup="msg">
-			<listcell label="Marketingemphelung" />
+			<listcell label="Marketingempfelung" />
 		</listitem>
 	</listbox>
 	<popup id="msg" width="50%">
 		<vlayout>
-			Klicken Sie auf die einzelnen Optionen für eine detailierte Beschreibung
+			Halten Sie den Mauszeiger auf die einzelnen Optionen für eine detailierte Beschreibung
 			<listbox>
 				<listitem tooltip="snm">
 					<listcell label="Social Network Marketing" />
