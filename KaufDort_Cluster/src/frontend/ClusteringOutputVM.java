@@ -51,12 +51,13 @@ public class ClusteringOutputVM {
 
 
 	private void storeUploadItem() {
+		
 		String fileName = (String)Sessions.getCurrent().getAttribute("originalFileName");
 		String date = (String)Sessions.getCurrent().getAttribute("uploadDate");
 		OldUploadItem old = new OldUploadItem(fileName, date, clusterList.size());
 		old.setClusterList(clusterList);
 		old.setFeatureList(featureList);
-		new StoreToDataBase(old);
+		//new StoreToDataBase(old); 
 	}
 
 	
@@ -80,13 +81,14 @@ public class ClusteringOutputVM {
 		for (int i = 0; i < featureList.size(); i++) {
 
 			for (int j = 0; j < clusterList.size(); j++) {
+				
 				Instance in = clusterList.get(j).getCenteroid();
 				value.add(in.toString(i));
-				// System.out.print(in.toString(i)+" ");
+				 //System.out.print(in.toString(i)+" ");
 			}
 
 			data.put((featureList.get(i).getFeatureName()), value);
-			// System.out.print(featureList.get(i).getFeatureName());
+			//System.out.print(featureList.get(i).getFeatureName());
 			// System.out.println();
 			value = new ArrayList<String>();
 		}
