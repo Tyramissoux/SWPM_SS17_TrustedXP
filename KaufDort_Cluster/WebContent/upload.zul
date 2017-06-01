@@ -50,6 +50,9 @@
 					upload="true,multiple=false,accept=.csv"
 					onUpload="@command('fileUpload')" 
 				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
+			<button id="btnLogOut" label="LogOut"
+				onClick="@command('logOut')"
+				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
 		</box>
 	
 

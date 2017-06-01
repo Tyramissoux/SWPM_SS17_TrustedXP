@@ -56,6 +56,13 @@ public class FileUploadVM {
 		}
 		return items;
 	}
+	
+	@Command
+	public void logOut() {
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
+		mgmt.logOff();
+		Executions.sendRedirect("login.zul");
+    }
 
 	public void setSelected(Listitem selected) {
 		_selected = selected;
