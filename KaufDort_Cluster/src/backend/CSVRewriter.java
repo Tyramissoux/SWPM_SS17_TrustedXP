@@ -51,7 +51,10 @@ public class CSVRewriter {
 	 *         durch .arff
 	 */
 	public String createFileOut(String in) {
-		return in.substring(0, in.lastIndexOf(".")) + "_new.csv";
+		if (in.contains("."))
+			return in.substring(0, in.lastIndexOf(".")) + "_new.csv";
+		else
+			return in + "_new.csv";
 	}
 
 	/**
@@ -93,15 +96,19 @@ public class CSVRewriter {
 			BufferedWriter write = createFileWriter();
 
 			StringBuilder sb = new StringBuilder();
-			String line = null;
-
-			int endValue = selectedIndices.size();
+			String line = read.readLine();
+			String[] lineArr = line.split(",");
+			ArrayList<Integer> checkedList = checkParsedList(selectedIndices,
+					lineArr.length);
 
 			while ((line = read.readLine()) != null) {
-				String[] lineArr = line.split(",");
+
 				int counter = 1;
+				int endValue = checkedList.size();
+
 				for (int i = 0; i < lineArr.length; i++) {
-					if (selectedIndices.contains(i)) {
+
+					if (checkedList.contains(i)) {
 
 						/*
 						 * String temp = Normalizer.normalize(lineArr[i],
@@ -140,9 +147,19 @@ public class CSVRewriter {
 
 	}
 
+	protected ArrayList<Integer> checkParsedList(ArrayList<Integer> list,
+			int max) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i) >= max) {
+				list.remove(i);
+			}
+		}
+		return list;
+	}
+
 	public static void main(String[] args) {
 		new CSVRewriter(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 7, 9)),
-				"");
+				"C:/Users/wooooot/Downloads/SPM_TestdatensatzKlein_2017.csv");
 	}
 
 }
