@@ -6,88 +6,70 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
- <style>
-    div.z-grid, tr.z-row td.z-row-inner {background: white; border:0;  zoom: 1; }
-    </style>
-    <window id="userManager" border="none" height="100%" width="100%" apply="frontend.userManagmentController">
+	<style>body { background-color: #fcfcfc; }</style>
 
-        <h:br></h:br>
-        <h:br></h:br>
-        <h:br></h:br>
-        <h:table align="center">
-            <h:tr>
-                <h:td>&#160; </h:td>
-                <h:td>&#160; </h:td>
-            </h:tr>
-            <h:tr>
-                <h:td>&#160; </h:td>
-                <h:td>
-                    <h:h1>  <label style="position:relative; top:-30px;padding-left: 50px; font-size:30px;color:#008BB6;font-weight:bold;"
-					value="User Manager"/>
-                    </h:h1>
-                </h:td>
-            </h:tr>
-            <h:tr>
-                <h:td>&#160;</h:td>
-                <h:td>
-                    <label value="Vorhandene user:" />
-					<listbox model="@load(vm.items)"
-						selectedItem="@bind(vm.selected)" hflex="true" height="300px"
-						checkmark="true">
-					<listhead>
-						<listheader label="Username" align="center"
-							sort="true" />
-						<listheader label="Password" align="center"
-							sort="true" />
-						
-					</listhead>
-					<template name="model" var="users">
-						<listitem value="@bind(item)">
-							<listcell label="@bind(item.name)"
-								style="text-align: left" />
-							<listcell label="@bind(item.password)"
-								style="text-align: left" />
-						</listitem>
-					</template>
-				</listbox>
-                </h:td>
-                <h:td>
+	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
+		style="display: block; width: 300px; margin: 5% auto 0 auto;">
+	</image>
 
-                    <panel closable="false"  width="320px">
-                        <panelchildren>
-                            <groupbox>
-                                <caption label="Neuer User" />
-                                <div>
-                                    <grid fixedLayout="true" sclass="GridLayoutNoBorder" style="border:0px">
-                                        <columns>
-                                            <column width="40%" />
-                                            <column width="60%" />
-                                        </columns>
-                                        <rows>
-                                            <row>
-                                                <label id="usernameLbl" value="User" />
-                                                <textbox id="usernameTxtbox" width="98%" />
-                                            </row>
-                                            <row>
-                                                <label id="pwdLbl" value="Password" />
-                                                <textbox id="passwordTxtbox" type="password" width="98%" />
-                                            </row>
-                                        </rows>
-                                    </grid>
-                                    <separator bar="false" />
-                                    <separator bar="true" />
-                                    <hbox>
-                                        <button id="newUserButton" type="submit" height="22px" label="Erstellen" />
-                                        <button id="resetButton" type="reset" height="22px" label="Reset" />
-                                    </hbox>
-                                        <label id="mesgLbl" />
-                                </div>
-                            </groupbox>
-                        </panelchildren>
-                    </panel>
-                </h:td>
-            </h:tr>
-        </h:table>
-    </window>
+	<window id="userManager" border="none" width="500px"
+		apply="frontend.userManagmentController"
+		style="margin: 0 auto; background: #ddf4ea; position: relative;">
+		<caption label="User manager"
+			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
+
+		<label value="Vorhandene Benutzer:"
+			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000;" />
+		<listbox model="@load(vm.items)"
+			selectedItem="@bind(vm.selected)"  height="200px"
+			checkmark="true">
+			<listhead>
+				<listheader label="Username" align="center" sort="true"
+					style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
+				<listheader label="Password" align="center" sort="true"
+					style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
+
+			</listhead>
+			<template name="model" var="users">
+				<listitem value="@bind(item)">
+					<listcell label="@bind(item.name)"
+						style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;" />
+					<listcell label="@bind(item.password)"
+						style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;" />
+				</listitem>
+			</template>
+		</listbox>
+		<panel closable="false" width="100%" style="margin-top: 20px; position: relative;">
+			<panelchildren>
+				<groupbox style="border: none;">
+					<label value="Neuen Benutzer anlegen:"
+						style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000;" />
+					<h:br></h:br>
+					<h:br></h:br>
+					<label id="usernameLbl" value="User"
+						style="font-family: Segoe UI; font-size: 19px; font-style: normal; color: #000000;" />
+						<h:br></h:br>
+					<textbox id="usernameTxtbox" width="300px" />
+					<h:br></h:br>
+					<h:br></h:br>
+					<label id="pwdLbl" value="Password"
+						style="font-family: Segoe UI; font-size: 19px; font-style: normal; color: #000000;" />
+					<h:br></h:br>
+					<textbox id="passwordTxtbox" type="password"
+						width="300px" />
+					<h:br></h:br>
+					<h:br></h:br>
+
+					<hbox>
+						<button id="newUserButton" type="submit"
+							height="22px" label="Erstellen" style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;"/>
+						<button id="resetButton" type="reset"
+							height="22px" label="Reset" style="border: none; border-radius: 0px; background: #f1c40f; color: white; width: 140px; text-shadow: none; font-size: 18px; margin-left: 10px;"/>
+					</hbox>
+					<label id="mesgLbl" />
+
+				</groupbox>
+			</panelchildren>
+		</panel>
+	</window>
 </zk>
-

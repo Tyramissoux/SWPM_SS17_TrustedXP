@@ -6,69 +6,42 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
- <style>
-    div.z-grid, tr.z-row td.z-row-inner {background: white; border:0;  zoom: 1; }
-    </style>
-    <window id="loginwin" border="none" height="100%" width="100%" apply="frontend.LoginController">
+	<style>body { background-color: #FCFCFC; }</style>
 
-        <h:br></h:br>
-        <h:br></h:br>
-        <h:br></h:br>
-        <h:table align="center">
-            <h:tr>
-                <h:td>&#160; </h:td>
-                <h:td>&#160; </h:td>
-            </h:tr>
-            <h:tr>
-                <h:td>&#160; </h:td>
-                <h:td>
-                    <h:h1>  <label style="position:relative; top:-30px;padding-left: 50px; font-size:30px;color:#008BB6;font-weight:bold;"
-					value="Login fuer Clustering"/>
-                    </h:h1>
-                </h:td>
-            </h:tr>
-            <h:tr>
-                <h:td>&#160;</h:td>
-                <h:td>
-                    <image id="eios1" src="img/home-in2.gif" width="323"  height="242"/>
-                </h:td>
-                <h:td>
+	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
+		style="display: block; width: 300px; margin: 5% auto 20px auto;">
+	</image>
 
-                    <panel closable="false"  width="320px">
-                        <panelchildren>
-                            <groupbox>
-                                <caption label="Login" />
-                                <div>
-                                    <grid fixedLayout="true" sclass="GridLayoutNoBorder" style="border:0px">
-                                        <columns>
-                                            <column width="40%" />
-                                            <column width="60%" />
-                                        </columns>
-                                        <rows>
-                                            <row>
-                                                <label id="usernameLbl" value="User" />
-                                                <textbox id="usernameTxtbox" width="98%" />
-                                            </row>
-                                            <row>
-                                                <label id="pwdLbl" value="Password" />
-                                                <textbox id="passwordTxtbox" type="password" width="98%" />
-                                            </row>
-                                        </rows>
-                                    </grid>
-                                    <separator bar="false" />
-                                    <separator bar="true" />
-                                    <hbox>
-                                        <button id="loginButton" type="submit" height="22px" label="Login" />
-                                        <button id="resetButton" type="reset" height="22px" label="Reset" />
-                                    </hbox>
-                                        <label id="mesgLbl" />
-                                </div>
-                            </groupbox>
-                        </panelchildren>
-                    </panel>
-                </h:td>
-            </h:tr>
-        </h:table>
-    </window>
+
+	<window id="loginwin" border="none" apply="frontend.LoginController"
+		style="width: 300px; margin: auto;"
+		contentStyle="background: #fcfcfc;">
+
+		<label value="Login für Clustering"
+			style="font-family: Segoe UI; font-size: 22px; font-style: normal; color: #2980b9;" />
+		<h:br></h:br>
+		<h:br></h:br>
+		<label id="usernameLbl" value="User"
+			style="font-family: Segoe UI; font-size: 19px; font-style: normal; color: #000000;" />
+		<textbox id="usernameTxtbox" width="100%" />
+		<h:br></h:br>
+		<h:br></h:br>
+		<label id="pwdLbl" value="Password"
+			style="font-family: Segoe UI; font-size: 19px; font-style: normal; color: #000000;" />
+		<textbox id="passwordTxtbox" type="password" width="100%" />
+		<h:br></h:br>
+		<h:br></h:br>
+		<hbox>
+			<button id="loginButton" type="submit" height="22px"
+				label="Login"
+				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;" />
+			<button id="resetButton" type="reset" height="22px"
+				label="Reset"
+				style="border: none; border-radius: 0px; background: #f1c40f; color: white; width: 140px; text-shadow: none; font-size: 18px; margin-left: 10px;" />
+		</hbox>
+		<label id="mesgLbl" />
+
+
+
+	</window>
 </zk>
-

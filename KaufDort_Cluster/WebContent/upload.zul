@@ -1,46 +1,57 @@
-<zk xmlns:n="native" xmlns:c="client">
+                                        <zk xmlns:n="native" xmlns:c="client">
+
+	<style>body { background-color: #fcfcfc; }</style>
+
+	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
+		style="display: block; width: 300px; margin: 5% auto 0 auto;">
+	</image>
+
 	<window id="Upload" apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('frontend.FileUploadVM')"
 		title="KaufDort Cluster - CSV Upload " border="normal" width="1000px"
-		position="center,top" mode="embedded">
+		position="center,top" mode="embedded"
+		style="margin: 0 auto; background: #ddf4ea;">
+
+		<caption label="CSV Upload"
+			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
 
 
-		<label sclass="bold" value="UPLOAD:" />
-		<space width="5" />
-		<hbox>
-			<box orient="horizontal">
-				<button id="btnUpload" label="Upload"
-					upload="true,multiple=false,accept=.csv"
-					onUpload="@command('fileUpload')" />
-			</box>
+		<label value="Vergangene Uploads:"
+			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000;" />
 
-			<box orient="horizontal" visible="true">
-				<label value="Vergangene Uploads:" />
-				<listbox model="@load(vm.items)"
+		<box orient="horizontal" visible="true">
+			<listbox model="@load(vm.items)"
 					selectedItem="@bind(vm.selected)" hflex="true" height="300px"
-					checkmark="true">
-					<listhead>
-						<listheader label="Datum" align="center"
-							sort="true" hflex="min" />
-						<listheader label="Datei" align="center"
-							sort="true" hflex="min" />
-						<listheader label="Clusteranzahl" align="center"
-							sort="true" hflex="min"/>
-					</listhead>
-					<template name="model" var="item">
-						<listitem value="@bind(item)" >
-							<listcell label="@bind(item.date)"
-								style="text-align: left" />
-							<listcell label="@bind(item.fileName)"
-								style="text-align: left" />
-							<listcell label="@bind(item.clustersUsed)"
-								style="text-align: left" />
-						</listitem>
-					</template>
-				</listbox>
-			</box>
-		</hbox>
+					checkmark="true" style="width: 100%;">
+				<listhead>
+					<listheader label="Datum" align="center" sort="true"
+						style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
+					<listheader label="Datei" align="center" sort="true"
+						style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
+					<listheader label="Clusteranzahl" align="center"
+						sort="true"
+						style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
+				</listhead>
+				<template name="model" var="item">
+					<listitem value="@bind(item)">
+						<listcell label="@bind(item.date)"
+							style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;" />
+						<listcell label="@bind(item.fileName)"
+							style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;" />
+						<listcell label="@bind(item.clustersUsed)"
+							style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;" />
+					</listitem>
+				</template>
+			</listbox>
+		</box>
 
+		<box orient="horizontal" style="margin-top: 20px;">
+			<button id="btnUpload" label="Upload"
+					upload="true,multiple=false,accept=.csv"
+					onUpload="@command('fileUpload')" 
+				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
+		</box>
+	
 
 	</window>
 
