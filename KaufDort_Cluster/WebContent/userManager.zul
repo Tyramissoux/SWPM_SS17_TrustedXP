@@ -13,7 +13,8 @@
 	</image>
 
 	<window id="userManager" border="none" width="500px"
-		apply="frontend.userManagmentController"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('frontend.userManagmentController')"
 		style="margin: 0 auto; background: #ddf4ea; position: relative;">
 		<caption label="User manager"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
@@ -21,7 +22,7 @@
 		<label value="Vorhandene Benutzer:"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000;" />
 		<listbox model="@load(vm.items)"
-			selectedItem="@bind(vm.selected)"  height="200px"
+			  height="200px"
 			checkmark="true">
 			<listhead>
 				<listheader label="Username" align="center" sort="true"
@@ -30,7 +31,7 @@
 					style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
 
 			</listhead>
-			<template name="model" var="users">
+			<template name="model" var="item">
 				<listitem value="@bind(item)">
 					<listcell label="@bind(item.name)"
 						style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;" />
