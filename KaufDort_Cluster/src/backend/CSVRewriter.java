@@ -142,7 +142,7 @@ public class CSVRewriter {
 
 	public static void main(String[] args) {
 		new CSVRewriter(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 7, 9)),
-				"C:\\Users\\wooooot\\Downloads\\SPM_TestdatensatzKlein_2017.csv");
+				"");
 	}
 
 }

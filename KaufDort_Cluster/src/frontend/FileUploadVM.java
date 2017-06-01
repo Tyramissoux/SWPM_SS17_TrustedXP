@@ -153,7 +153,7 @@ public class FileUploadVM {
 
 		Media media = upEvent.getMedia();
 
-		if (!media.getName().endsWith(".csv")) {
+		if (!media.getName().toLowerCase().endsWith(".csv")) {
 			Messagebox.show("Ausgewählte Datei ist keine CSV", "Warning",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 			return;
