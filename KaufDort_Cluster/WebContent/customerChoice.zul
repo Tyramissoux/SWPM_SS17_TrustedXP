@@ -1,31 +1,50 @@
 <?page title="Feature und Clusteranzahl" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="win" title="Clusteranzahl und Featurewahl"
-		border="normal" apply="frontend.SelectorVM">
+	<style>body { background-color: #fcfcfc; }</style>
+	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
+		style="display: block; width: 300px; margin: 1% auto 0 auto;">
+	</image>
+	<window id="win"
+		style="margin: 0 auto; background: #ddf4ea; position: relative;"
+		width="1000px" border="normal" apply="frontend.SelectorVM">
+		<caption label="Clusteranzahl und Featurewahl"
+			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
 		<vbox width="100%">
-			<hbox width="100%">
-				<label value="Gewünschte Clusteranzahl:" />
-				<intbox value="5" id="intBoxCluster"
+			<hbox width="100%" style="margin-top: 20px;">
+				<label
+					style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000;"
+					value="Gewünschte Clusteranzahl:" />
+				<intbox
+					style="font-family: Segoe UI; font-style: normal; font-size: 16px; padding: 2px;"
+					value="5" id="intBoxCluster"
 					constraint="no empty : Feld darf nicht leer sein, no negative: Keine negativen Zahlen, no zero : Bitte einen anderen Wert als 0 waehlen, " />
-				<space width="100px"/>
-				<button id="btnGO" label="Start" type="button" orient="horizontal"/>
+				<space width="100px" />
+				<button
+					style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;"
+					id="btnGO" label="Start" type="button" orient="horizontal" />
 			</hbox>
 		</vbox>
 		<hbox width="100%">
-			<listbox id="listbox" model="${win$composer.featureChoice}"
-				checkmark="true" width="100%" height="500px" >
+			<listbox style="margin-top: 20px; position: relative;"
+				id="listbox" model="${win$composer.featureChoice}" checkmark="true"
+				width="100%" height="500px">
 				<listhead sizable="true">
-					<listheader label="Feature" sort="false" hflex="min"
-						align="left" width="50%"/>
-					<listheader label="Beispiel" sort="false" hflex="max"
-						align="left" width="50%" />
+					<listheader
+						style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;"
+						label="Feature" sort="false" hflex="min" align="left" width="50%" />
+					<listheader
+						style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;"
+						label="Beispiel" sort="false" hflex="max" align="left"
+						width="50%" />
 				</listhead>
 				<template name="model">
 					<listitem>
-						<listcell label="${each.feature}"
-							style="text-align: left" />
-						<listcell label="${each.example}"
-							style="text-align: left"  />
+						<listcell
+							style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;"
+							label="${each.feature}" />
+						<listcell
+							style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;"
+							label="${each.example}" />
 					</listitem>
 				</template>
 			</listbox>
