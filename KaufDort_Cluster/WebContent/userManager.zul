@@ -9,10 +9,10 @@
 	<style>body { background-color: #fcfcfc; }</style>
 
 	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
-		style="display: block; width: 300px; margin: 5% auto 0 auto;">
+		style="display: block; width: 300px; margin: 1% auto 0 auto;">
 	</image>
 
-	<window id="userManager" border="none" width="500px"
+	<window id="userManager" border="normal" width="500px"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('frontend.userManagmentController')"
 		style="margin: 0 auto; background: #ddf4ea; position: relative;">
@@ -21,7 +21,7 @@
 
 		<label value="Vorhandene Benutzer:"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000;" />
-		<listbox model="@load(vm.items)"
+		<listbox style="margin-top: 20px;" model="@load(vm.items)"
 			  height="200px"
 			checkmark="true">
 			<listhead>

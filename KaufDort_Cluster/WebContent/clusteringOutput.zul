@@ -2,31 +2,43 @@
 
 
 <zk xmlns:n="native" xmlns:c="client">
+	<style>body { background-color: #fcfcfc; }</style>
+	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
+		style="display: block; width: 300px; margin: 1% auto 0 auto;">
+	</image>
 	<window id="win" apply="org.zkoss.bind.BindComposer"
+		style="margin: 0 auto; background: #ddf4ea; position: relative;"
 		viewModel="@id('vm') @init('frontend.ClusteringOutputVM')"
-		title="KaufDort Cluster - Clustering Output " border="normal"
-		width="100%" position="center,top" mode="embedded">
-
+		border="normal" width="1000px" position="center,top"
+		mode="embedded">
+		<caption label="KaufDort Cluster - Clustering Output"
+			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
+			<include style="margin-top: 20px; margin-bottom: 20px;" src="/marketing.zul"/>
 		<hbox>
-			<grid id="grid" model="@load(vm.mapModel)"  height="500px" hflex="max" style="overflow: scroll;">
-				<columns children="@load(vm.columnsModel)" >
+			<grid id="grid" model="@load(vm.mapModel)"
+				hflex="max">
+				<columns children="@load(vm.columnsModel)">
 					<template name="children">
 						<column hflex="min" label="@load(each)"
-							sort="none" />
+							sort="none"
+							style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
 					</template>
 				</columns>
 				<template name="model" var="cur_row">
-					<row 
+					<row
 						children="@load(vm.columnsModel) @template(forEachStatus.index lt (vm.columnsModel.size()- cur_row.value.size()) ? 'fixed' : 'variable')">
 						<template name="fixed">
 							<cell>
-							<button label="@load(cur_row.key)"  onClick="@command('showDiagram')"  width="100%"/>				
+								<button label="@load(cur_row.key)"
+									style="border: none; border-radius: 0px; background: #7f8c8d; color: white; text-shadow: none; font-size: 18px;"
+									onClick="@command('showDiagram')" width="100%" />
 							</cell>
 						</template>
-						
+
 						<template name="variable">
 							<cell>
 								<label
+									style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;"
 									value="@load(cur_row.value[forEachStatus.index- vm.columnsModel.size()+ cur_row.value.size()])" />
 							</cell>
 						</template>
@@ -34,25 +46,35 @@
 				</template>
 			</grid>
 			    
-			<image id="questionmark" src="Files/QuestionmarkButton.png" tooltip="centroid" style="cursor: help" />
+			<image id="questionmark" src="Files/QuestionmarkButton.png"
+				tooltip="centroid" style="cursor: help" />
 			  
 		</hbox>
 	</window>
 	<popup id="centroid" width="300px">
 		<html>
 
+
+
+
+
+
+			
 			<![CDATA[ Der Cluster Centroid ist die berechnete Mitte
 			eines Clusters. Ein Centroid ist ein Vektor, der einen Wert
 			für jedes Feature (Variable) enthält, wobei jeder Wert den
 			Mittelwert einer Variable für die Beobachtungen in dem
-			Cluster darstellt.
-			<br><br>
-			Man kann den Centroiden as Maß der Clusterlage verwenden.
-			Für einen einzelnen Cluster ist die durchschnittliche
-			Distanz zwischen den Beobachtungen und dem Centroid. 
-			<br><br>
-			Centroid 1 entspricht dem Mittelpunkt von Cluster 1 usw.
-			]]>
+			Cluster darstellt. <br><br> Man kann den Centroiden as Maß
+			der Clusterlage verwenden. Für einen einzelnen Cluster ist
+			die durchschnittliche Distanz zwischen den Beobachtungen und
+			dem Centroid. <br><br> Centroid 1 entspricht dem Mittelpunkt
+			von Cluster 1 usw. ]]>
+			
+			
+			
+			
+			
+			
 	
 		</html>
 	</popup>

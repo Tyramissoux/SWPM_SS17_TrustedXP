@@ -1,12 +1,15 @@
-<zk>	
+<zk>
 	<listbox hflex="min">
 		<listitem popup="msg">
-			<listcell label="Marketingempfelung" />
+			<listcell
+				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;"
+				label="Marketingempfelung" />
 		</listitem>
 	</listbox>
 	<popup id="msg" width="50%">
 		<vlayout>
-			Halten Sie den Mauszeiger auf die einzelnen Optionen für eine detailierte Beschreibung
+			Halten Sie den Mauszeiger über die einzelnen Optionen für
+			eine detailierte Beschreibung
 			<listbox>
 				<listitem tooltip="snm">
 					<listcell label="Social Network Marketing" />
@@ -35,71 +38,85 @@
 			</listbox>
 			<popup id="snm" width="50%">
 				<vlayout>
-					Portale wie zum Beispiel Facebook, Twitter und Instagram haben eine riesige
-					Reichweite. Diese bieten eine simple Möglichkeit schnell viele Nutzer
-					gleichzeitig zu erreichen. Auf diese Weise kann man Produktneuerungen und
-					-angebote bewerben. Auch kann man hier mit einzelnen Kunden unkompliziert
-					in Kontakt treten, um Fragen oder auch Probleme zu klären.
+					Portale wie zum Beispiel Facebook, Twitter und
+					Instagram haben eine riesige Reichweite. Diese
+					bieten eine simple Möglichkeit schnell viele Nutzer
+					gleichzeitig zu erreichen. Auf diese Weise kann man
+					Produktneuerungen und -angebote bewerben. Auch kann
+					man hier mit einzelnen Kunden unkompliziert in
+					Kontakt treten, um Fragen oder auch Probleme zu
+					klären.
 				</vlayout>
 			</popup>
 			<popup id="pm" width="50%">
 				<vlayout>
-					Kunden schätzen den persönlichen Kontakt. Nutzen Sie deshalb die Möglichkeit
-					Probierstände im Geschäft aufzustellen. Promoter sollten hier Produkte
-					anpreisen, um Kunden auf diese aufmerksam zu machen. Mitarbeiter können
-					ebenfalls in die Fußgängerzone geschickt werden, um Passanten auf aktuelle
-					Angebote hinzuweisen. Werbeware (Kartenspiel mit Firmenlogo, Süßigkeiten,
-					etc.) lockt Kinder an.
+					Kunden schätzen den persönlichen Kontakt. Nutzen Sie
+					deshalb die Möglichkeit Probierstände im Geschäft
+					aufzustellen. Promoter sollten hier Produkte
+					anpreisen, um Kunden auf diese aufmerksam zu machen.
+					Mitarbeiter können ebenfalls in die Fußgängerzone
+					geschickt werden, um Passanten auf aktuelle Angebote
+					hinzuweisen. Werbeware (Kartenspiel mit Firmenlogo,
+					Süßigkeiten, etc.) lockt Kinder an.
 				</vlayout>
 			</popup>
 			<popup id="ws" width="50%">
 				<vlayout>
-					Die eigene Webseite sollte einen Überblick über die eigene Produktpalette
-					liefern. Auch sollten die einzelnen Filialen hier zu finden sein. Des
-					Weiteren, besteht die Möglichkeit einen regionalen Lieferdienst anzubieten.
-					Beachten Sie ebenfalls die Suchmaschinenoptimierung (SEO), um auf
-					Suchmaschinen möglichst weit oben gelistet zu werden. Eine Webseite bietet
-					ebenfalls die Möglichkeit einen Newsletter bereitzustellen, über den Kunden
-					über Leistungen, Produkte und Aktionen auf dem Laufenden gehalten werden.
+					Die eigene Webseite sollte einen Überblick über die
+					eigene Produktpalette liefern. Auch sollten die
+					einzelnen Filialen hier zu finden sein. Des
+					Weiteren, besteht die Möglichkeit einen regionalen
+					Lieferdienst anzubieten. Beachten Sie ebenfalls die
+					Suchmaschinenoptimierung (SEO), um auf Suchmaschinen
+					möglichst weit oben gelistet zu werden. Eine
+					Webseite bietet ebenfalls die Möglichkeit einen
+					Newsletter bereitzustellen, über den Kunden über
+					Leistungen, Produkte und Aktionen auf dem Laufenden
+					gehalten werden.
 				</vlayout>
 			</popup>
 			<popup id="ns" width="50%">
 				<vlayout>
-					Lassen Sie Kunden daran teilhaben, was in Ihrem Unternehmen geschieht.
-					Hierfür bieten sich vor allem Printmedien, Social Networks und die eigene
-					Webseite an.
+					Lassen Sie Kunden daran teilhaben, was in Ihrem
+					Unternehmen geschieht. Hierfür bieten sich vor allem
+					Printmedien, Social Networks und die eigene Webseite
+					an.
 				</vlayout>
 			</popup>
 			<popup id="fr" width="50%">
 				<vlayout>
-					Nutzen Sie regelmäßige Flyer, um auf aktuelle Angebote aufmerksam zu machen.
-					Zudem können Coupons hierüber verteilt werden, die exklusive Vorteile bieten.
-					Werden in Ihrer Region kostenlose Zeitungen verteilt, können diesen die
-					Flyer beigelegt werden.
+					Nutzen Sie regelmäßige Flyer, um auf aktuelle
+					Angebote aufmerksam zu machen. Zudem können Coupons
+					hierüber verteilt werden, die exklusive Vorteile
+					bieten. Werden in Ihrer Region kostenlose Zeitungen
+					verteilt, können diesen die Flyer beigelegt werden.
 				</vlayout>
 			</popup>
 			<popup id="es" width="50%">
 				<vlayout>
-					Nutzen Sie saisonale Veranstaltungen (Sommerspiele), um Kunden zu
-					unterhalten und um sie in den Markt zu locken. Dies steigert die
-					Kundenbindung und bringt Neukunden.
+					Nutzen Sie saisonale Veranstaltungen (Sommerspiele),
+					um Kunden zu unterhalten und um sie in den Markt zu
+					locken. Dies steigert die Kundenbindung und bringt
+					Neukunden.
 				</vlayout>
 			</popup>
 			<popup id="ss" width="50%">
 				<vlayout>
-					Bieten Sie, nach Möglichkeit, verschiedene Services an. Ein Lieferdienst
-					wäre für ältere Menschen, die nicht mehr eigenständig einkaufen können,
-					hilfreich.
+					Bieten Sie, nach Möglichkeit, verschiedene Services
+					an. Ein Lieferdienst wäre für ältere Menschen, die
+					nicht mehr eigenständig einkaufen können, hilfreich.
 				</vlayout>
 			</popup>
 			<popup id="wss" width="50%">
 				<vlayout>
-					Workshops bieten den Vorteil, dass man hier mit Kunden intensiv in Kontakt
-					tritt und so deren Bindung zum Geschäft erhöht. Geeignete Workshops wären
-					zum Beispiel: Weinverkostung und Kochkurse. Hier haben Sie zudem die
-					Gelegenheit eigene Produkte anzupreisen.
+					Workshops bieten den Vorteil, dass man hier mit
+					Kunden intensiv in Kontakt tritt und so deren
+					Bindung zum Geschäft erhöht. Geeignete Workshops
+					wären zum Beispiel: Weinverkostung und Kochkurse.
+					Hier haben Sie zudem die Gelegenheit eigene Produkte
+					anzupreisen.
 				</vlayout>
 			</popup>
 		</vlayout>
-	</popup>	
+	</popup>
 </zk>
