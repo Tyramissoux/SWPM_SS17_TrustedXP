@@ -62,9 +62,9 @@
 					<h:br></h:br>
 
 					<hbox>
-						<button id="newUserButton" type="submit"
+						<button id="newUserButton" type="submit" onClick="@command('newUserButton')"
 							height="22px" label="Erstellen" style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;"/>
-						<button id="resetButton" type="reset"
+						<button id="resetButton" type="reset" onClick="@command('resetButton')"
 							height="22px" label="Reset" style="border: none; border-radius: 0px; background: #f1c40f; color: white; width: 140px; text-shadow: none; font-size: 18px; margin-left: 10px;"/>
 					</hbox>
 					<label id="mesgLbl" />
