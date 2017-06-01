@@ -17,7 +17,9 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-
+import org.zkoss.zul.Listitem;
+import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zul.Messagebox;
 
 @SuppressWarnings("rawtypes")
 public class userManagmentController extends GenericForwardComposer {
@@ -30,6 +32,7 @@ public class userManagmentController extends GenericForwardComposer {
     protected Textbox passwordTxtbox;
     protected Button resetButton;
     protected Button newUserButton;
+    private Listitem _selected;
 
     /**
      * Standard doAfterCompose with added authentication check before proceed
@@ -51,6 +54,7 @@ public class userManagmentController extends GenericForwardComposer {
  */
     
     public List<User> getItems() {
+    	System.out.println("test liste");
 		if (items == null) {
 		
 			UserDatenbank tmp= new UserDatenbank();
@@ -72,6 +76,14 @@ public class userManagmentController extends GenericForwardComposer {
 		}
 		
 		return items;
+	}
+    
+    public void setSelected(Listitem selected) {
+		_selected = selected;
+	}
+
+	public Listitem getSelected() {
+		return _selected;
 	}
     
     public void onClick$newUserButton(Event event) {
