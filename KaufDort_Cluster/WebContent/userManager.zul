@@ -21,8 +21,7 @@
 		<label value="Vorhandene Benutzer:"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000;" />
 		<listbox model="@load(vm.items)"
-			selectedItem="@bind(vm.selected)"  height="200px"
-			checkmark="true">
+			selectedItem="@bind(vm.selected)" height="200px" checkmark="true">
 			<listhead>
 				<listheader label="Username" align="center" sort="true"
 					style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
@@ -39,7 +38,8 @@
 				</listitem>
 			</template>
 		</listbox>
-		<panel closable="false" width="100%" style="margin-top: 20px; position: relative;">
+		<panel closable="false" width="100%"
+			style="margin-top: 20px; position: relative;">
 			<panelchildren>
 				<groupbox style="border: none;">
 					<label value="Neuen Benutzer anlegen:"
@@ -48,7 +48,7 @@
 					<h:br></h:br>
 					<label id="usernameLbl" value="User"
 						style="font-family: Segoe UI; font-size: 19px; font-style: normal; color: #000000;" />
-						<h:br></h:br>
+					<h:br></h:br>
 					<textbox id="usernameTxtbox" width="300px" />
 					<h:br></h:br>
 					<h:br></h:br>
@@ -62,9 +62,11 @@
 
 					<hbox>
 						<button id="newUserButton" type="submit"
-							height="22px" label="Erstellen" style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;"/>
+							height="22px" label="Erstellen"
+							style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;" />
 						<button id="resetButton" type="reset"
-							height="22px" label="Reset" style="border: none; border-radius: 0px; background: #f1c40f; color: white; width: 140px; text-shadow: none; font-size: 18px; margin-left: 10px;"/>
+							height="22px" label="Reset"
+							style="border: none; border-radius: 0px; background: #f1c40f; color: white; width: 140px; text-shadow: none; font-size: 18px; margin-left: 10px;" />
 					</hbox>
 					<label id="mesgLbl" />
 

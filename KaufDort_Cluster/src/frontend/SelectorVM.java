@@ -86,11 +86,11 @@ public class SelectorVM extends SelectorComposer<Component> {
 
 	private boolean checkIntBox() {
 		chosenNumOfClusters = intBoxCluster.getValue();
-		if (chosenNumOfClusters > 1 && chosenNumOfClusters < 16)
+		if (chosenNumOfClusters > 1 && chosenNumOfClusters < 11)
 			return true;
 		else {
 			Messagebox
-					.show("Gewählte Anzahl an gewünschten Clustern muss zwischen 2 und 15 liegen",
+					.show("Gewählte Anzahl an gewünschten Clustern muss zwischen 2 und 10 liegen",
 							"Warnung", Messagebox.OK, Messagebox.INFORMATION);
 			return false;
 		}

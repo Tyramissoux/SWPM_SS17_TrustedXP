@@ -154,7 +154,7 @@ public class FileUploadVM {
 		Media media = upEvent.getMedia();
 
 		if (!media.getName().toLowerCase().endsWith(".csv")) {
-			Messagebox.show("Ausgewählte Datei ist keine CSV", "Warning",
+			Messagebox.show("Ausgewählte Datei ist keine *.csv", "Warning",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 			return;
 		}
@@ -168,6 +168,10 @@ public class FileUploadVM {
 		try {
 			Files.copy(new File(filePath), media.getStreamData());
 			ArrayList<FeatureItem> header = new CSVReader(filePath).getFeatureExampleList();
+			if(header.size()== 0){
+				Messagebox.show("CSV Datei ist fehlerhaft formattiert (ungleich viele Elemente pro Zeile) - bitte andere Datei reparieren und nochmals hochladen", "Warnung",Messagebox.OK, Messagebox.ERROR);
+				return;
+			}
 			Sessions.getCurrent().setAttribute("headerValues", header);
 			Sessions.getCurrent().setAttribute("uploadedFilePath", filePath);
 			if (header.size() != 0)
