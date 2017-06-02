@@ -60,6 +60,10 @@ public class FileUploadVM {
 		mgmt.logOff();
 		Executions.sendRedirect("login.zul");
 	}
+	@Command
+	public void passwordChange() {
+		Executions.sendRedirect("userManager.zul");
+	}
 
 	public void setSelected(Listitem selected) {
 		_selected = selected;
