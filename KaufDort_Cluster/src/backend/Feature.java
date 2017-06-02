@@ -1,5 +1,6 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ import java.util.HashMap;
  * @author Insa Kruse
  * 
  */
-public class Feature {
+public class Feature implements Serializable{
 	private String featureName;
 	private int featureType;
 	

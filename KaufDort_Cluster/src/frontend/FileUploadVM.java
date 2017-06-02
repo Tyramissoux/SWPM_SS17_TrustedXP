@@ -47,10 +47,8 @@ public class FileUploadVM {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<OldUploadItem> getItems() {
 		if (items == null) {
-			items = new ArrayList();
-			items.add(new OldUploadItem("file1.csv", "20.05.2017-14:58:16", 4));
-			items.add(new OldUploadItem("file2.csv", "21.05.2017-15:58:16", 3));
-			items.add(new OldUploadItem("file3.csv", "22.05.2017-16:58:16", 5));
+			StoreToDataBase tmp= new StoreToDataBase();
+			items=tmp.daten.getDatabase();
 		}
 		return items;
 	}

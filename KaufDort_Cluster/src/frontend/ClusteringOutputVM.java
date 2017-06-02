@@ -56,7 +56,7 @@ public class ClusteringOutputVM {
 		OldUploadItem old = new OldUploadItem(fileName, date, clusterList.size());
 		old.setClusterList(clusterList);
 		old.setFeatureList(featureList);
-		//new StoreToDataBase(old);
+		new StoreToDataBase(old);
 	}
 
 	
