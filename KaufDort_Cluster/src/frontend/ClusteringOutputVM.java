@@ -173,5 +173,18 @@ public class ClusteringOutputVM {
 			Executions.getCurrent().sendRedirect("piechart.zul","_blank");
 
 	}
+	@Command
+	public void logOut() {
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
+				.getCurrent());
+		mgmt.logOff();
+		Executions.sendRedirect("login.zul");
+	}
+	
+	@Command
+	public void home() {
+		
+		Executions.sendRedirect("upload.zul");
+	}
 
 }

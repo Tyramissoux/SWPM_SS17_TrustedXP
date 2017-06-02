@@ -2,7 +2,7 @@
 
 	<style>body { background-color: #fcfcfc; }</style>
 
-	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
+	<image id="image" src="Files/logo.gif"
 		style="display: block; width: 300px; margin: 1% auto 0 auto;">
 	</image>
 

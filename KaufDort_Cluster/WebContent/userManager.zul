@@ -8,7 +8,7 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 	<style>body { background-color: #fcfcfc; }</style>
 
-	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
+	<image id="image" src="Files/logo.gif"
 		style="display: block; width: 300px; margin: 5% auto 0 auto;">
 	</image>
 
@@ -18,7 +18,6 @@
 		<caption label="Passwort ändern"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
 		<button id="btnLogOut" label="Logout"
-			onClick="@command('logOut')"
 			style="position: absolute; right:0; top:0; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey;border-radius: 0px; background: #c0392b; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;" />
 		<button
 			style="position: absolute; right:0; top:0; margin-right: 100px; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey; border-radius: 0px; background: #d35400; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;"

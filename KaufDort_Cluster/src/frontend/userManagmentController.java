@@ -57,7 +57,18 @@ public class userManagmentController extends GenericForwardComposer {
  * @param event
  */
     
+    public void onClick$btnHome(Event event) {
+
+		Executions.sendRedirect("upload.zul");
+	}
     
+    public void onClick$btnLogOut(Event event) {
+
+    	UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
+				.getCurrent());
+		mgmt.logOff();
+		Executions.sendRedirect("login.zul");
+	}
     
     public void onClick$aendernButton(Event event) {
         doaendern();
