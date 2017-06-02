@@ -10,7 +10,7 @@
 		style="margin: 0 auto; background: #ddf4ea; position: relative;"
 		viewModel="@id('vm') @init('frontend.ClusteringOutputVM')"
 		border="normal" position="center,top"
-		mode="embedded">
+		mode="embedded"  hflex="1">
 		<caption label="KaufDort Cluster - Clustering Output"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
 		<button
@@ -20,7 +20,7 @@
 			onClick="@command('logOut')"
 			style="position: absolute; right:0; top:0; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey;border-radius: 0px; background: #c0392b; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;" />
 		<hbox>
-			<grid id="grid" model="@load(vm.mapModel)" hflex="max">
+			<grid id="grid" model="@load(vm.mapModel)" hflex="min">
 				<columns children="@load(vm.columnsModel)">
 					<template name="children">
 						<column hflex="min" label="@load(each)"

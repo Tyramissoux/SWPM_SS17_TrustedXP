@@ -69,15 +69,15 @@ public class ClusteringOutputVM {
 	}
 
 	@AfterCompose
-	public void paintCells() {
-		/*for (int i = 0; i < paintMe.length; i++) {
+	/*public void paintCells() {
+		for (int i = 0; i < paintMe.length; i++) {
 			for (int j = 0; j < paintMe[i].length; j++) {
 				if(paintMe[i][j]){
 					grid.getCell(i, j).setAttribute("style", "background:red");
 				}
 			}
-		}*/
-	}
+		}
+	}*/
 
 	/*
 	 * private String createServerPath(String name) { String webAppPath =
