@@ -6,64 +6,70 @@
 	<image id="image" src="Files/logo.gif"
 		style="display: block; width: 300px; margin: 1% auto 0 auto;">
 	</image>
-	<window id="win" apply="org.zkoss.bind.BindComposer"
-		style="margin: 0 auto; background: #ddf4ea; position: relative;"
-		viewModel="@id('vm') @init('frontend.ClusteringOutputVM')"
-		border="normal" position="center,top"
-		mode="embedded">
-		<caption label="KaufDort Cluster - Clustering Output"
-			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
-		<button
-			style="position: absolute; right:0; top:0; margin-right: 100px; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey; border-radius: 0px; background: #d35400; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;"
-			onClick="@command('home')" id="btnHome" label="Startseite" type="button" orient="horizontal" />
-		<button id="btnLogOut" label="Logout"
-			onClick="@command('logOut')"
-			style="position: absolute; right:0; top:0; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey;border-radius: 0px; background: #c0392b; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;" />
-		<hbox>
-			<grid id="grid" model="@load(vm.mapModel)" hflex="max">
-				<columns children="@load(vm.columnsModel)">
-					<template name="children">
-						<column hflex="min" label="@load(each)"
-							sort="none"
-							style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
-					</template>
-				</columns>
-				<template name="model" var="cur_row">
-					<row
-						children="@load(vm.columnsModel) @template(forEachStatus.index lt (vm.columnsModel.size()- cur_row.value.size()) ? 'fixed' : 'variable')">
-						<template name="fixed">
-							<cell>
-								<button label="@load(cur_row.key)"
-									style="border: none; border-radius: 0px; background: #ecf0f1; color: black; text-shadow: none; font-size: 18px;"
-									onClick="@command('showDiagram')" width="100%" />
-							</cell>
+	<div style="text-align: center;">
+		<window id="win" apply="org.zkoss.bind.BindComposer"
+			style="min-width:600px; margin: 0 auto; background: #ddf4ea; position: relative; display: inline-block;"
+			viewModel="@id('vm') @init('frontend.ClusteringOutputVM')"
+			border="normal" position="center,top" mode="embedded">
+			<caption label="KaufDort Cluster - Clustering Output"
+				style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
+			<button
+				style="position: absolute; right:0; top:0; margin-right: 100px; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey; border-radius: 0px; background: #d35400; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;"
+				onClick="@command('home')" id="btnHome" label="Startseite"
+				type="button" orient="horizontal" />
+			<button id="btnLogOut" label="Logout"
+				onClick="@command('logOut')"
+				style="position: absolute; right:0; top:0; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey;border-radius: 0px; background: #c0392b; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;" />
+			<hbox>
+				<grid id="grid" model="@load(vm.mapModel)"
+					hflex="min">
+					<columns children="@load(vm.columnsModel)">
+						<template name="children">
+							<column hflex="min" label="@load(each)"
+								sort="none"
+								style="background: #ddf4ea; font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; font-weight: normal;" />
 						</template>
+					</columns>
+					<template name="model" var="cur_row">
+						<row
+							children="@load(vm.columnsModel) @template(forEachStatus.index lt (vm.columnsModel.size()- cur_row.value.size()) ? 'fixed' : 'variable')">
+							<template name="fixed">
+								<cell>
+									<button label="@load(cur_row.key)"
+										style="border: none; border-radius: 0px; background: #ecf0f1; color: black; text-shadow: none; font-size: 18px;"
+										onClick="@command('showDiagram')" width="100%" />
+								</cell>
+							</template>
 
-						<template name="variable">
-							<cell>
-								<label
-									style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;"
-									value="@load(cur_row.value[forEachStatus.index- vm.columnsModel.size()+ cur_row.value.size()])" />
-							</cell>
-						</template>
-					</row>
-				</template>
-			</grid>
-			    
-			<image id="questionmark" src="Files/QuestionmarkButton.png"
-				tooltip="centroid" style="cursor: help" />
-			  
-		</hbox>
-		<include style="margin-top: 20px; margin-bottom: 20px;"
-			src="marketing.zul" />
-	</window>
+							<template name="variable">
+								<cell>
+									<label
+										style="text-align: left; font-family: Segoe UI; font-style: normal; font-size: 14px; color: #000000;"
+										value="@load(cur_row.value[forEachStatus.index- vm.columnsModel.size()+ cur_row.value.size()])" />
+								</cell>
+							</template>
+						</row>
+					</template>
+				</grid>
+				    
+				<image id="questionmark"
+					src="Files/QuestionmarkButton.png" tooltip="centroid"
+					style="cursor: help" />
+				  
+			</hbox>
+			<include style="margin-top: 20px; margin-bottom: 20px;"
+				src="marketing.zul" />
+		</window>
+	</div>
 	<popup id="centroid" width="300px">
 		<html>
+
 
 			
 			<![CDATA[ In dieser Tabelle werden die berechneten
 			Mittelpunkte der Cluster (Gruppe) aufgelistet, also Werte,
 			die diesen Cluster charakterisieren. ]]>
+			
 			
 			
 		</html>
