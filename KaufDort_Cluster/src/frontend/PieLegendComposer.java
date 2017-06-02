@@ -44,7 +44,7 @@ public class PieLegendComposer extends SelectorComposer<Window> {
         NumericFeature feat = (NumericFeature) Sessions.getCurrent().getAttribute(
 				"chosenFeature");
         series.setName(feat.getFeatureName());
-        chart.setTitle("Prozentualer Anteil an der Gesamtsummer eines Clusters für das Feature +\""+feat.getFeatureName()+"\"");
+        chart.setTitle("Prozentualer Anteil einzelner Cluster an der Gesamtsumme für das Feature \""+feat.getFeatureName()+"\"");
         ArrayList<ArrayList<Double>> clusterValues = feat.getValuesPerCluster();
         for (int i = 0; i < clusterValues.size(); i++) {
 			ArrayList<Double> tmp = clusterValues.get(i);

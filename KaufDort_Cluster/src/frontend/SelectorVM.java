@@ -10,6 +10,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
@@ -47,17 +48,6 @@ public class SelectorVM extends SelectorComposer<Component> {
 		((ListModelList<FeatureItem>) featureChoice).setMultiple(true);
 	}
 
-	/**
-	 * Methode wird aufgerufen nachdem alle Komponenten in der
-	 * customerChoice.zul initialisiert wurden - preselect funktioniert nicht
-	 */
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
-		for(int i = 0; i< listbox.getItems().size();i++){
-			listbox.getItems().get(i).setSelected(true);
-		}
-	}
-
 	public ListModel<FeatureItem> getFeatureChoice() {
 		return featureChoice;
 	}
@@ -76,7 +66,7 @@ public class SelectorVM extends SelectorComposer<Component> {
 	 */
 	@Listen("onClick  = #btnGO")
 	public void checkValues(Event event) {
-
+		Clients.showBusy("Bitte warten...");
 		if (!checkIntBox())
 			return;
 		if (!checkListBox())
@@ -84,6 +74,7 @@ public class SelectorVM extends SelectorComposer<Component> {
 		new BackEndController(chosenListBoxIndices, (String) Sessions
 				.getCurrent().getAttribute("uploadedFilePath"),
 				chosenNumOfClusters,allFeaturesChosen);
+		Clients.clearBusy();
 	}
 
 	private boolean checkIntBox() {
@@ -91,6 +82,7 @@ public class SelectorVM extends SelectorComposer<Component> {
 		if (chosenNumOfClusters > 1 && chosenNumOfClusters < 11)
 			return true;
 		else {
+			Clients.clearBusy();
 			Messagebox
 					.show("Gewählte Anzahl an gewünschten Clustern muss zwischen 2 und 10 liegen",
 							"Warnung", Messagebox.OK, Messagebox.INFORMATION);
@@ -112,6 +104,7 @@ public class SelectorVM extends SelectorComposer<Component> {
 			}
 			return true;
 		} else {
+			Clients.clearBusy();
 			Messagebox
 					.show("Kein Feature ausgewählt - mindestens ein Feature muss ausgewählt werden",
 							"Warnung", Messagebox.OK, Messagebox.INFORMATION);

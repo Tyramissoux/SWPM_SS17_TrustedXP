@@ -10,6 +10,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModel;
@@ -40,7 +41,7 @@ public class ClusteringOutputVM {
 	private Grid grid;
 
 	public ClusteringOutputVM() {
-
+		Clients.showBusy("Bitte warten...");
 		data = new ListModelMap();
 		columns_model = new ListModelList();
 
@@ -49,7 +50,7 @@ public class ClusteringOutputVM {
 		fillColumnsModel(numOfClusters);
 
 		storeUploadItem();
-
+		Clients.clearBusy();
 		// System.out.println(picPath);
 	}
 
@@ -91,6 +92,7 @@ public class ClusteringOutputVM {
 	 */
 
 	private void transferDataToListModelMap() {
+		
 		List<String> valueList = new java.util.ArrayList<String>();
 		int featureType = 0;
 
@@ -166,10 +168,23 @@ public class ClusteringOutputVM {
 
 		if (feat.getFeatureType() != 0)
 			// koennte problematisch werden bei anderen Browsern
-			Executions.getCurrent().sendRedirect("stackedColumns.zul");
+			Executions.getCurrent().sendRedirect("stackedColumns.zul","_blank");
 		else
-			Executions.getCurrent().sendRedirect("piechart.zul");
+			Executions.getCurrent().sendRedirect("piechart.zul","_blank");
 
+	}
+	@Command
+	public void logOut() {
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
+				.getCurrent());
+		mgmt.logOff();
+		Executions.sendRedirect("login.zul");
+	}
+	
+	@Command
+	public void home() {
+		
+		Executions.sendRedirect("upload.zul");
 	}
 
 }

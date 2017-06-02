@@ -19,6 +19,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
@@ -65,7 +66,7 @@ public class FileUploadVM {
 	
 	@Command
 	public void loadOld() {
-		//System.out.println(listbox.getSelectedItem().getIndex());
+		Clients.showBusy("Bitte warten...");
 		OldUploadItem tmp=items.get(selected);
 		
 		Sessions.getCurrent().setAttribute("finalClusterList", tmp.getClusterList());
@@ -73,8 +74,9 @@ public class FileUploadVM {
 		Sessions.getCurrent().setAttribute("chosenNumOfClusters", tmp.getClustersUsed());
 		Sessions.getCurrent().setAttribute("originalFileName", "");
 		Sessions.getCurrent().setAttribute("uploadDate", tmp.getDate());
-		
+		Clients.clearBusy();
 		Executions.sendRedirect("clusteringOutput.zul");
+		
 	}
 	@Command
 	public void passwordChange() {
