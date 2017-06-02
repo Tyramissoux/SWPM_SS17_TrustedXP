@@ -8,7 +8,7 @@ public class NominalFeature extends Feature implements Serializable
 {
 	private ArrayList<HashMap<String, Integer>> nominalElementCountsPerCluster;
 	private ArrayList<String> uniqueNominalItems;
-
+	
 
 	public NominalFeature(String featureName, int featureType, int numOfClusters) {
 		super(featureName, featureType, numOfClusters);
@@ -17,6 +17,8 @@ public class NominalFeature extends Feature implements Serializable
 		this.uniqueNominalItems = new ArrayList<String>();
 		preFillNominalArrayList(numOfClusters);
 	}
+	
+
 	
 	/**
 	 * Die ArrayList elementCountsPerCluster wird vorher gefuellt mit so vielen

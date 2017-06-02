@@ -3,7 +3,7 @@
 		<listitem popup="msg">
 			<listcell
 				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;"
-				label="Marketingempfelung" />
+				label="Marketingempfehlung" />
 		</listitem>
 	</listbox>
 	<popup id="msg" width="50%">

@@ -5,11 +5,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
+@SuppressWarnings("serial")
 public class NumericFeature extends Feature {
 	private ArrayList<HashMap<Double, Integer>> numericElementCountsPerCluster;
 	private ArrayList<Double> uniqueNumericItems;
 	private SummaryStatistics stats;
 	private ArrayList<ArrayList<Double>> valuesPerCluster;
+
 
 	public NumericFeature(String featureName, int featureType, int numOfClusters) {
 		super(featureName, featureType, numOfClusters);
