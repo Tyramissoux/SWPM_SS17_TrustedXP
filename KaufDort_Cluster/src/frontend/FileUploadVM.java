@@ -71,7 +71,8 @@ public class FileUploadVM {
 		Sessions.getCurrent().setAttribute("finalClusterList", tmp.getClusterList());
 		Sessions.getCurrent().setAttribute("finalFeatureList", tmp.getFeatureList());
 		Sessions.getCurrent().setAttribute("chosenNumOfClusters", tmp.getClustersUsed());
-		
+		Sessions.getCurrent().setAttribute("originalFileName", "");
+		Sessions.getCurrent().setAttribute("uploadDate", tmp.getDate());
 		
 		Executions.sendRedirect("clusteringOutput.zul");
 	}

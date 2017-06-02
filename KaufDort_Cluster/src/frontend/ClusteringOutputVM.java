@@ -42,6 +42,7 @@ public class ClusteringOutputVM {
 		getSessionGlobalVariables();
 		transferDataToListModelMap();
 		fillColumnsModel(numOfClusters);
+		
 		storeUploadItem();
 		
 		//System.out.println(picPath);
@@ -53,11 +54,13 @@ public class ClusteringOutputVM {
 
 	private void storeUploadItem() {
 		String fileName = (String)Sessions.getCurrent().getAttribute("originalFileName");
+		if(!fileName.equals("")){
 		String date = (String)Sessions.getCurrent().getAttribute("uploadDate");
 		OldUploadItem old = new OldUploadItem(fileName, date, clusterList.size());
 		old.setClusterList(clusterList);
 		old.setFeatureList(featureList);
 		new StoreToDataBase(old);
+		}
 	}
 
 	

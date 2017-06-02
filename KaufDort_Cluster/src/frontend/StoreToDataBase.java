@@ -72,6 +72,9 @@ public class StoreToDataBase implements Serializable{
     			c.printStackTrace();
     			return;
     		}
+    	/*if(daten.database.isEmpty()){
+		daten.database.add(new OldUploadItem("","",0));
+	}*/
     	System.out.println("Datenbank wurde geladen");
     	
     	
@@ -105,8 +108,8 @@ public class StoreToDataBase implements Serializable{
     	
     private void cleanDatabase(){
     	ArrayList<OldUploadItem> database =daten.getDatabase();
-    	if(database.size()>=6){
-    	database.remove(0);
+    	if(database.size()>=7){
+    	database.remove(1);
     	daten.setDatabase(database);
     	saveDatabase();
     	}
