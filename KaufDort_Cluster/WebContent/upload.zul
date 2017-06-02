@@ -1,23 +1,31 @@
 <zk xmlns:n="native" xmlns:c="client">
 
 	<style>body { background-color: #fcfcfc; }</style>
-
+	
 	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
 		style="display: block; width: 300px; margin: 1% auto 0 auto;">
 	</image>
-
+	
+		
 	<window id="Upload" apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('frontend.FileUploadVM')" border="normal"
 		width="1000px" position="center,top" mode="embedded"
 		style="margin: 0 auto; background: #ddf4ea;">
-
+		
 		<caption label="KaufDort Cluster - CSV Upload"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
+		
 		<box orient="horizontal" style="margin-top: 20px; margin-bottom: 20px;">
 			<button id="btnUpload" label="Upload"
 				upload="true,multiple=false,accept=.csv"
 				onUpload="@command('fileUpload')"
 				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
+			<button id="btnLogOut" label="LogOut"
+				onClick="@command('logOut')"
+				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 65px; height: 25px; text-shadow: none; font-size: 9px;" />
+			<button id="btnPassword" label="Passwort Ändern"
+				onClick="@command('passwordChange')"
+				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 90px; height: 25px; text-shadow: none; font-size: 9px;" />
 		</box>
 
 		<label value="Vergangene Uploads:"
@@ -54,14 +62,7 @@
 				onClick="@command('loadOld')"
 				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
 		</box>
-		<box orient="horizontal" style="margin-top: 20px; margin-bottom: 20px;">
-			<button id="btnLogOut" label="LogOut"
-				onClick="@command('logOut')"
-				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 65px; height: 25px; text-shadow: none; font-size: 9px;" />
-			<button id="btnPassword" label="Passwort Ändern"
-				onClick="@command('passwordChange')"
-				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 90px; height: 25px; text-shadow: none; font-size: 9px;" />
-		</box>
+		
 
 	</window>
 

@@ -12,17 +12,17 @@
 		style="display: block; width: 300px; margin: 5% auto 0 auto;">
 	</image>
 
-	<window id="userManager" border="none" width="500px"
+	<window id="PaswordChange" border="none" width="500px"
 		apply="frontend.userManagmentController"
 		style="margin: 0 auto; background: #ddf4ea; position: relative;">
-		<caption label="User manager"
+		<caption label="Passwort ändern"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
 
 		
 		<panel closable="false" width="100%" style="margin-top: 20px; position: relative;">
 			<panelchildren>
 				<groupbox style="border: none;">
-					<label value="Neuen Benutzer anlegen:"
+					<label value="Neues Passwort eingeben:"
 						style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000;" />
 					<h:br></h:br>
 					<h:br></h:br>
