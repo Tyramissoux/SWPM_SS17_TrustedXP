@@ -14,7 +14,7 @@
 		<caption label="KaufDort Cluster - Clustering Output"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
 		<include style="margin-top: 20px; margin-bottom: 20px;"
-			src="/marketing.zul" />
+			src="marketing.zul" />
 		<hbox>
 			<grid id="grid" model="@load(vm.mapModel)" hflex="max">
 				<columns children="@load(vm.columnsModel)">

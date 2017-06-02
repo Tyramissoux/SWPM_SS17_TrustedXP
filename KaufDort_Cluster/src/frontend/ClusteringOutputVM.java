@@ -45,7 +45,7 @@ public class ClusteringOutputVM {
 		fillColumnsModel(numOfClusters);
 		storeUploadItem();
 		
-		//System.out.println(picPath);
+		
 	}
 
 
@@ -56,7 +56,7 @@ public class ClusteringOutputVM {
 		OldUploadItem old = new OldUploadItem(fileName, date, clusterList.size());
 		old.setClusterList(clusterList);
 		old.setFeatureList(featureList);
-		new StoreToDataBase(old);
+		//new StoreToDataBase(old);
 	}
 
 	
@@ -80,14 +80,14 @@ public class ClusteringOutputVM {
 		for (int i = 0; i < featureList.size(); i++) {
 
 			for (int j = 0; j < clusterList.size(); j++) {
-				Instance in = clusterList.get(j).getCenteroid();
+				Instance in = clusterList.get(j).getCentroid();
 				value.add(in.toString(i));
-				// System.out.print(in.toString(i)+" ");
+				//System.out.print(in.toString(i)+" ");
 			}
 
 			data.put((featureList.get(i).getFeatureName()), value);
-			// System.out.print(featureList.get(i).getFeatureName());
-			// System.out.println();
+			 //System.out.print(featureList.get(i).getFeatureName());
+		System.out.println();
 			value = new ArrayList<String>();
 		}
 
@@ -105,7 +105,7 @@ public class ClusteringOutputVM {
 	private void fillColumnsModel(int endValue) {
 		((List) columns_model).add(new String("Feature"));
 		for (int i = 1; i <= endValue; ++i)
-			((List) columns_model).add(new String("Centroid " + i));
+			((List) columns_model).add(new String("Cluster " + i));
 
 	}
 

@@ -35,7 +35,7 @@ public class StoreToDataBase {
     	
     	try {
     		
-            	FileInputStream fileIn = new FileInputStream(createServerPath("Database.ser"));
+            	FileInputStream fileIn = new FileInputStream("File/Database.ser");
             	ObjectInputStream in = new ObjectInputStream(fileIn);
             	tmp = (List) in.readObject();
             	in.close();

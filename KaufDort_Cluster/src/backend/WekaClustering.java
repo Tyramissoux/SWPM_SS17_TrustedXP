@@ -186,8 +186,10 @@ public class WekaClustering {
 	 */
 	private void addCentroids(SimpleKMeans kmeans) {
 		Instances centroids = kmeans.getClusterCentroids();
+		System.out.println(centroids.numInstances());
 		for (int i = 0; i < centroids.numInstances(); i++) {
 			kMeansClusterList.get(i).addCenteroid(centroids.instance(i));
+			
 		}
 	}
 
@@ -213,7 +215,7 @@ public class WekaClustering {
 
 	public static void main(String[] args) {
 		new WekaClustering(
-				"C:/Users/wooooot/AppData/Local/Temp/2017_4_13_8_17_39/SPM_TestdatensatzKlein_2017_new.arff",
+				"C:/Users/wooooot/Downloads/SPM_TestdatensatzKlein_2017_new.arff",
 				5);
 	}
 

@@ -96,34 +96,29 @@ public class CSVRewriter {
 			BufferedWriter write = createFileWriter();
 
 			StringBuilder sb = new StringBuilder();
-			String line = read.readLine();
-			String[] lineArr = line.split(",");
-			ArrayList<Integer> checkedList = checkParsedList(selectedIndices,
-					lineArr.length);
+			String line = "";
+			int endValue = selectedIndices.size();
 
 			while ((line = read.readLine()) != null) {
-
+				String[] lineArr = line.split(",");
 				int counter = 1;
-				int endValue = checkedList.size();
-
 				for (int i = 0; i < lineArr.length; i++) {
+					if (!selectedIndices.contains(i))
+						continue;
 
-					if (checkedList.contains(i)) {
+					/*
+					 * String temp = Normalizer.normalize(lineArr[i], Form.NFD);
+					 * temp = temp.replaceAll("[^\\p{ASCII}]","");
+					 */
 
-						/*
-						 * String temp = Normalizer.normalize(lineArr[i],
-						 * Form.NFD); temp =
-						 * temp.replaceAll("[^\\p{ASCII}]","");
-						 */
-
-						if (counter < endValue) {
-							sb.append(lineArr[i] + ",");
-						} else {
-							sb.append(lineArr[i]);
-						}
-						counter++;
+					if (counter < endValue) {
+						sb.append(lineArr[i] + ",");
+					} else {
+						sb.append(lineArr[i]);
 					}
+					counter++;
 				}
+
 				write.write(sb.toString() + "\n");
 				sb.setLength(0);
 			}

@@ -22,7 +22,6 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
-
 import frontend.helper.CSVReader;
 import frontend.helper.FeatureItem;
 import frontend.helper.OldUploadItem;
@@ -37,32 +36,32 @@ public class FileUploadVM {
 	private List<OldUploadItem> items;
 	private Listitem _selected;
 
-	
-	
 	public FileUploadVM() {
-		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
+				.getCurrent());
 		if (!mgmt.isAuthenticated()) {
 			Executions.sendRedirect("login.zul");
-        } 
+		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<OldUploadItem> getItems() {
 		if (items == null) {
 			items = new ArrayList();
-			items.add(new OldUploadItem("file1.csv","20.05.2017-14:58:16",4));
-			items.add(new OldUploadItem("file2.csv","21.05.2017-15:58:16",3));
-			items.add(new OldUploadItem("file3.csv","22.05.2017-16:58:16",5));
+			items.add(new OldUploadItem("file1.csv", "20.05.2017-14:58:16", 4));
+			items.add(new OldUploadItem("file2.csv", "21.05.2017-15:58:16", 3));
+			items.add(new OldUploadItem("file3.csv", "22.05.2017-16:58:16", 5));
 		}
 		return items;
 	}
-	
+
 	@Command
 	public void logOut() {
-		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions.getCurrent());
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
+				.getCurrent());
 		mgmt.logOff();
 		Executions.sendRedirect("login.zul");
-    }
+	}
 
 	public void setSelected(Listitem selected) {
 		_selected = selected;
@@ -72,11 +71,12 @@ public class FileUploadVM {
 		return _selected;
 	}
 
-	/*@Command
-	@NotifyChange("items")
-	public void addItem() {
-		items.get(1).setQuantity(items.get(1).getQuantity() + 1);
-	}*/
+	/*
+	 * @Command
+	 * 
+	 * @NotifyChange("items") public void addItem() {
+	 * items.get(1).setQuantity(items.get(1).getQuantity() + 1); }
+	 */
 
 	public File getSaveFolder() {
 		return saveFolder;
@@ -105,7 +105,8 @@ public class FileUploadVM {
 		if (!tmpPath.endsWith(File.separatorChar + ""))
 			tmpPath = tmpPath + File.separatorChar;
 
-		String date =day+"."+month+"."+year+"-"+hour+":"+min+":"+sec;
+		String date = day + "." + month + "." + year + "-" + hour + ":" + min
+				+ ":" + sec;
 		Sessions.getCurrent().setAttribute("uploadDate", date);
 		String filePath = tmpPath + year + "_" + month + "_" + day + "_" + hour
 				+ "_" + min + "_" + sec + File.separatorChar;
@@ -167,18 +168,24 @@ public class FileUploadVM {
 
 		try {
 			Files.copy(new File(filePath), media.getStreamData());
-			ArrayList<FeatureItem> header = new CSVReader(filePath).getFeatureExampleList();
-			if(header.size()== 0){
-				Messagebox.show("CSV Datei ist fehlerhaft formattiert (ungleich viele Elemente pro Zeile) - bitte andere Datei reparieren und nochmals hochladen", "Warnung",Messagebox.OK, Messagebox.ERROR);
+			ArrayList<FeatureItem> header = new CSVReader(filePath)
+					.getFeatureExampleList();
+			if (header.size() == 0) {
+				Messagebox
+						.show("CSV Datei ist fehlerhaft formattiert (ungleich viele Elemente pro Zeile) - bitte andere Datei reparieren und nochmals hochladen",
+								"Warnung", Messagebox.OK, Messagebox.ERROR);
 				return;
 			}
 			Sessions.getCurrent().setAttribute("headerValues", header);
 			Sessions.getCurrent().setAttribute("uploadedFilePath", filePath);
 			if (header.size() != 0)
 				Executions.sendRedirect("customerChoice.zul");
-			else
-				Messagebox.show("Hochgeladene Datei war nicht korrekt formatiert", "Warning",
-						Messagebox.OK, Messagebox.EXCLAMATION);
+			else {
+				Messagebox.show(
+						"Hochgeladene Datei war nicht korrekt formatiert",
+						"Warning", Messagebox.OK, Messagebox.EXCLAMATION);
+				return;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;

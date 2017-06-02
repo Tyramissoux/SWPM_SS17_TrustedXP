@@ -35,6 +35,7 @@ public class SelectorVM extends SelectorComposer<Component> {
 
 	int chosenNumOfClusters;
 	ArrayList<Integer> chosenListBoxIndices;
+	boolean allFeaturesChosen;
 
 	@SuppressWarnings("unchecked")
 	public SelectorVM() {
@@ -81,7 +82,7 @@ public class SelectorVM extends SelectorComposer<Component> {
 			return;
 		new BackEndController(chosenListBoxIndices, (String) Sessions
 				.getCurrent().getAttribute("uploadedFilePath"),
-				chosenNumOfClusters);
+				chosenNumOfClusters,allFeaturesChosen);
 	}
 
 	private boolean checkIntBox() {
@@ -98,6 +99,10 @@ public class SelectorVM extends SelectorComposer<Component> {
 
 	private boolean checkListBox() {
 		Set<Listitem> set = listbox.getSelectedItems();
+		if(featureChoice.getSize() == set.size()){
+			allFeaturesChosen = true;
+			return true;
+		}
 		if (set.size() != 0) {
 			chosenListBoxIndices = new ArrayList<Integer>();
 			Sessions.getCurrent().setAttribute("selectedIndices", set);

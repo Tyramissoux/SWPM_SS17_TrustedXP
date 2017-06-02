@@ -109,7 +109,7 @@ public class KMeansCluster {
 	 * 
 	 * @return
 	 */
-	public Instance getCenteroid() {
+	public Instance getCentroid() {
 		return centroid;
 	}
 
