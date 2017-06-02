@@ -61,6 +61,16 @@ public class FileUploadVM {
 		Executions.sendRedirect("login.zul");
 	}
 	@Command
+	public void loadOld() {
+		/*OldUploadItem tmp=_selected.;
+		Sessions.getCurrent().setAttribute("finalClusterList", tmp.getClusterList());
+		Sessions.getCurrent().setAttribute("finalFeatureList", tmp.getFeatureList());
+		Sessions.getCurrent().setAttribute("chosenNumOfClusters", tmp.getClustersUsed());*/
+		
+		
+		Executions.sendRedirect("clusteringOutput.zul");
+	}
+	@Command
 	public void passwordChange() {
 		Executions.sendRedirect("userManager.zul");
 	}

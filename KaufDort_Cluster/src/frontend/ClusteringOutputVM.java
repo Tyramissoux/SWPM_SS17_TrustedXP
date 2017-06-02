@@ -34,12 +34,11 @@ public class ClusteringOutputVM {
 	private ListModel columns_model;
 
 
-
 	public ClusteringOutputVM() {
 
 		data = new ListModelMap();
 		columns_model = new ListModelList();
-
+		
 		getSessionGlobalVariables();
 		transferDataToListModelMap();
 		fillColumnsModel(numOfClusters);
@@ -47,6 +46,8 @@ public class ClusteringOutputVM {
 		
 		//System.out.println(picPath);
 	}
+	
+	
 
 
 

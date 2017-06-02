@@ -18,12 +18,6 @@
 				upload="true,multiple=false,accept=.csv"
 				onUpload="@command('fileUpload')"
 				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
-			<button id="btnLogOut" label="LogOut"
-				onClick="@command('logOut')"
-				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
-			<button id="btnPassword" label="Passwort Ändern"
-				onClick="@command('passwordChange')"
-				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 180px; height: 50px; text-shadow: none; font-size: 18px;" />
 		</box>
 
 		<label value="Vergangene Uploads:"
@@ -32,7 +26,7 @@
 		<box style="margin-top: 20px;" orient="horizontal"
 			visible="true">
 			<listbox model="@load(vm.items)"
-				selectedItem="@bind(vm.selected)" hflex="true" height="300px"
+				 hflex="true" height="300px"
 				checkmark="true" style="width: 100%;">
 				<listhead>
 					<listheader label="Datum" align="center" sort="true"
@@ -54,6 +48,19 @@
 					</listitem>
 				</template>
 			</listbox>
+			</box>
+			<box orient="horizontal" style="margin-top: 20px; margin-bottom: 20px;">
+			<button id="btnLoadOld" label="Laden"
+				onClick="@command('loadOld')"
+				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
+		</box>
+		<box orient="horizontal" style="margin-top: 20px; margin-bottom: 20px;">
+			<button id="btnLogOut" label="LogOut"
+				onClick="@command('logOut')"
+				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 65px; height: 25px; text-shadow: none; font-size: 9px;" />
+			<button id="btnPassword" label="Passwort Ändern"
+				onClick="@command('passwordChange')"
+				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 90px; height: 25px; text-shadow: none; font-size: 9px;" />
 		</box>
 
 	</window>
