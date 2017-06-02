@@ -25,7 +25,7 @@
 
 		<box style="margin-top: 20px;" orient="horizontal"
 			visible="true">
-			<listbox model="@load(vm.items)" id="listbox"
+			<listbox model="@load(vm.items)" id="listbox" selectedIndex="@bind(vm.selected)"
 				 hflex="true" height="300px"
 				checkmark="true" style="width: 100%;">
 				<listhead>

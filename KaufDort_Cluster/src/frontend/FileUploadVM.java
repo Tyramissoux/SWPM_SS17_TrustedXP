@@ -19,7 +19,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
-import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
@@ -35,8 +34,9 @@ public class FileUploadVM {
 	private AMedia fileContent;
 	private File saveFolder;
 	private List<OldUploadItem> items;
-	private Listitem _selected;
-	private Listbox listbox;
+	private int selected;
+
+	
 
 	public FileUploadVM() {
 		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
@@ -46,7 +46,7 @@ public class FileUploadVM {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	
 	public List<OldUploadItem> getItems() {
 		if (items == null) {
 			StoreToDataBase tmp= new StoreToDataBase();
@@ -62,10 +62,11 @@ public class FileUploadVM {
 		mgmt.logOff();
 		Executions.sendRedirect("login.zul");
 	}
+	
 	@Command
 	public void loadOld() {
 		//System.out.println(listbox.getSelectedItem().getIndex());
-		OldUploadItem tmp=items.get(0);
+		OldUploadItem tmp=items.get(selected);
 		
 		Sessions.getCurrent().setAttribute("finalClusterList", tmp.getClusterList());
 		Sessions.getCurrent().setAttribute("finalFeatureList", tmp.getFeatureList());
@@ -79,12 +80,13 @@ public class FileUploadVM {
 		Executions.sendRedirect("userManager.zul");
 	}
 
-	public void setSelected(Listitem selected) {
-		_selected = selected;
+	
+	public void setSelected(int selected) {
+		this.selected = selected;
 	}
 
-	public Listitem getSelected() {
-		return _selected;
+	public int getSelected() {
+		return selected;
 	}
 
 	/*
