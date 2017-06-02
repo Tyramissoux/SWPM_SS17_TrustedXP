@@ -19,6 +19,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
@@ -35,6 +36,7 @@ public class FileUploadVM {
 	private File saveFolder;
 	private List<OldUploadItem> items;
 	private Listitem _selected;
+	private Listbox listbox;
 
 	public FileUploadVM() {
 		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
@@ -62,10 +64,12 @@ public class FileUploadVM {
 	}
 	@Command
 	public void loadOld() {
-		/*OldUploadItem tmp=_selected.;
+		//System.out.println(listbox.getSelectedItem().getIndex());
+		OldUploadItem tmp=items.get(0);
+		
 		Sessions.getCurrent().setAttribute("finalClusterList", tmp.getClusterList());
 		Sessions.getCurrent().setAttribute("finalFeatureList", tmp.getFeatureList());
-		Sessions.getCurrent().setAttribute("chosenNumOfClusters", tmp.getClustersUsed());*/
+		Sessions.getCurrent().setAttribute("chosenNumOfClusters", tmp.getClustersUsed());
 		
 		
 		Executions.sendRedirect("clusteringOutput.zul");
