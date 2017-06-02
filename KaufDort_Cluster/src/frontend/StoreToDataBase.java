@@ -24,8 +24,11 @@ public class StoreToDataBase implements Serializable{
 		
 		loadDatabase();
 		daten.database.add(old);
+		
 		saveDatabase();
-		//cleanDatabase();
+		
+		cleanDatabase();
+		
 		
 	}
 	public StoreToDataBase(){
@@ -102,7 +105,7 @@ public class StoreToDataBase implements Serializable{
     	
     private void cleanDatabase(){
     	ArrayList<OldUploadItem> database =daten.getDatabase();
-    	if(database.size()>=5){
+    	if(database.size()>=6){
     	database.remove(0);
     	daten.setDatabase(database);
     	saveDatabase();
