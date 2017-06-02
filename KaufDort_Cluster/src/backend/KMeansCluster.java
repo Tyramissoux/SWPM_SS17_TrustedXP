@@ -1,5 +1,6 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import weka.core.Instance;
 
@@ -14,7 +15,7 @@ import weka.core.Instance;
  * @author Insa Kruse
  * 
  */
-public class KMeansCluster {
+public class KMeansCluster implements Serializable{
 
 	private ArrayList<Instance> assignedInstances;
 	private ArrayList<Integer> originalInstanceNumber;

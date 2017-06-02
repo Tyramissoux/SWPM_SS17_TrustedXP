@@ -8,8 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -19,9 +17,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import org.zkoss.zul.Listitem;
-import org.zkoss.zk.ui.select.Selectors;
-import org.zkoss.zul.Messagebox;
+
 
 @SuppressWarnings("rawtypes")
 public class userManagmentController extends GenericForwardComposer {
@@ -33,9 +29,17 @@ public class userManagmentController extends GenericForwardComposer {
     protected Textbox usernameTxtbox;
     protected Textbox passwordTxtbox;
     protected Button resetButton;
-    protected Button newUserButton;
-    private Listitem _selected;
+    protected Button loginButton;
 
+    
+    public userManagmentController() {
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
+				.getCurrent());
+		if (!mgmt.isAuthenticated()) {
+			Executions.sendRedirect("login.zul");
+		}
+	}
+    
     /**
      * Standard doAfterCompose with added authentication check before proceed
      * @param Component comp
@@ -45,53 +49,24 @@ public class userManagmentController extends GenericForwardComposer {
 	@Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
-        if (UserCredentialManager.getIntance(session).isAuthenticated()) {
-           // execution.sendRedirect("upload.zul");
-        }
-        usernameTxtbox.setFocus(true);
+        
+        
     }
 /**
  * On click of the login button, doLogin method will execute
  * @param event
  */
     
-    public List<User> getItems() {
-    	System.out.println("test liste");
-		if (items == null) {
-		
-			UserDatenbank tmp= new UserDatenbank();
-				try {
-        		
-                FileInputStream fileIn = new FileInputStream("Daten.ser");
-                ObjectInputStream in = new ObjectInputStream(fileIn);
-                tmp = (UserDatenbank) in.readObject();
-                in.close();
-                fileIn.close();
-             }catch(IOException i) {
-                i.printStackTrace();
-                
-             }catch(ClassNotFoundException c) {
-                System.out.println("Datenbank wurde nicht gefunden");
-                c.printStackTrace();
-             }
-				items=tmp.getUsers();
-		}
-		
-		return items;
-	}
     
-    public void setSelected(Listitem selected) {
-		_selected = selected;
-	}
-
-	public Listitem getSelected() {
-		return _selected;
-	}
-	@Command
-    public void newUserButton(Event event) {
-        addUser();
+    
+    public void onClick$aendernButton(Event event) {
+        doaendern();
     }
-    
+
+    /**
+     * Method that will initiate the login action
+     * Input values are taken from front end and passed to the manager for processing
+     */
     private String createServerPath(String name) {
 		String webAppPath = Executions.getCurrent().getDesktop().getWebApp()
 				.getRealPath("/");
@@ -100,12 +75,7 @@ public class userManagmentController extends GenericForwardComposer {
 		return webAppPath + name;
 
 	}
-
-    /**
-     * Method that will initiate the login action
-     * Input values are taken from front end and passed to the manager for processing
-     */
-    private void addUser() {
+    private void doaendern() {
     	UserDatenbank tmp= new UserDatenbank();
     	try {
     		
@@ -141,17 +111,13 @@ public class userManagmentController extends GenericForwardComposer {
     	
     }
     	
-    	for(User a : tmp.users){
-    		if (usernameTxtbox.getValue().trim().equals(a.getName())) {
-    			mesgLbl.setValue("The UserName or Password provided is already existing.");
-    			return;
-    		}
-    	}
-    	PermissionModel user = new PermissionModel("1","User");
-		ArrayList<PermissionModel> Premissions = new ArrayList<PermissionModel>();
-		Premissions.add(user);
+    	/*
+    	 * Schnittstelle für Multiuser und User verwaltung vorhanden.
+    	 */
+    	
 		
-		User newUser = new User(usernameTxtbox.getValue().trim(),passwordTxtbox.getValue().trim(),Premissions);
+		User newUser = new User(tmp.users.get(0).getName(),passwordTxtbox.getValue().trim(),tmp.users.get(0).getPermissionList());
+		tmp.users.clear();
 		tmp.users.add(newUser);
 		try {
     		File file= new File(createServerPath("Daten.ser"));
@@ -167,14 +133,14 @@ public class userManagmentController extends GenericForwardComposer {
          }catch(IOException i) {
             i.printStackTrace();
          }
-		mesgLbl.setValue("User successful created");
+		mesgLbl.setValue("Passwort geändert");
+		Executions.sendRedirect("upload.zul");
     }
 /**
  * Just clears the screen 
  * @param event
  */
-    @Command
-    public void resetButton(Event event) {
+    public void onClick$resetButton(Event event) {
         this.usernameTxtbox.setValue("");
         this.passwordTxtbox.setValue("");
         this.usernameTxtbox.focus(); // set the focus on UserName

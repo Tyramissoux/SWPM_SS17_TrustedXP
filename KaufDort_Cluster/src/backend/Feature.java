@@ -1,5 +1,8 @@
 package backend;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Feature ist eine Datenstruktur, die Daten zu einem einzelnen Feature pro
@@ -9,7 +12,7 @@ package backend;
  * @author Insa Kruse
  * 
  */
-public class Feature {
+public class Feature implements Serializable{
 	private String featureName;
 	private int featureType;
 	

@@ -6,21 +6,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import org.zkoss.zk.ui.Executions;
 
 import frontend.helper.OldUploadItem;
+import frontend.helper.OldUploadList;
 
-public class StoreToDataBase {
+public class StoreToDataBase implements Serializable{
 	
-	public List<OldUploadItem> database;
+	public OldUploadList daten= new OldUploadList();
 	
 	public StoreToDataBase(OldUploadItem old){
+		
+		
 		loadDatabase();
-		cleanDatabase();
+		daten.database.add(old);
+		
 		saveDatabase();
+		
+		cleanDatabase();
+		
 		
 	}
 	public StoreToDataBase(){
@@ -31,13 +39,27 @@ public class StoreToDataBase {
     	
     private void loadDatabase(){
 
-    	List<OldUploadItem> tmp= new ArrayList();
+    	
     	
     	try {
+    		File file= new File(createServerPath("Database.ser"));
+    		//System.getProperty("user.dir");
+            if(file.createNewFile()){
+            	FileOutputStream fileOut= new FileOutputStream(file);
+            	ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            	out.writeObject(daten);
+            	out.close();
+            	fileOut.close();
+            	System.out.printf("Neue datenbank wurde erstellt");
+            }
+         }catch(IOException i) {
+            i.printStackTrace();
+         }
+    	try {
     		
-            	FileInputStream fileIn = new FileInputStream("File/Database.ser");
+            	FileInputStream fileIn = new FileInputStream(createServerPath("Database.ser"));
             	ObjectInputStream in = new ObjectInputStream(fileIn);
-            	tmp = (List) in.readObject();
+            	daten = (OldUploadList) in.readObject();
             	in.close();
             	fileIn.close();
          	}
@@ -50,22 +72,29 @@ public class StoreToDataBase {
     			c.printStackTrace();
     			return;
     		}
-    	database=tmp;
+    	System.out.println("Datenbank wurde geladen");
+    	
     	
     }
     	
-    private void saveDatabase(){
+    public OldUploadList getDaten() {
+		return daten;
+	}
+	public void setDaten(OldUploadList daten) {
+		this.daten = daten;
+	}
+	private void saveDatabase(){
     	try {
     		File file= new File(createServerPath("Database.ser"));
     		//System.getProperty("user.dir");
-            if(file.createNewFile()){
+    		file.createNewFile();
             	FileOutputStream fileOut= new FileOutputStream(file);
             	ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            	out.writeObject(database);
+            	out.writeObject(daten);
             	out.close();
             	fileOut.close();
-            	System.out.printf("Neue datenbank wurde erstellt");
-            }
+            	System.out.printf("datenbank wurde gespeichert");
+            
          }catch(IOException i) {
             i.printStackTrace();
          }
@@ -75,10 +104,13 @@ public class StoreToDataBase {
     
     	
     private void cleanDatabase(){
-    	if(database.size()==5){
+    	ArrayList<OldUploadItem> database =daten.getDatabase();
+    	if(database.size()>=6){
     	database.remove(0);
-    	}
+    	daten.setDatabase(database);
     	saveDatabase();
+    	}
+    	
     		
     }
     

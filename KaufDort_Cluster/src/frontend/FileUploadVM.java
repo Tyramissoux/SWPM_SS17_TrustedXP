@@ -19,6 +19,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
@@ -35,6 +36,7 @@ public class FileUploadVM {
 	private File saveFolder;
 	private List<OldUploadItem> items;
 	private Listitem _selected;
+	private Listbox listbox;
 
 	public FileUploadVM() {
 		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
@@ -47,10 +49,8 @@ public class FileUploadVM {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<OldUploadItem> getItems() {
 		if (items == null) {
-			items = new ArrayList();
-			items.add(new OldUploadItem("file1.csv", "20.05.2017-14:58:16", 4));
-			items.add(new OldUploadItem("file2.csv", "21.05.2017-15:58:16", 3));
-			items.add(new OldUploadItem("file3.csv", "22.05.2017-16:58:16", 5));
+			StoreToDataBase tmp= new StoreToDataBase();
+			items=tmp.daten.getDatabase();
 		}
 		return items;
 	}
@@ -61,6 +61,22 @@ public class FileUploadVM {
 				.getCurrent());
 		mgmt.logOff();
 		Executions.sendRedirect("login.zul");
+	}
+	@Command
+	public void loadOld() {
+		//System.out.println(listbox.getSelectedItem().getIndex());
+		OldUploadItem tmp=items.get(0);
+		
+		Sessions.getCurrent().setAttribute("finalClusterList", tmp.getClusterList());
+		Sessions.getCurrent().setAttribute("finalFeatureList", tmp.getFeatureList());
+		Sessions.getCurrent().setAttribute("chosenNumOfClusters", tmp.getClustersUsed());
+		
+		
+		Executions.sendRedirect("clusteringOutput.zul");
+	}
+	@Command
+	public void passwordChange() {
+		Executions.sendRedirect("userManager.zul");
 	}
 
 	public void setSelected(Listitem selected) {

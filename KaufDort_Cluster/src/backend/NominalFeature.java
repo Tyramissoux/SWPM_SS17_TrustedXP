@@ -1,9 +1,10 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class NominalFeature extends Feature
+public class NominalFeature extends Feature implements Serializable
 {
 	private ArrayList<HashMap<String, Integer>> nominalElementCountsPerCluster;
 	private ArrayList<String> uniqueNominalItems;
