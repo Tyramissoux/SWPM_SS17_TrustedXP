@@ -9,7 +9,7 @@
 	<window id="win" apply="org.zkoss.bind.BindComposer"
 		style="margin: 0 auto; background: #ddf4ea; position: relative;"
 		viewModel="@id('vm') @init('frontend.ClusteringOutputVM')"
-		border="normal" width="1000px" position="center,top"
+		border="normal" position="center,top"
 		mode="embedded">
 		<caption label="KaufDort Cluster - Clustering Output"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
@@ -19,8 +19,6 @@
 		<button id="btnLogOut" label="Logout"
 			onClick="@command('logOut')"
 			style="position: absolute; right:0; top:0; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey;border-radius: 0px; background: #c0392b; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;" />
-		<include style="margin-top: 20px; margin-bottom: 20px;"
-			src="marketing.zul" />
 		<hbox>
 			<grid id="grid" model="@load(vm.mapModel)" hflex="max">
 				<columns children="@load(vm.columnsModel)">
@@ -36,7 +34,7 @@
 						<template name="fixed">
 							<cell>
 								<button label="@load(cur_row.key)"
-									style="border: none; border-radius: 0px; background: #7f8c8d; color: white; text-shadow: none; font-size: 18px;"
+									style="border: none; border-radius: 0px; background: #ecf0f1; color: black; text-shadow: none; font-size: 18px;"
 									onClick="@command('showDiagram')" width="100%" />
 							</cell>
 						</template>
@@ -56,13 +54,17 @@
 				tooltip="centroid" style="cursor: help" />
 			  
 		</hbox>
+		<include style="margin-top: 20px; margin-bottom: 20px;"
+			src="marketing.zul" />
 	</window>
 	<popup id="centroid" width="300px">
 		<html>
+
 			
 			<![CDATA[ In dieser Tabelle werden die berechneten
 			Mittelpunkte der Cluster (Gruppe) aufgelistet, also Werte,
 			die diesen Cluster charakterisieren. ]]>
+			
 			
 		</html>
 	</popup>
