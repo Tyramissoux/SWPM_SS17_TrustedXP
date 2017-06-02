@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
@@ -117,6 +118,20 @@ public class SelectorVM extends SelectorComposer<Component> {
 
 			return false;
 		}
+	}
+	
+	@Listen("onClick  = #btnLogOut")
+	public void logout(Event event) {
+
+		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
+				.getCurrent());
+		mgmt.logOff();
+		Executions.sendRedirect("login.zul");
+	}
+	@Listen("onClick  = #btnHome")
+	public void home(Event event) {
+
+		Executions.sendRedirect("upload.zul");
 	}
 
 	//

@@ -7,8 +7,15 @@
 	<window id="win"
 		style="margin: 0 auto; background: #ddf4ea; position: relative;"
 		width="1000px" border="normal" apply="frontend.SelectorVM">
+
 		<caption label="Clusteranzahl und Featurewahl"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
+		<button
+			style="position: absolute; right:0; top:0; margin-right: 100px; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey; border-radius: 0px; background: #d35400; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;"
+			id="btnHome" label="Startseite" type="button" orient="horizontal" />
+		<button id="btnLogOut" label="Logout"
+			onClick="@command('logOut')"
+			style="position: absolute; right:0; top:0; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey;border-radius: 0px; background: #c0392b; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;" />
 		<vbox width="100%">
 			<hbox width="100%" style="margin-top: 20px;">
 				<label
@@ -18,10 +25,13 @@
 					style="font-family: Segoe UI; font-style: normal; font-size: 16px; padding: 2px;"
 					value="5" id="intBoxCluster"
 					constraint="no empty : Feld darf nicht leer sein, no negative: Keine negativen Zahlen, no zero : Bitte einen anderen Wert als 0 waehlen, " />
-				<space width="100px" />
+				<space width="10px" />
 				<button
 					style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;"
 					id="btnGO" label="Start" type="button" orient="horizontal" />
+
+
+
 			</hbox>
 		</vbox>
 		<hbox width="100%">

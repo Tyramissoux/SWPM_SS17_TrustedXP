@@ -6,14 +6,22 @@
 		style="display: block; width: 300px; margin: 1% auto 0 auto;">
 	</image>
 
+
 	<window id="Upload" apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('frontend.FileUploadVM')" border="normal"
 		width="1000px" position="center,top" mode="embedded"
-		style="margin: 0 auto; background: #ddf4ea;">
+		style="position: relative; margin: 0 auto; background: #ddf4ea;">
 
 		<caption label="KaufDort Cluster - CSV Upload"
 			style="font-family: Segoe UI; font-style: normal; font-size: 18px; color: #000000; padding: 5px;" />
-		<box orient="horizontal" style="margin-top: 20px; margin-bottom: 20px;">
+		<button id="btnPassword" label="Passwort ändern"
+			onClick="@command('passwordChange')"
+			style="position: absolute; right:0; top:0; margin-right: 100px; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey; border-radius: 0px; background: #d35400; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;" />
+		<button id="btnLogOut" label="Logout"
+			onClick="@command('logOut')"
+			style="position: absolute; right:0; top:0; border-top: none; border-right: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey;border-radius: 0px; background: #c0392b; color: white; width: 100px; height: 25px; text-shadow: none; font-size: 10px;" />
+		<box orient="horizontal"
+			style="margin-top: 20px; margin-bottom: 20px;">
 			<button id="btnUpload" label="Upload"
 				upload="true,multiple=false,accept=.csv"
 				onUpload="@command('fileUpload')"
@@ -25,8 +33,8 @@
 
 		<box style="margin-top: 20px;" orient="horizontal"
 			visible="true">
-			<listbox model="@load(vm.items)" id="listbox" selectedIndex="@bind(vm.selected)"
-				 hflex="true" height="300px"
+			<listbox model="@load(vm.items)" id="listbox"
+				selectedIndex="@bind(vm.selected)" hflex="true" height="300px"
 				checkmark="true" style="width: 100%;">
 				<listhead>
 					<listheader label="Datum" align="center" sort="true"
@@ -48,20 +56,14 @@
 					</listitem>
 				</template>
 			</listbox>
-			</box>
-			<box orient="horizontal" style="margin-top: 20px; margin-bottom: 20px;">
+		</box>
+		<box orient="horizontal"
+			style="margin-top: 20px; margin-bottom: 20px;">
 			<button id="btnLoadOld" label="Laden"
 				onClick="@command('loadOld')"
 				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
 		</box>
-		<box orient="horizontal" style="margin-top: 20px; margin-bottom: 20px;">
-			<button id="btnLogOut" label="LogOut"
-				onClick="@command('logOut')"
-				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 65px; height: 25px; text-shadow: none; font-size: 9px;" />
-			<button id="btnPassword" label="Passwort Ändern"
-				onClick="@command('passwordChange')"
-				style="border: none; border-radius: 0px; background: #c0392b; color: white; width: 90px; height: 25px; text-shadow: none; font-size: 9px;" />
-		</box>
+
 
 	</window>
 
