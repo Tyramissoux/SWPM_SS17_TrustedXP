@@ -48,7 +48,7 @@ public class ColumnStackedComposer extends SelectorComposer<Window> {
 		yAxis.setMin(0);
 		yAxis.getTitle().setText("Vorkommen");
 		XAxis xAxis = chart.getXAxis();
-		xAxis.getTitle().setText("Einzigartige Werte pro Feature");
+		xAxis.getTitle().setText("Vorkommen von Werten pro Cluster");
 		StackLabels stackLabels = yAxis.getStackLabels();
 		stackLabels.setEnabled(true);
 		String style = "fontWeight: bold;";
@@ -63,7 +63,7 @@ public class ColumnStackedComposer extends SelectorComposer<Window> {
 	
 		legend.setX(0);
 		legend.setVerticalAlign("top");
-		legend.setY(0);
+		legend.setY(50);
 		if (!isThemeStyleSet("background2")) {
 			legend.setBackgroundColor("white");
 		}

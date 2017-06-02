@@ -53,31 +53,9 @@
 	</window>
 	<popup id="centroid" width="300px">
 		<html>
-
-
-
-
-
-
-
-			
-			<![CDATA[ Der Cluster Centroid ist die berechnete Mitte
-			eines Clusters. Ein Centroid ist ein Vektor, der einen Wert
-			für jedes Feature (Variable) enthält, wobei jeder Wert den
-			Mittelwert einer Variable für die Beobachtungen in dem
-			Cluster darstellt. <br><br> Man kann den Centroiden as Maß
-			der Clusterlage verwenden. Für einen einzelnen Cluster ist
-			die durchschnittliche Distanz zwischen den Beobachtungen und
-			dem Centroid. <br><br> Centroid 1 entspricht dem Mittelpunkt
-			von Cluster 1 usw. ]]>
-			
-			
-			
-			
-			
-			
-			
-	
+			<![CDATA[ In dieser Tabelle werden die berechneten
+			Mittelpunkte der Cluster (Gruppe) aufgelistet, also Werte,
+			die diesen Cluster charakterisieren. ]]>
 		</html>
 	</popup>
 </zk>

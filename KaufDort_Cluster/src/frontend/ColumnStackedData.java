@@ -23,7 +23,7 @@ public class ColumnStackedData {
 		for (int i = 0; i < mapList.size(); i++) {
 			HashMap<String,Integer> tmp = mapList.get(i);
 			for(Entry<String,Integer>e : tmp.entrySet())
-			model.setValue("Cluster "+i, e.getKey(), e.getValue());
+			model.setValue (e.getKey(),"Cluster "+(i+1), e.getValue());
 		}
 		
 	}

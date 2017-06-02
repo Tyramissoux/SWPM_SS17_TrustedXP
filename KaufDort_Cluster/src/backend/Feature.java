@@ -1,7 +1,5 @@
 package backend;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Feature ist eine Datenstruktur, die Daten zu einem einzelnen Feature pro
