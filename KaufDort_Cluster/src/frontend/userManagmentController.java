@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -85,8 +87,8 @@ public class userManagmentController extends GenericForwardComposer {
 	public Listitem getSelected() {
 		return _selected;
 	}
-    
-    public void onClick$newUserButton(Event event) {
+	@Command
+    public void newUserButton(Event event) {
         addUser();
     }
     
@@ -140,7 +142,7 @@ public class userManagmentController extends GenericForwardComposer {
     }
     	
     	for(User a : tmp.users){
-    		if (usernameTxtbox.getValue().trim().equals(a.getName()) && passwordTxtbox.getValue().trim().equals(a.getPassword())) {
+    		if (usernameTxtbox.getValue().trim().equals(a.getName())) {
     			mesgLbl.setValue("The UserName or Password provided is already existing.");
     			return;
     		}
@@ -171,7 +173,8 @@ public class userManagmentController extends GenericForwardComposer {
  * Just clears the screen 
  * @param event
  */
-    public void onClick$resetButton(Event event) {
+    @Command
+    public void resetButton(Event event) {
         this.usernameTxtbox.setValue("");
         this.passwordTxtbox.setValue("");
         this.usernameTxtbox.focus(); // set the focus on UserName

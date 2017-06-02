@@ -45,7 +45,7 @@ public class ClusteringOutputVM {
 		fillColumnsModel(numOfClusters);
 		storeUploadItem();
 		
-		
+		//System.out.println(picPath);
 	}
 
 
@@ -80,14 +80,15 @@ public class ClusteringOutputVM {
 		for (int i = 0; i < featureList.size(); i++) {
 
 			for (int j = 0; j < clusterList.size(); j++) {
+				
 				Instance in = clusterList.get(j).getCentroid();
 				value.add(in.toString(i));
 				//System.out.print(in.toString(i)+" ");
 			}
 
 			data.put((featureList.get(i).getFeatureName()), value);
-			 //System.out.print(featureList.get(i).getFeatureName());
-		System.out.println();
+			//System.out.print(featureList.get(i).getFeatureName());
+			// System.out.println();
 			value = new ArrayList<String>();
 		}
 
