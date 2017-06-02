@@ -8,7 +8,7 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 	<style>body { background-color: #fcfcfc; }</style>
 
-	<image id="image" src="http://i.imgur.com/dL3ahNV.gif"
+	<image id="image" src="Files/logo.gif"
 		style="display: block; width: 300px; margin: 5% auto 0 auto;">
 	</image>
 
