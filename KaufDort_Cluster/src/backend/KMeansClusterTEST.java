@@ -1,10 +1,14 @@
 package backend;
 
 import static org.junit.Assert.*;
-import weka.core.Instance;
 import org.junit.Test;
 import backend.KMeansCluster;
 
+/**
+ * 
+ * @author Frederik Golchert
+ *
+ */
 public class KMeansClusterTEST {
 	KMeansCluster testObjekt1;
 	KMeansCluster testObjekt2;

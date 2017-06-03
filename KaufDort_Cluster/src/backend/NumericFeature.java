@@ -3,14 +3,14 @@ package backend;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 @SuppressWarnings("serial")
 public class NumericFeature extends Feature {
 	private ArrayList<HashMap<Double, Integer>> numericElementCountsPerCluster;
 	private ArrayList<Double> uniqueNumericItems;
-	private SummaryStatistics stats;
+	private ArrayList<Double> totalValues;
 	private ArrayList<ArrayList<Double>> valuesPerCluster;
+	
 
 
 	public NumericFeature(String featureName, int featureType, int numOfClusters) {
@@ -19,7 +19,7 @@ public class NumericFeature extends Feature {
 		this.numericElementCountsPerCluster = new ArrayList<HashMap<Double, Integer>>();
 		this.uniqueNumericItems = new ArrayList<Double>();
 		this.valuesPerCluster = new ArrayList<ArrayList<Double>>();
-		this.stats = new SummaryStatistics();
+		this.totalValues = new ArrayList<Double>();
 		preFillHashMapArrayList(numOfClusters);
 		prefillArrayList(numOfClusters);
 	}
@@ -68,7 +68,7 @@ public class NumericFeature extends Feature {
 					1);
 		}
 		valuesPerCluster.get(clusterNum).add(numericElement);
-		stats.addValue(numericElement);
+		totalValues.add(numericElement);
 	}
 
 	/**
@@ -108,24 +108,12 @@ public class NumericFeature extends Feature {
 		return uniqueNumericItems;
 	}
 
-	public double getStdDev() {
-		return stats.getStandardDeviation();
-	}
-
-	public double getVariance() {
-		return stats.getVariance();
-	}
-
-	public double getMean() {
-		return stats.getMean();
-	}
-
-	public double getMin() {
-		return stats.getMin();
-	}
-
-	public double getMax() {
-		return stats.getMax();
+	public double[] getAllValuesForFeature(){
+		double[] arr = new double[totalValues.size()];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = totalValues.get(i);
+		}
+		return arr;
 	}
 	
 	public ArrayList<ArrayList<Double>> getValuesPerCluster(){

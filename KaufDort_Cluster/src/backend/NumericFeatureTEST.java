@@ -8,6 +8,11 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Frederik Golchert
+ *
+ */
 public class NumericFeatureTEST {
 
 	NumericFeature testObjekt1;

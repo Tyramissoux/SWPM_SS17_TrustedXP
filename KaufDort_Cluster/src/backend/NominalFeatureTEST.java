@@ -1,4 +1,5 @@
 package backend;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,6 +8,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import backend.NominalFeature;
 
+/**
+ * 
+ * @author Frederik Golchert
+ *
+ */
 public class NominalFeatureTEST {
 
 	NominalFeature testObjekt1;

@@ -2,8 +2,12 @@ package backend;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import java.util.*;;
 
+/**
+ * 
+ * @author Frederik Golchert
+ *
+ */
 public class ArffCreatorTEST {
 	String csv;
 	ArffCreator arff;

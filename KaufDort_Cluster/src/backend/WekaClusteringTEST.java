@@ -12,6 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 import backend.WekaClustering;
 
+/**
+ * 
+ * @author Frederik Golchert
+ *
+ */
 public class WekaClusteringTEST {
 
 	WekaClustering testObjekt;

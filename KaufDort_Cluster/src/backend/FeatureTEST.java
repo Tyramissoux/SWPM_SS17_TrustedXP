@@ -1,7 +1,13 @@
 package backend;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * 
+ * @author Frederik Golchert
+ *
+ */
 public class FeatureTEST {
 	@Test
 	public void testFeature(){

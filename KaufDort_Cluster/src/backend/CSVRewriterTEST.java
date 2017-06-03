@@ -1,4 +1,5 @@
 package backend;
+
 import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -14,7 +15,11 @@ import org.junit.Before;
 import org.junit.Test;
 import backend.CSVRewriter;
 
-
+/**
+ * 
+ * @author Frederik Golchert
+ *
+ */
 public class CSVRewriterTEST {
 	
 	CSVRewriter testObjekt;
