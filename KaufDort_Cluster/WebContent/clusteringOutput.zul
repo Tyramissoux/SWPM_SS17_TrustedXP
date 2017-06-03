@@ -40,17 +40,6 @@
 										onClick="@command('showDiagram')" width="100%" />
 								</cell>
 							</template>
-					</columns>
-					<template name="model" var="cur_row">
-						<row
-							children="@load(vm.columnsModel) @template(forEachStatus.index lt (vm.columnsModel.size()- cur_row.value.size()) ? 'fixed' : 'variable')">
-							<template name="fixed">
-								<cell>
-									<button label="@load(cur_row.key)"
-										style="border: none; border-radius: 0px; background: #ecf0f1; color: black; text-shadow: none; font-size: 18px;"
-										onClick="@command('showDiagram')" width="100%" />
-								</cell>
-							</template>
 
 
 							<template name="variable">
@@ -63,27 +52,45 @@
 						</row>
 					</template>
 				</grid>
-				    
-				<image id="questionmark"
-					src="Files/QuestionmarkButton.png" tooltip="centroid"
-					style="cursor: help" />
-				  
-			</vbox>
-		</hbox>
-		<include style="margin-top: 20px; margin-bottom: 20px;"
-			src="marketing.zul" />
-	</window>
+				<vbox>
+					    
+					<button label="Werte" id="btnColour"
+						onClick="@command('colourMe')" tooltip="popupColour"
+						style="border: none; border-radius: 0px; background: #1a4d38; color: white; text-shadow: none; font-size: 10px;" />
+					<button label="Speichern" id="btnSave"
+						onClick="@command('store')" tooltip="popupStore"
+						style="border: none; border-radius: 0px; background: #1a4d38; color: white; text-shadow: none; font-size: 10px;" />
+					<image id="questionmark"
+						src="Files/QuestionmarkButton.png" tooltip="centroid"
+						style="cursor: help" />
+					  
+				</vbox>
+			</hbox>
+			<div style="text-align: right;">
+				<include style="margin-top: 20px; margin-bottom: 20px;"
+					src="marketing.zul" />
+			</div>
+		</window>
+	</div>
 	<popup id="centroid" width="300px">
 		<html>
+
+
+			
 			<![CDATA[ In dieser Tabelle werden die berechneten
 			Mittelpunkte der Cluster (Gruppe) aufgelistet, also Werte,
-			die diesen Cluster charakterisieren. ]]>	
+			die diesen Cluster charakterisieren. ]]>
+			
+				
+					
 		</html>
 	</popup>
 	<popup id="popupColour">
-	<label value="Zeigt ungewöhnliche hohe Werte bei zahlenbasierten Features an"> </label>
-</popup>
-<popup id="popupStore">
-	<label value="Speichert die aktuellen Ergebnisse"> </label>
-</popup>
+		<label
+			value="Zeigt ungewöhnliche hohe Werte bei zahlenbasierten Features an">
+		</label>
+	</popup>
+	<popup id="popupStore">
+		<label value="Speichert die aktuellen Ergebnisse"></label>
+	</popup>
 </zk>
