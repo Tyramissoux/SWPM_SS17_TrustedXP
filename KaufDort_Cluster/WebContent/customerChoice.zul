@@ -29,7 +29,9 @@
 				<button
 					style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 140px; text-shadow: none; font-size: 18px;"
 					id="btnGO" label="Start" type="button" orient="horizontal" />
-
+				<image id="questionmark"
+					src="Files/QuestionmarkButton.png" tooltip="feature"
+					style="cursor: help" />
 
 
 			</hbox>
@@ -60,4 +62,9 @@
 			</listbox>
 		</hbox>
 	</window>
+	<popup id="feature" width="300px">
+		<html>
+			<![CDATA[ Wenn Sie weniger Features für Ihre Clusteranalyse möchten, wählen Sie einfach aus, die Sie wünschen und drücken dann Start. <br><br>Falls Sie alle Features behalten möchten, klicken Sie einfach das kleine Kästchen in der Tabellenkopfzeile neben 'Features' und starten danach die Analyse.  ]]>	
+		</html>
+	</popup>
 </zk>

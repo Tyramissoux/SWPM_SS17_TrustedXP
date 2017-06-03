@@ -20,7 +20,6 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
 import frontend.helper.CSVReader;
@@ -91,13 +90,6 @@ public class FileUploadVM {
 	public int getSelected() {
 		return selected;
 	}
-
-	/*
-	 * @Command
-	 * 
-	 * @NotifyChange("items") public void addItem() {
-	 * items.get(1).setQuantity(items.get(1).getQuantity() + 1); }
-	 */
 
 	public File getSaveFolder() {
 		return saveFolder;
@@ -218,17 +210,4 @@ public class FileUploadVM {
 		return System.getProperty("java.io.tmpdir");
 	}
 
-	/*
-	 * @Command
-	 * 
-	 * @NotifyChange("fileContent") public void showPDF() throws IOException {
-	 * System.out.println("filePath='"+filePath+"'"); File f = new
-	 * File(filePath); byte[] buffer = new byte[(int) f.length()];
-	 * FileInputStream fs = new FileInputStream(f); fs.read(buffer); fs.close();
-	 * ByteArrayInputStream is = new ByteArrayInputStream(buffer); String
-	 * resultName = f.getName(); fileContent = new AMedia(resultName, "pdf",
-	 * "application/pdf", is);
-	 * 
-	 * }
-	 */
 }

@@ -6,16 +6,22 @@ import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Cell;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.ListModelMap;
+import org.zkoss.zul.Rows;
+
 import frontend.helper.OldUploadItem;
 import weka.core.Instance;
 import backend.KMeansCluster;
@@ -37,8 +43,9 @@ public class ClusteringOutputVM {
 	private ListModelMap data;
 	private ListModel columns_model;
 	private boolean[][] paintMe;
-	@Wire
-	private Grid grid;
+	
+	@Wire("#grid")
+	public Grid grid;
 
 	public ClusteringOutputVM() {
 		Clients.showBusy("Bitte warten...");
@@ -49,12 +56,13 @@ public class ClusteringOutputVM {
 		transferDataToListModelMap();
 		fillColumnsModel(numOfClusters);
 
-		storeUploadItem();
+		
 		Clients.clearBusy();
 		// System.out.println(picPath);
 	}
-
-	private void storeUploadItem() {
+	
+	@Command
+	private void store() {
 		String fileName = (String) Sessions.getCurrent().getAttribute(
 				"originalFileName");
 		if (!fileName.equals("")) {
@@ -69,16 +77,33 @@ public class ClusteringOutputVM {
 	}
 
 	@AfterCompose
-	public void paintCells() {
-		/*for (int i = 0; i < paintMe.length; i++) {
+	public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
+		Selectors.wireComponents(view, this, false);
+		/*
+		List<Component> comps = view.getChildren();
+		for (Component c : comps) {
+			if (c.getId().equals("grid"))
+				grid = (Grid) c;
+		}*/
+
+		
+	}
+	
+	@Command
+	public void colourMe(){
+		
+		for (int i = 0; i < paintMe.length; i++) {
 			for (int j = 0; j < paintMe[i].length; j++) {
-				if(paintMe[i][j]){
-					grid.getCell(i, j).setAttribute("style", "background:red");
+				if (paintMe[i][j]) {
+					
+					Cell c = (Cell) grid.getCell(i, j);
+					c.setStyle("background:yellow");
 				}
 			}
-		}*/
+		}
 	}
-
+	
+	
 	/*
 	 * private String createServerPath(String name) { String webAppPath =
 	 * Executions.getCurrent().getDesktop().getWebApp()
@@ -92,7 +117,7 @@ public class ClusteringOutputVM {
 	 */
 
 	private void transferDataToListModelMap() {
-		
+
 		List<String> valueList = new java.util.ArrayList<String>();
 		int featureType = 0;
 
@@ -102,13 +127,14 @@ public class ClusteringOutputVM {
 				NumericFeature nf = (NumericFeature) featureList.get(i);
 				double mean = nf.getMean();
 				double stDev = nf.getStdDev();
+				
 
 				for (int j = 0; j < clusterList.size(); j++) {
 					Instance in = clusterList.get(j).getCentroid();
 					String centroidVal = in.toString(i);
 					double value = Double.valueOf(centroidVal);
-					if (value > (mean + stDev) || value < (mean - stDev)) {
-						paintMe[i+1][j+1] = true;
+					if (value > (mean + stDev)) {
+						paintMe[i][j + 1] = true;
 					}
 					valueList.add(centroidVal);
 
@@ -116,7 +142,7 @@ public class ClusteringOutputVM {
 			} else {
 				for (int j = 0; j < clusterList.size(); j++) {
 					Instance in = clusterList.get(j).getCentroid();
-					paintMe[i+1][j+1] = false;
+					paintMe[i + 1][j + 1] = false;
 					valueList.add(in.toString(i));
 				}
 
@@ -168,11 +194,13 @@ public class ClusteringOutputVM {
 
 		if (feat.getFeatureType() != 0)
 			// koennte problematisch werden bei anderen Browsern
-			Executions.getCurrent().sendRedirect("stackedColumns.zul","_blank");
+			Executions.getCurrent()
+					.sendRedirect("stackedColumns.zul", "_blank");
 		else
-			Executions.getCurrent().sendRedirect("piechart.zul","_blank");
+			Executions.getCurrent().sendRedirect("piechart.zul", "_blank");
 
 	}
+
 	@Command
 	public void logOut() {
 		UserCredentialManager mgmt = UserCredentialManager.getIntance(Sessions
@@ -180,10 +208,10 @@ public class ClusteringOutputVM {
 		mgmt.logOff();
 		Executions.sendRedirect("login.zul");
 	}
-	
+
 	@Command
 	public void home() {
-		
+
 		Executions.sendRedirect("upload.zul");
 	}
 

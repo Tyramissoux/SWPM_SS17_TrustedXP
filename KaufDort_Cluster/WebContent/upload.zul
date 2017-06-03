@@ -26,6 +26,8 @@
 				upload="true,multiple=false,accept=.csv"
 				onUpload="@command('fileUpload')"
 				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
+			<image id="questionmark" src="Files/QuestionmarkButton.png"
+				tooltip="upload" style="cursor: help" />
 		</box>
 
 		<label value="Vergangene Uploads:"
@@ -62,9 +64,34 @@
 			<button id="btnLoadOld" label="Laden"
 				onClick="@command('loadOld')"
 				style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 50px; text-shadow: none; font-size: 18px;" />
+			<image id="question" src="Files/QuestionmarkButton.png"
+				tooltip="loadOld" style="cursor: help" />
 		</box>
 
 
 	</window>
+	<popup id="upload" width="300px">
+		<html>
+			
+			<![CDATA[ Wenn sie auf den Button Upload klicken, öffnet
+			sich ein Fenster in dem Sie die Möglichkeit bekommen eine
+			csv-Datei (Komma separierte Werte in einer Textdatei)
+			auszuwählen und hochzuladen. Die weitere Verarbeitung
+			startet sofort danach. ]]>
+			
+		</html>
+	</popup>
+	<popup id="loadOld" width="300px">
+		<html>
+			
+			<![CDATA[ Laden Sie eine vorherige Datenverarbeitung indem
+			Sie einen der alten Uploads aus der obigen Tabelle auswählen
+			und dann auf 'Laden' Button klicken.<br><br>Falls Sie noch
+			nicht vertraut sind mit dem Tool, können Sie einfach den
+			Upload 'Beispiel.csv' verwenden. Sie bleibt immer für Sie
+			erhalten. ]]>
+			
+		</html>
+	</popup>
 
 </zk>
