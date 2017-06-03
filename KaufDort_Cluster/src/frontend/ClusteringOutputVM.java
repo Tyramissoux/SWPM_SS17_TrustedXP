@@ -20,6 +20,7 @@ import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.ListModelMap;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Rows;
 
 import frontend.helper.OldUploadItem;
@@ -43,12 +44,12 @@ public class ClusteringOutputVM {
 	private ListModelMap data;
 	private ListModel columns_model;
 	private boolean[][] paintMe;
-	
+
 	@Wire("#grid")
 	public Grid grid;
 
 	public ClusteringOutputVM() {
-		Clients.showBusy("Bitte warten...");
+
 		data = new ListModelMap();
 		columns_model = new ListModelList();
 
@@ -56,13 +57,12 @@ public class ClusteringOutputVM {
 		transferDataToListModelMap();
 		fillColumnsModel(numOfClusters);
 
-		
-		Clients.clearBusy();
 		// System.out.println(picPath);
 	}
-	
+
 	@Command
-	private void store() {
+	public void store() {
+		Clients.showBusy("Bitte warten...");
 		String fileName = (String) Sessions.getCurrent().getAttribute(
 				"originalFileName");
 		if (!fileName.equals("")) {
@@ -73,6 +73,10 @@ public class ClusteringOutputVM {
 			old.setClusterList(clusterList);
 			old.setFeatureList(featureList);
 			new StoreToDataBase(old);
+			Clients.clearBusy();
+			Messagebox.show("Erfolgreich gespeichert", "Information",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+			
 		}
 	}
 
@@ -80,30 +84,26 @@ public class ClusteringOutputVM {
 	public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
 		Selectors.wireComponents(view, this, false);
 		/*
-		List<Component> comps = view.getChildren();
-		for (Component c : comps) {
-			if (c.getId().equals("grid"))
-				grid = (Grid) c;
-		}*/
+		 * List<Component> comps = view.getChildren(); for (Component c : comps)
+		 * { if (c.getId().equals("grid")) grid = (Grid) c; }
+		 */
 
-		
 	}
-	
+
 	@Command
-	public void colourMe(){
-		
+	public void colourMe() {
+
 		for (int i = 0; i < paintMe.length; i++) {
 			for (int j = 0; j < paintMe[i].length; j++) {
 				if (paintMe[i][j]) {
-					
 					Cell c = (Cell) grid.getCell(i, j);
 					c.setStyle("background:yellow");
 				}
 			}
 		}
+		
 	}
-	
-	
+
 	/*
 	 * private String createServerPath(String name) { String webAppPath =
 	 * Executions.getCurrent().getDesktop().getWebApp()
@@ -127,7 +127,6 @@ public class ClusteringOutputVM {
 				NumericFeature nf = (NumericFeature) featureList.get(i);
 				double mean = nf.getMean();
 				double stDev = nf.getStdDev();
-				
 
 				for (int j = 0; j < clusterList.size(); j++) {
 					Instance in = clusterList.get(j).getCentroid();

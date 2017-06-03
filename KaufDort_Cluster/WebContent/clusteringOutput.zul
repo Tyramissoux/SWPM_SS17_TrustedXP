@@ -57,29 +57,40 @@
 					<button label="Werte" id="btnColour"
 						onClick="@command('colourMe')" tooltip="popupColour"
 						style="border: none; border-radius: 0px; background: #1a4d38; color: white; text-shadow: none; font-size: 10px;" />
-					<button label="Speichern" id="btnSave"
-						onClick="@command('store')" tooltip="popupStore"
-						style="border: none; border-radius: 0px; background: #1a4d38; color: white; text-shadow: none; font-size: 10px;" />
 					<image id="questionmark"
 						src="Files/QuestionmarkButton.png" tooltip="centroid"
 						style="cursor: help" />
 					  
 				</vbox>
 			</hbox>
-			<div style="text-align: right;">
-				<include style="margin-top: 20px; margin-bottom: 20px;"
-					src="marketing.zul" />
-			</div>
+		
+				<div style="float: left">
+					<include
+						style="margin-top: 20px; margin-bottom: 20px;"
+						src="marketing.zul" />
+				</div>
+				
+				
+				<div style="float: right">
+					<button label="Speichern" id="btnSave"
+						onClick="@command('store')" tooltip="popupStore"
+						style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 35px; text-shadow: none; font-size: 18px; margin-top: 20px; margin-bottom: 20px;" />
+				</div>
+			
 		</window>
 	</div>
 	<popup id="centroid" width="300px">
 		<html>
 
 
+
+
 			
 			<![CDATA[ In dieser Tabelle werden die berechneten
 			Mittelpunkte der Cluster (Gruppe) aufgelistet, also Werte,
 			die diesen Cluster charakterisieren. ]]>
+			
+			
 			
 				
 					
