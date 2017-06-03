@@ -54,34 +54,34 @@
 				</grid>
 				<vbox>
 					    
-					<button label="Werte" id="btnColour"
-						onClick="@command('colourMe')" tooltip="popupColour"
-						style="border: none; border-radius: 0px; background: #1a4d38; color: white; text-shadow: none; font-size: 10px;" />
 					<image id="questionmark"
 						src="Files/QuestionmarkButton.png" tooltip="centroid"
 						style="cursor: help" />
+					<button label="Farben" id="btnColour"
+						onClick="@command('colourMe')" tooltip="popupColour"
+						style="border: none; border-radius: 0px; background: #1a4d38; color: white; text-shadow: none; font-size: 10px;" />
+					<image id="legend" src="Files/heatmap.png"
+						visible="@load(vm.isVisible)" />
 					  
 				</vbox>
 			</hbox>
-		
-				<div style="float: left">
-					<include
-						style="margin-top: 20px; margin-bottom: 20px;"
-						src="marketing.zul" />
-				</div>
-				
-				
-				<div style="float: right">
-					<button label="Speichern" id="btnSave"
-						onClick="@command('store')" tooltip="popupStore"
-						style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 35px; text-shadow: none; font-size: 18px; margin-top: 20px; margin-bottom: 20px;" />
-				</div>
-			
+
+			<div style="float: left">
+				<include style="margin-top: 20px; margin-bottom: 20px;"
+					src="marketing.zul" />
+			</div>
+
+
+			<div style="float: right">
+				<button label="Speichern" id="btnSave"
+					onClick="@command('store')" tooltip="popupStore"
+					style="border: none; border-radius: 0px; background: #1a4d38; color: white; width: 130px; height: 35px; text-shadow: none; font-size: 18px; margin-top: 20px; margin-bottom: 20px;" />
+			</div>
+
 		</window>
 	</div>
 	<popup id="centroid" width="300px">
 		<html>
-
 
 
 
@@ -92,16 +92,32 @@
 			
 			
 			
-				
-					
+						
 		</html>
 	</popup>
-	<popup id="popupColour">
-		<label
-			value="Zeigt ungewöhnliche hohe Werte bei zahlenbasierten Features an">
-		</label>
+	<popup id="popupColour" width="300px">
+		<html>
+
+			
+			<![CDATA[ Durch einen Click auf diesen Button wird eine
+			Heatmap (je intensiver die Farbe, desto höher der Wert) bei
+			den zahlenbasierten Features sichtbar. <br>Die Heatmap
+			bezieht sich auf eine Wertereihe, die zu einem Feature
+			gespeichert wurde. <br>Die Wertereihe wird der Größe nach
+			sortiert und in zehn gleich große Teile (Bins) geschnitten
+			wurden. <br>Je nachdem, in welchen Bin ein clusterbezogener
+			Mittelwert aus der Tabelle fällt, wird der Hintergrund
+			eingefärbt. <br><br>Das verwendete Farbschema ist in der
+			Legende unterhalb zu sehen. Sie ist immer dann sichtbar,
+			wenn die Heatmap aktiviert wurde.]]>
+			
+						
+		</html>
+
 	</popup>
-	<popup id="popupStore">
-		<label value="Speichert die aktuellen Ergebnisse"></label>
+	<popup id="popupStore" width="300px">
+		<label
+			value="Speichert die aktuellen Ergebnisse in der Datenbank">
+		</label>
 	</popup>
 </zk>

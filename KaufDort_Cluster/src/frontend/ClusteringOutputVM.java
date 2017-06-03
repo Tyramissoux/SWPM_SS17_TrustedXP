@@ -1,6 +1,7 @@
 package frontend;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
@@ -9,6 +10,7 @@ import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -44,6 +46,7 @@ public class ClusteringOutputVM {
 	private ListModelMap data;
 	private ListModel columns_model;
 	private String[][] paintMe;
+	private boolean isVisible;
 
 	@Wire("#grid")
 	public Grid grid;
@@ -79,7 +82,7 @@ public class ClusteringOutputVM {
 
 		}
 	}
-
+	
 	@AfterCompose
 	public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
 		Selectors.wireComponents(view, this, false);
@@ -90,21 +93,28 @@ public class ClusteringOutputVM {
 
 	}
 
+	@NotifyChange("isVisible")
 	@Command
 	public void colourMe() {
+		int xAxis = clusterList.size() + 1;
+		int yAxis = featureList.size();
+		isVisible = !isVisible;
+		for (int i = 0; i < yAxis; i++) {
+			for (int j = 0; j < xAxis; j++) {
 
-		for (int i = 0; i < paintMe.length; i++) {
-			for (int j = 0; j < paintMe[i].length; j++) {
-				
-					Cell c = (Cell) grid.getCell(i, j);
-					if (c.getStyle() != null)
-						c.setStyle(null);
-					else
-						c.setStyle(paintMe[i][j+1]);
-				
+				Cell c = (Cell) grid.getCell(i, j);
+				if (c.getStyle() != null)
+					c.setStyle(null);
+				else
+					c.setStyle(paintMe[i][j]);
+
 			}
 		}
 
+	}
+	
+	public boolean getIsVisible(){
+		return isVisible;
 	}
 
 	/*
@@ -130,37 +140,84 @@ public class ClusteringOutputVM {
 				NumericFeature nf = (NumericFeature) featureList.get(i);
 				double[] featureValuesArr = nf.getAllValuesForFeature();
 				Percentile percentile = new Percentile();
+				Arrays.sort(featureValuesArr);
 				percentile.setData(featureValuesArr);
-				double min = percentile.evaluate(0);
-				double first = percentile.evaluate(25);
-				double second = percentile.evaluate(50);
-				double third = percentile.evaluate(75);
+				double min = 0;
+				double ten = percentile.evaluate(10);
+				double twenty = percentile.evaluate(20);
+				double thirty = percentile.evaluate(30);
+				double fourty = percentile.evaluate(40);
+				double fifty = percentile.evaluate(50);
+				double sixty = percentile.evaluate(60);
+				double seventy = percentile.evaluate(70);
+				double eighty = percentile.evaluate(80);
+				double ninety = percentile.evaluate(90);
 				double max = percentile.evaluate(100);
+
+				// System.out.println(nf.getFeatureName()+"\t"+min+"\t"+first+"\t"+second+"\t"+third+"\t"+max);
 
 				for (int j = 0; j < clusterList.size(); j++) {
 					Instance in = clusterList.get(j).getCentroid();
 					String centroidVal = in.toString(i);
 					double value = Double.valueOf(centroidVal);
-
-					if (value >= min && value < first)
-						paintMe[i][j + 1] = "background:#ffffcc";
-
-					else if (value >= first && value < second)
-						paintMe[i][j + 1] = "background:#ffddcc";
-
-					else if (value >= second && value < third)
-						paintMe[i][j + 1] = "background:#ffad99";
-
-					else if (value >= third && value <= max)
-						paintMe[i][j + 1] = "background:ff471a";
-
 					valueList.add(centroidVal);
+					//http://colorbrewer2.org/#type=sequential&scheme=YlOrRd&n=9
+					if (value >= min && value < ten) {
+						paintMe[i][j + 1] = "background:#f7fcfd";//
+						continue;
+					}
 
+					if (value >= ten && value < twenty) {
+						paintMe[i][j + 1] = "background:#e0ecf4";//
+						continue;
+					}
+					
+					if (value >= twenty && value < thirty) {
+						paintMe[i][j + 1] = "background:#bfd3e6";//
+						continue;
+					}
+
+					if (value >= thirty && value < fourty) {
+						paintMe[i][j + 1] = "background:#9ebcda";//
+						continue;
+					}
+					
+
+					if (value >= fourty && value < fifty) {
+						paintMe[i][j + 1] = "background:#8c96c6";//
+						continue;
+					}
+
+					if (value >= fifty && value < sixty) {
+						paintMe[i][j + 1] = "background:#a1d99b";//
+						continue;
+					}
+
+					
+					if (value >= sixty && value < seventy) {
+						paintMe[i][j + 1] = "background:#74c476";//
+						continue;
+					}
+
+					if (value >= seventy && value < eighty) {
+						paintMe[i][j + 1] = "background:#41ab5d";//
+						continue;
+					}
+
+					if (value >= eighty && value < ninety) {
+						paintMe[i][j + 1] = "background:#8c6bb1";//
+						continue;
+					}
+					
+					if (value >= ninety && value <= max) {
+						paintMe[i][j + 1] = "background:#810f7c";
+						continue;
+					}
 				}
 			} else {
 				for (int j = 0; j < clusterList.size(); j++) {
 					Instance in = clusterList.get(j).getCentroid();
-					paintMe[i ][j + 1] = null;
+					paintMe[i][j + 1] = "background:#f7fcb9";
 					valueList.add(in.toString(i));
 				}
 
