@@ -181,6 +181,7 @@ public class FileUploadVM {
 
 		try {
 			Files.copy(new File(filePath), media.getStreamData());
+			//filePath="myFolder/my.csv";
 			ArrayList<FeatureItem> header = new CSVReader(filePath)
 					.getFeatureExampleList();
 			if (header.size() == 0) {
