@@ -3,9 +3,6 @@ package frontend.helper;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-import frontend.User;
-
 public class OldUploadList implements Serializable{
 	
 	/**
