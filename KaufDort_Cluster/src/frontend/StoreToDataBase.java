@@ -72,9 +72,9 @@ public class StoreToDataBase implements Serializable{
     			c.printStackTrace();
     			return;
     		}
-    	if(daten.database.isEmpty()){
+    	/*if(daten.database.isEmpty()){
 		daten.database.add(new OldUploadItem("","",0));
-	}
+	}*/
     	System.out.println("Datenbank wurde geladen");
     	
     	
